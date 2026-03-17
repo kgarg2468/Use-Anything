@@ -62,7 +62,27 @@ BASE_INTERFACE_SCORES = {
         "documentation_depth": 0.6,
         "ecosystem_adoption": 0.7,
     },
+    "llms_txt": {
+        "structured_io": 0.7,
+        "error_quality": 0.65,
+        "statefulness": 0.9,
+        "auth_complexity": 0.9,
+        "documentation_depth": 0.85,
+        "ecosystem_adoption": 0.75,
+    },
 }
+
+INTERFACE_PRIORITY_ORDER = [
+    "openapi_spec",
+    "python_sdk",
+    "node_sdk",
+    "graphql_api",
+    "grpc_api",
+    "rest_api_docs",
+    "existing_skill",
+    "llms_txt",
+    "cli_tool",
+]
 
 
 class Ranker:
@@ -82,7 +102,13 @@ class Ranker:
                 )
             )
 
-        scored.sort(key=lambda item: item.score, reverse=True)
+        scored.sort(
+            key=lambda item: (
+                item.score,
+                self._priority_for(item.type),
+            ),
+            reverse=True,
+        )
         if not scored:
             raise ValueError("Cannot rank interfaces: no candidates available")
 
@@ -98,5 +124,12 @@ class Ranker:
             "rest_api_docs": "REST interface is usable but less structured than SDKs.",
             "cli_tool": "CLI interface available as fallback when SDK is unavailable.",
             "existing_skill": "Existing skill content can be used as acceleration input.",
+            "llms_txt": "LLM-optimized docs can accelerate synthesis and workflow extraction.",
         }
         return reasons.get(interface_type, "Scored by weighted usability heuristics.")
+
+    def _priority_for(self, interface_type: str) -> int:
+        try:
+            return len(INTERFACE_PRIORITY_ORDER) - INTERFACE_PRIORITY_ORDER.index(interface_type)
+        except ValueError:
+            return 0
