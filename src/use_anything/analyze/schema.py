@@ -12,6 +12,7 @@ ANALYZER_IR_SCHEMA: dict = {
         "capability_groups",
         "workflows",
         "gotchas",
+        "analysis_sources",
     ],
     "properties": {
         "software": {"type": "string", "minLength": 1},
@@ -64,5 +65,6 @@ ANALYZER_IR_SCHEMA: dict = {
             },
         },
         "gotchas": {"type": "array", "items": {"type": "string"}},
+        "analysis_sources": {"type": "array", "items": {"type": "string"}},
     },
 }

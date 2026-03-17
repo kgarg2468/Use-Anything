@@ -91,6 +91,9 @@ class FakeAnalyzer:
                     "Set timeouts.",
                     "Handle retries carefully.",
                 ],
+                "analysis_sources": [
+                    "python_sdk:pypi:requests",
+                ],
             }
         )
 

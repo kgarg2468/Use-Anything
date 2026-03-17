@@ -178,6 +178,7 @@ class AnalyzerIR:
     capability_groups: list[CapabilityGroup]
     workflows: list[Workflow]
     gotchas: list[str]
+    analysis_sources: list[str] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, raw: dict[str, Any]) -> AnalyzerIR:
@@ -189,6 +190,7 @@ class AnalyzerIR:
             capability_groups=[CapabilityGroup.from_dict(item) for item in raw.get("capability_groups", [])],
             workflows=[Workflow.from_dict(item) for item in raw.get("workflows", [])],
             gotchas=[str(item) for item in raw.get("gotchas", [])],
+            analysis_sources=[str(item) for item in raw.get("analysis_sources", [])],
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -200,6 +202,7 @@ class AnalyzerIR:
             "capability_groups": [item.to_dict() for item in self.capability_groups],
             "workflows": [item.to_dict() for item in self.workflows],
             "gotchas": self.gotchas,
+            "analysis_sources": self.analysis_sources,
         }
 
 

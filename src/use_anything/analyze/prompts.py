@@ -10,7 +10,13 @@ Prioritize concrete workflows and failure-preventing gotchas over exhaustive API
 """
 
 
-def build_analysis_prompt(*, probe_result: ProbeResult, rank_result: RankResult) -> str:
+def build_analysis_prompt(
+    *,
+    probe_result: ProbeResult,
+    rank_result: RankResult,
+    interface_context: str,
+    analysis_sources: list[str],
+) -> str:
     """Build the user prompt for deep interface analysis."""
 
     metadata = probe_result.source_metadata
@@ -28,6 +34,10 @@ def build_analysis_prompt(*, probe_result: ProbeResult, rank_result: RankResult)
         f"Project URLs: {metadata.get('project_urls', {})}\n\n"
         "Discovered interfaces:\n"
         f"{interfaces_text}\n\n"
+        "Interface-specific context:\n"
+        f"{interface_context}\n\n"
+        f"Analysis sources (must be included in output as analysis_sources): {analysis_sources}\n\n"
         "Generate a strict JSON object with setup, capability groups, workflows, and gotchas. "
-        "Workflows must be procedural and include concrete steps and common errors."
+        "Workflows must be procedural and include concrete steps and common errors. "
+        "Include analysis_sources as a list of provenance strings."
     )

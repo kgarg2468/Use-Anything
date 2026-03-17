@@ -74,6 +74,10 @@ def sample_analysis_dict() -> dict:
             "Session objects are not inherently thread-safe.",
             "Retries require urllib3 Retry + mounted adapter.",
         ],
+        "analysis_sources": [
+            "python_sdk:pypi:requests",
+            "docs:https://requests.readthedocs.io/en/latest/",
+        ],
     }
 
 

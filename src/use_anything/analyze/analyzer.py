@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from jsonschema import ValidationError, validate
 
+from use_anything.analyze.interface_handlers import build_interface_context
 from use_anything.analyze.llm_client import LLMClient
 from use_anything.analyze.prompts import SYSTEM_PROMPT, build_analysis_prompt
 from use_anything.analyze.schema import ANALYZER_IR_SCHEMA
@@ -18,7 +19,16 @@ class Analyzer:
         self.llm_client = llm_client or LLMClient(model=model)
 
     def analyze(self, probe_result: ProbeResult, rank_result: RankResult) -> AnalyzerIR:
-        user_prompt = build_analysis_prompt(probe_result=probe_result, rank_result=rank_result)
+        interface_context = build_interface_context(
+            probe_result=probe_result,
+            interface_type=rank_result.primary.type,
+        )
+        user_prompt = build_analysis_prompt(
+            probe_result=probe_result,
+            rank_result=rank_result,
+            interface_context=interface_context.summary,
+            analysis_sources=interface_context.sources,
+        )
         payload = self.llm_client.analyze(
             system_prompt=SYSTEM_PROMPT,
             user_prompt=user_prompt,
