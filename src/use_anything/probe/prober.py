@@ -5,7 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 
 from use_anything.exceptions import ProbeError
-from use_anything.models import InterfaceCandidate, ProbeResult
+from use_anything.models import ProbeResult
+from use_anything.probe.adapters import probe_binary, probe_docs_url, probe_github_repo, probe_local_directory
 from use_anything.probe.pypi import fetch_pypi_metadata, infer_interfaces_from_metadata
 from use_anything.probe.targets import classify_target
 
@@ -20,26 +21,18 @@ class Prober:
             return self._probe_pypi(classified.normalized_target)
 
         if classified.target_type == "binary":
-            candidates = [
-                InterfaceCandidate(
-                    type="cli_tool",
-                    location=f"binary:{classified.normalized_target}",
-                    quality_score=0.7,
-                    coverage="partial",
-                    notes="Binary target discovered from --binary option",
-                )
-            ]
+            candidates, metadata = probe_binary(classified.normalized_target)
             return ProbeResult(
                 target=classified.normalized_target,
                 target_type="binary",
                 interfaces_found=candidates,
-                recommended_interface="cli_tool",
+                recommended_interface=candidates[0].type if candidates else "cli_tool",
                 reasoning="Binary targets use CLI probing first.",
-                source_metadata={"binary": classified.normalized_target},
+                source_metadata=metadata,
             )
 
         if classified.target_type == "local_directory":
-            return self._probe_local_directory(Path(classified.normalized_target))
+            return self._probe_local_directory(Path(classified.normalized_target), raw_target=classified.normalized_target)
 
         if classified.target_type == "github_repo":
             return self._probe_url_target(classified.normalized_target, target_type="github_repo")
@@ -74,40 +67,28 @@ class Prober:
             },
         )
 
-    def _probe_local_directory(self, directory: Path) -> ProbeResult:
-        candidates = [
-            InterfaceCandidate(
-                type="python_sdk",
-                location=str(directory),
-                quality_score=0.7,
-                coverage="partial",
-                notes="Local directory probing is based on project file heuristics",
-            )
-        ]
+    def _probe_local_directory(self, directory: Path, *, raw_target: str) -> ProbeResult:
+        candidates, metadata = probe_local_directory(directory)
         return ProbeResult(
-            target=directory.name,
+            target=raw_target,
             target_type="local_directory",
             interfaces_found=candidates,
-            recommended_interface="python_sdk",
-            reasoning="Detected local source directory with likely SDK entrypoints.",
-            source_metadata={"path": str(directory)},
+            recommended_interface=candidates[0].type if candidates else "python_sdk",
+            reasoning="Detected local directory interfaces via file heuristics.",
+            source_metadata=metadata,
         )
 
     def _probe_url_target(self, url: str, *, target_type: str) -> ProbeResult:
-        candidate_type = "rest_api_docs" if target_type == "docs_url" else "python_sdk"
+        if target_type == "github_repo":
+            candidates, metadata = probe_github_repo(url)
+        else:
+            candidates, metadata = probe_docs_url(url)
+
         return ProbeResult(
             target=url,
             target_type=target_type,
-            interfaces_found=[
-                InterfaceCandidate(
-                    type=candidate_type,
-                    location=url,
-                    quality_score=0.65,
-                    coverage="partial",
-                    notes="URL probing support is enabled for phase 2 target expansion",
-                )
-            ],
-            recommended_interface=candidate_type,
-            reasoning=f"Selected {candidate_type} based on URL target heuristics.",
-            source_metadata={"url": url},
+            interfaces_found=candidates,
+            recommended_interface=candidates[0].type if candidates else "rest_api_docs",
+            reasoning=f"Selected {candidates[0].type if candidates else 'rest_api_docs'} based on URL target heuristics.",
+            source_metadata=metadata,
         )
