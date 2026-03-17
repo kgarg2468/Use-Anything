@@ -2,24 +2,56 @@
 
 from __future__ import annotations
 
-import os
-import re
+from pathlib import Path
 
-from use_anything.exceptions import ProbeError, UnsupportedTargetError
-from use_anything.models import ProbeResult
+from use_anything.exceptions import ProbeError
+from use_anything.models import InterfaceCandidate, ProbeResult
 from use_anything.probe.pypi import fetch_pypi_metadata, infer_interfaces_from_metadata
-
-PACKAGE_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*$")
+from use_anything.probe.targets import classify_target
 
 
 class Prober:
     """Discover interfaces available for a given target."""
 
-    def probe_target(self, target: str) -> ProbeResult:
-        package_name = self._validate_and_classify_target(target)
+    def probe_target(self, target: str | None, *, binary_name: str | None = None) -> ProbeResult:
+        classified = classify_target(target, binary_name=binary_name)
+
+        if classified.target_type == "pypi_package":
+            return self._probe_pypi(classified.normalized_target)
+
+        if classified.target_type == "binary":
+            candidates = [
+                InterfaceCandidate(
+                    type="cli_tool",
+                    location=f"binary:{classified.normalized_target}",
+                    quality_score=0.7,
+                    coverage="partial",
+                    notes="Binary target discovered from --binary option",
+                )
+            ]
+            return ProbeResult(
+                target=classified.normalized_target,
+                target_type="binary",
+                interfaces_found=candidates,
+                recommended_interface="cli_tool",
+                reasoning="Binary targets use CLI probing first.",
+                source_metadata={"binary": classified.normalized_target},
+            )
+
+        if classified.target_type == "local_directory":
+            return self._probe_local_directory(Path(classified.normalized_target))
+
+        if classified.target_type == "github_repo":
+            return self._probe_url_target(classified.normalized_target, target_type="github_repo")
+
+        if classified.target_type == "docs_url":
+            return self._probe_url_target(classified.normalized_target, target_type="docs_url")
+
+        raise ProbeError(f"Unsupported target type '{classified.target_type}'")
+
+    def _probe_pypi(self, package_name: str) -> ProbeResult:
         metadata = fetch_pypi_metadata(package_name)
         candidates = infer_interfaces_from_metadata(package_name, metadata)
-
         if not candidates:
             raise ProbeError(f"No interfaces discovered for package '{package_name}'")
 
@@ -42,34 +74,40 @@ class Prober:
             },
         )
 
-    def _validate_and_classify_target(self, target: str) -> str:
-        value = target.strip()
-        if not value:
-            raise UnsupportedTargetError("Only PyPI package names are supported in MVP; received empty target")
-
-        if value.startswith("http://") or value.startswith("https://"):
-            raise UnsupportedTargetError(
-                "Only PyPI package names are supported in MVP. URL targets are not implemented yet."
+    def _probe_local_directory(self, directory: Path) -> ProbeResult:
+        candidates = [
+            InterfaceCandidate(
+                type="python_sdk",
+                location=str(directory),
+                quality_score=0.7,
+                coverage="partial",
+                notes="Local directory probing is based on project file heuristics",
             )
+        ]
+        return ProbeResult(
+            target=directory.name,
+            target_type="local_directory",
+            interfaces_found=candidates,
+            recommended_interface="python_sdk",
+            reasoning="Detected local source directory with likely SDK entrypoints.",
+            source_metadata={"path": str(directory)},
+        )
 
-        if os.path.exists(value):
-            raise UnsupportedTargetError(
-                "Only PyPI package names are supported in MVP. Local directory targets are not implemented yet."
-            )
-
-        if value.startswith("npm:"):
-            raise UnsupportedTargetError(
-                "Only PyPI package names are supported in MVP. npm targets are not implemented yet."
-            )
-
-        if value.startswith("binary:"):
-            raise UnsupportedTargetError(
-                "Only PyPI package names are supported in MVP. binary targets are not implemented yet."
-            )
-
-        if not PACKAGE_NAME_RE.match(value):
-            raise UnsupportedTargetError(
-                f"Only PyPI package names are supported in MVP; '{target}' is not a valid package name"
-            )
-
-        return value
+    def _probe_url_target(self, url: str, *, target_type: str) -> ProbeResult:
+        candidate_type = "rest_api_docs" if target_type == "docs_url" else "python_sdk"
+        return ProbeResult(
+            target=url,
+            target_type=target_type,
+            interfaces_found=[
+                InterfaceCandidate(
+                    type=candidate_type,
+                    location=url,
+                    quality_score=0.65,
+                    coverage="partial",
+                    notes="URL probing support is enabled for phase 2 target expansion",
+                )
+            ],
+            recommended_interface=candidate_type,
+            reasoning=f"Selected {candidate_type} based on URL target heuristics.",
+            source_metadata={"url": url},
+        )

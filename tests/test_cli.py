@@ -25,7 +25,7 @@ def test_cli_probe_subcommand(monkeypatch) -> None:
     runner = CliRunner()
 
     class FakeProber:
-        def probe_target(self, target: str):
+        def probe_target(self, target: str | None, *, binary_name: str | None = None):
             from use_anything.models import ProbeResult
 
             return ProbeResult(

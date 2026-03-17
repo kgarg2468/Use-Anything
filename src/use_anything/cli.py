@@ -10,6 +10,7 @@ import click
 from use_anything.exceptions import AnalyzeError, ProbeError, UnsupportedTargetError
 from use_anything.pipeline import UseAnythingPipeline
 from use_anything.probe.prober import Prober
+from use_anything.probe.targets import classify_target
 from use_anything.rank.ranker import Ranker
 from use_anything.validate.validator import Validator
 
@@ -22,7 +23,9 @@ class TargetAwareGroup(click.Group):
     """Route unknown first tokens to a hidden default run command."""
 
     def parse_args(self, ctx: click.Context, args: list[str]) -> list[str]:
-        if args and args[0] not in self.commands and not args[0].startswith("-"):
+        if args and args[0] not in self.commands:
+            if args[0] in CONTEXT_SETTINGS["help_option_names"]:
+                return super().parse_args(ctx, args)
             args = ["_run", *args]
         return super().parse_args(ctx, args)
 
@@ -42,13 +45,15 @@ def cli(ctx: click.Context) -> None:
 
 
 @cli.command(name="_run", hidden=True)
-@click.argument("target")
+@click.argument("target", required=False)
+@click.option("--binary", "binary_name", help="Probe a binary available on PATH")
 @click.option("--model", help="LLM model override for analysis and generation")
 @click.option("--interface", "forced_interface", help="Force a specific interface type")
 @click.option("-o", "--output-dir", type=click.Path(path_type=Path), help="Output directory")
 @click.option("--probe-only", is_flag=True, help="Run only probe and rank phases")
 def run_command(
-    target: str,
+    target: str | None,
+    binary_name: str | None,
     model: str | None,
     forced_interface: str | None,
     output_dir: Path | None,
@@ -57,8 +62,10 @@ def run_command(
     """Run full or probe-only generation path for a single target."""
 
     try:
+        classify_target(target, binary_name=binary_name)
         result = UseAnythingPipeline().run(
             target=target,
+            binary_name=binary_name,
             model=model,
             forced_interface=forced_interface,
             output_dir=output_dir,
@@ -88,12 +95,14 @@ def run_command(
 
 
 @cli.command("probe")
-@click.argument("target")
-def probe_command(target: str) -> None:
+@click.argument("target", required=False)
+@click.option("--binary", "binary_name", help="Probe a binary available on PATH")
+def probe_command(target: str | None, binary_name: str | None) -> None:
     """Probe a target and list discovered interfaces."""
 
     try:
-        probe_result = Prober().probe_target(target)
+        classify_target(target, binary_name=binary_name)
+        probe_result = Prober().probe_target(target, binary_name=binary_name)
     except (UnsupportedTargetError, ProbeError) as exc:
         raise click.ClickException(str(exc)) from exc
 

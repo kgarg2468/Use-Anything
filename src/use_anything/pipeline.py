@@ -33,13 +33,14 @@ class UseAnythingPipeline:
     def run(
         self,
         *,
-        target: str,
+        target: str | None,
+        binary_name: str | None = None,
         model: str | None = None,
         forced_interface: str | None = None,
         output_dir: Path | str | None = None,
         probe_only: bool = False,
     ) -> PipelineResult:
-        probe_result = self.prober.probe_target(target)
+        probe_result = self.prober.probe_target(target, binary_name=binary_name)
         rank_result = self.ranker.rank(probe_result)
 
         if forced_interface:
