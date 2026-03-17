@@ -51,6 +51,7 @@ def cli(ctx: click.Context) -> None:
 @click.option("--interface", "forced_interface", help="Force a specific interface type")
 @click.option("-o", "--output-dir", type=click.Path(path_type=Path), help="Output directory")
 @click.option("--probe-only", is_flag=True, help="Run only probe and rank phases")
+@click.option("--force", is_flag=True, help="Bypass enhancement merge and regenerate canonical output")
 def run_command(
     target: str | None,
     binary_name: str | None,
@@ -58,6 +59,7 @@ def run_command(
     forced_interface: str | None,
     output_dir: Path | None,
     probe_only: bool,
+    force: bool,
 ) -> None:
     """Run full or probe-only generation path for a single target."""
 
@@ -70,6 +72,7 @@ def run_command(
             forced_interface=forced_interface,
             output_dir=output_dir,
             probe_only=probe_only,
+            force=force,
         )
     except (UnsupportedTargetError, ProbeError, AnalyzeError) as exc:
         raise click.ClickException(str(exc)) from exc

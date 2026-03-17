@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import httpx
+
 from use_anything.analyze.analyzer import Analyzer
 from use_anything.exceptions import UnsupportedTargetError
 from use_anything.generate.generator import Generator
-from use_anything.models import PipelineResult, RankedInterface
+from use_anything.models import InterfaceCandidate, PipelineResult, RankedInterface
 from use_anything.probe.prober import Prober
 from use_anything.rank.ranker import Ranker
 from use_anything.validate.validator import Validator
@@ -54,6 +56,7 @@ class UseAnythingPipeline:
         forced_interface: str | None = None,
         output_dir: Path | str | None = None,
         probe_only: bool = False,
+        force: bool = False,
     ) -> PipelineResult:
         probe_result = self.prober.probe_target(target, binary_name=binary_name)
         rank_result = self.ranker.rank(probe_result)
@@ -87,10 +90,13 @@ class UseAnythingPipeline:
         analysis = analyzer.analyze(probe_result=probe_result, rank_result=rank_result)
 
         target_output = Path(output_dir) if output_dir else Path.cwd() / f"use-anything-{probe_result.target}"
+        existing_skill = None if force else self._load_existing_skill_content(probe_result.interfaces_found)
         artifacts = self.generator.generate(
             analysis,
             target_output,
             source_interface=rank_result.primary.type,
+            existing_skill=existing_skill,
+            force=force,
         )
         validation_report = self.validator.validate_directory(target_output)
 
@@ -102,3 +108,23 @@ class UseAnythingPipeline:
             validation_report=validation_report,
             probe_only=False,
         )
+
+    def _load_existing_skill_content(self, candidates: list[InterfaceCandidate]) -> str | None:
+        existing_candidates = [candidate for candidate in candidates if candidate.type == "existing_skill"]
+        if not existing_candidates:
+            return None
+
+        location = existing_candidates[0].location
+        path = Path(location)
+        if path.exists() and path.is_file():
+            return path.read_text(encoding="utf-8")
+
+        if location.startswith("http://") or location.startswith("https://"):
+            try:
+                response = httpx.get(location, timeout=15.0)
+                response.raise_for_status()
+                return response.text
+            except httpx.HTTPError:
+                return None
+
+        return None

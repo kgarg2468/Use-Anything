@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from use_anything.exceptions import UnsupportedTargetError
-from use_anything.models import AnalyzerIR, ProbeResult, RankResult
+from use_anything.models import AnalyzerIR, ProbeResult, RankResult, ValidationReport
 from use_anything.pipeline import UseAnythingPipeline
 
 
@@ -122,3 +122,112 @@ def test_pipeline_rejects_unknown_forced_interface() -> None:
 
     with pytest.raises(UnsupportedTargetError, match="Unsupported forced interface"):
         pipeline.run(target="requests", forced_interface="banana_interface", probe_only=True)
+
+
+def test_pipeline_passes_existing_skill_to_generator_when_not_forced(tmp_path: Path) -> None:
+    existing_skill_path = tmp_path / "upstream-skill.md"
+    existing_skill_path.write_text("---\nname: demo\ndescription: test\n---\n\n# demo\n")
+
+    class ExistingSkillProber(FakeProber):
+        def probe_target(self, target: str, *, binary_name: str | None = None) -> ProbeResult:
+            from use_anything.models import InterfaceCandidate
+
+            result = super().probe_target(target, binary_name=binary_name)
+            result.interfaces_found.append(
+                InterfaceCandidate(
+                    type="existing_skill",
+                    location=str(existing_skill_path),
+                    quality_score=0.7,
+                    coverage="partial",
+                    notes="existing",
+                )
+            )
+            return result
+
+    class RecordingGenerator:
+        def __init__(self) -> None:
+            self.last_existing_skill: str | None = None
+            self.last_force: bool | None = None
+
+        def generate(self, analysis, output_dir, *, source_interface, existing_skill=None, force=False):  # noqa: ANN001
+            self.last_existing_skill = existing_skill
+            self.last_force = force
+            from use_anything.models import GeneratedArtifacts
+
+            skill_path = Path(output_dir) / "SKILL.md"
+            Path(output_dir).mkdir(parents=True, exist_ok=True)
+            skill_path.write_text("---\nname: demo\ndescription: test\n---\n\n# demo\n")
+            return GeneratedArtifacts(skill_path=skill_path, reference_paths={}, token_counts={}, line_counts={})
+
+    class PassingValidator:
+        def validate_directory(self, skill_dir):  # noqa: ANN001
+            return ValidationReport(passed=True, errors=[], warnings=[], metrics={})
+
+    generator = RecordingGenerator()
+    pipeline = UseAnythingPipeline(
+        prober=ExistingSkillProber(),
+        ranker=FakeRanker(),
+        analyzer=FakeAnalyzer(),
+        generator=generator,
+        validator=PassingValidator(),
+    )
+
+    pipeline.run(target="requests", output_dir=tmp_path / "generated", force=False)
+
+    assert generator.last_existing_skill is not None
+    assert "name: demo" in generator.last_existing_skill
+    assert generator.last_force is False
+
+
+def test_pipeline_skips_existing_skill_when_forced(tmp_path: Path) -> None:
+    existing_skill_path = tmp_path / "upstream-skill.md"
+    existing_skill_path.write_text("---\nname: demo\ndescription: test\n---\n\n# demo\n")
+
+    class ExistingSkillProber(FakeProber):
+        def probe_target(self, target: str, *, binary_name: str | None = None) -> ProbeResult:
+            from use_anything.models import InterfaceCandidate
+
+            result = super().probe_target(target, binary_name=binary_name)
+            result.interfaces_found.append(
+                InterfaceCandidate(
+                    type="existing_skill",
+                    location=str(existing_skill_path),
+                    quality_score=0.7,
+                    coverage="partial",
+                    notes="existing",
+                )
+            )
+            return result
+
+    class RecordingGenerator:
+        def __init__(self) -> None:
+            self.last_existing_skill: str | None = "unexpected"
+            self.last_force: bool | None = None
+
+        def generate(self, analysis, output_dir, *, source_interface, existing_skill=None, force=False):  # noqa: ANN001
+            self.last_existing_skill = existing_skill
+            self.last_force = force
+            from use_anything.models import GeneratedArtifacts
+
+            skill_path = Path(output_dir) / "SKILL.md"
+            Path(output_dir).mkdir(parents=True, exist_ok=True)
+            skill_path.write_text("---\nname: demo\ndescription: test\n---\n\n# demo\n")
+            return GeneratedArtifacts(skill_path=skill_path, reference_paths={}, token_counts={}, line_counts={})
+
+    class PassingValidator:
+        def validate_directory(self, skill_dir):  # noqa: ANN001
+            return ValidationReport(passed=True, errors=[], warnings=[], metrics={})
+
+    generator = RecordingGenerator()
+    pipeline = UseAnythingPipeline(
+        prober=ExistingSkillProber(),
+        ranker=FakeRanker(),
+        analyzer=FakeAnalyzer(),
+        generator=generator,
+        validator=PassingValidator(),
+    )
+
+    pipeline.run(target="requests", output_dir=tmp_path / "generated", force=True)
+
+    assert generator.last_existing_skill is None
+    assert generator.last_force is True
