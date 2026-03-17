@@ -64,3 +64,40 @@ def test_build_interface_context_for_cli_candidate() -> None:
     assert "ffmpeg -i input output" in context.summary
     assert "version 7.1" in context.summary
     assert context.sources == ["cli:binary:ffmpeg"]
+
+
+def test_build_interface_context_prioritizes_llms_and_existing_skill_sources() -> None:
+    probe_result = ProbeResult(
+        target="requests",
+        target_type="docs_url",
+        interfaces_found=[
+            InterfaceCandidate(
+                type="python_sdk",
+                location="pypi:requests",
+                quality_score=0.95,
+                coverage="full",
+                notes="sdk",
+            ),
+            InterfaceCandidate(
+                type="llms_txt",
+                location="https://docs.example.dev/llms.txt",
+                quality_score=0.8,
+                coverage="partial",
+                notes="llms",
+            ),
+            InterfaceCandidate(
+                type="existing_skill",
+                location="https://docs.example.dev/skill.md",
+                quality_score=0.8,
+                coverage="partial",
+                notes="skill",
+            ),
+        ],
+        source_metadata={"summary": "HTTP helpers"},
+    )
+
+    context = build_interface_context(probe_result=probe_result, interface_type="python_sdk")
+
+    assert context.sources[0] == "llms_txt:https://docs.example.dev/llms.txt"
+    assert context.sources[1] == "existing_skill:https://docs.example.dev/skill.md"
+    assert "Supplemental prioritized sources" in context.summary

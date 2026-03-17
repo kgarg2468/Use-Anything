@@ -25,12 +25,39 @@ def build_interface_context(*, probe_result: ProbeResult, interface_type: str) -
     if candidate is None:
         return InterfaceContext(summary="No interface-specific context available.", sources=[])
 
+    prioritized_sources = _prioritized_support_sources(probe_result.interfaces_found)
     if interface_type == "openapi_spec":
-        return _build_openapi_context(candidate)
-    if interface_type == "cli_tool":
-        return _build_cli_context(candidate, probe_result.source_metadata)
+        context = _build_openapi_context(candidate)
+    elif interface_type == "cli_tool":
+        context = _build_cli_context(candidate, probe_result.source_metadata)
+    else:
+        context = _build_generic_context(candidate, probe_result.source_metadata)
 
-    return _build_generic_context(candidate, probe_result.source_metadata)
+    if not prioritized_sources:
+        return context
+
+    merged_sources = _dedupe_sources([*prioritized_sources, *context.sources])
+    summary = context.summary + "\nSupplemental prioritized sources:\n" + "\n".join(
+        f"- {source}" for source in prioritized_sources
+    )
+    return InterfaceContext(summary=summary, sources=merged_sources)
+
+
+def _prioritized_support_sources(candidates: list[InterfaceCandidate]) -> list[str]:
+    sources: list[str] = []
+    for interface_type in ("llms_txt", "existing_skill"):
+        for candidate in candidates:
+            if candidate.type == interface_type:
+                sources.append(f"{interface_type}:{candidate.location}")
+    return _dedupe_sources(sources)
+
+
+def _dedupe_sources(sources: list[str]) -> list[str]:
+    deduped: list[str] = []
+    for source in sources:
+        if source not in deduped:
+            deduped.append(source)
+    return deduped
 
 
 def _build_openapi_context(candidate: InterfaceCandidate) -> InterfaceContext:
