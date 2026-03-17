@@ -8,6 +8,8 @@ Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 Requires-Dist: click>=8.1.0
 Requires-Dist: httpx>=0.27.0
+Requires-Dist: beautifulsoup4>=4.12.0
+Requires-Dist: requests>=2.32.0
 Requires-Dist: pyyaml>=6.0.0
 Requires-Dist: tiktoken>=0.7.0
 Requires-Dist: rich>=13.7.0
@@ -47,11 +49,20 @@ export ANTHROPIC_API_KEY=...
 export OPENAI_API_KEY=...
 ```
 
+Or use local Codex CLI authentication (no API key env vars required by Use-Anything):
+
+```bash
+codex login
+```
+
 ## Usage
 
 ```bash
 # Full pipeline
 uv run use-anything requests
+
+# Full pipeline via Codex CLI backend
+uv run use-anything requests --model codex-cli
 
 # Probe only
 uv run use-anything requests --probe-only

@@ -141,6 +141,15 @@ def discover_interface_candidates(
 def extract_links_from_html(html: str) -> list[str]:
     """Extract href links from an HTML payload."""
 
+    try:
+        from bs4 import BeautifulSoup
+    except ImportError:
+        return re.findall(r"href=['\"]([^'\"]+)['\"]", html, flags=re.IGNORECASE)
+
+    soup = BeautifulSoup(html, "html.parser")
+    links = [str(link.get("href")) for link in soup.find_all("a") if link.get("href")]
+    if links:
+        return links
     return re.findall(r"href=['\"]([^'\"]+)['\"]", html, flags=re.IGNORECASE)
 
 

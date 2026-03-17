@@ -23,8 +23,11 @@ src/use_anything/generate/generator.py
 src/use_anything/generate/reference_writer.py
 src/use_anything/generate/skill_writer.py
 src/use_anything/probe/__init__.py
+src/use_anything/probe/adapters.py
+src/use_anything/probe/interface_scanner.py
 src/use_anything/probe/prober.py
 src/use_anything/probe/pypi.py
+src/use_anything/probe/targets.py
 src/use_anything/rank/__init__.py
 src/use_anything/rank/ranker.py
 src/use_anything/utils/__init__.py
@@ -37,5 +40,8 @@ tests/test_codex_provider.py
 tests/test_generate.py
 tests/test_pipeline.py
 tests/test_probe.py
+tests/test_probe_adapters.py
+tests/test_probe_scanner.py
 tests/test_rank.py
+tests/test_target_classification.py
 tests/test_validate.py
