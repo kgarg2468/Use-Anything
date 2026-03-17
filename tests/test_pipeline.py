@@ -7,7 +7,7 @@ from use_anything.pipeline import UseAnythingPipeline
 
 
 class FakeProber:
-    def probe_target(self, target: str) -> ProbeResult:
+    def probe_target(self, target: str, *, binary_name: str | None = None) -> ProbeResult:
         from use_anything.models import InterfaceCandidate
 
         return ProbeResult(

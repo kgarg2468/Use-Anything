@@ -32,7 +32,10 @@ class Prober:
             )
 
         if classified.target_type == "local_directory":
-            return self._probe_local_directory(Path(classified.normalized_target), raw_target=classified.normalized_target)
+            return self._probe_local_directory(
+                Path(classified.normalized_target),
+                raw_target=classified.normalized_target,
+            )
 
         if classified.target_type == "github_repo":
             return self._probe_url_target(classified.normalized_target, target_type="github_repo")
@@ -89,6 +92,9 @@ class Prober:
             target_type=target_type,
             interfaces_found=candidates,
             recommended_interface=candidates[0].type if candidates else "rest_api_docs",
-            reasoning=f"Selected {candidates[0].type if candidates else 'rest_api_docs'} based on URL target heuristics.",
+            reasoning=(
+                f"Selected {candidates[0].type if candidates else 'rest_api_docs'} "
+                "based on URL target heuristics."
+            ),
             source_metadata=metadata,
         )
