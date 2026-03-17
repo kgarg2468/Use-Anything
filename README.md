@@ -58,6 +58,9 @@ uv run use-anything ./my-project
 # Full pipeline from binary
 uv run use-anything --binary ffmpeg
 
+# Force full regeneration (skip merge from discovered existing skill)
+uv run use-anything requests --force
+
 # Full pipeline via Codex CLI backend
 uv run use-anything requests --model codex-cli
 
@@ -70,6 +73,16 @@ uv run use-anything probe requests
 # Validate generated output
 uv run use-anything validate ./use-anything-requests
 ```
+
+## Enhancement behavior
+
+When probing discovers an upstream `SKILL.md`, Use-Anything enhances output by:
+
+- Regenerating canonical sections (`Setup`, `Key concepts`, workflows, constraints, quick reference).
+- Preserving non-canonical custom sections from the upstream skill.
+- Preserving unknown metadata keys in frontmatter.
+
+Use `--force` to bypass this merge behavior and fully regenerate canonical output.
 
 ## Claude Code usage
 
