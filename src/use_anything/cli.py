@@ -88,6 +88,7 @@ def run_command(
         "skill_path": str(result.artifacts.skill_path) if result.artifacts else "",
         "token_counts": result.artifacts.token_counts if result.artifacts else {},
         "workflow_count": len(result.analysis.workflows) if result.analysis else 0,
+        "analysis_sources": result.analysis.analysis_sources if result.analysis else [],
         "validation_passed": result.validation_report.passed if result.validation_report else False,
         "validation_errors": result.validation_report.errors if result.validation_report else [],
     }
