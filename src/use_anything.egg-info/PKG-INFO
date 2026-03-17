@@ -1,0 +1,81 @@
+Metadata-Version: 2.4
+Name: use-anything
+Version: 0.1.0
+Summary: Generate agent skills from existing software interfaces
+Author: Use-Anything
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: click>=8.1.0
+Requires-Dist: httpx>=0.27.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: tiktoken>=0.7.0
+Requires-Dist: rich>=13.7.0
+Requires-Dist: jsonschema>=4.23.0
+Requires-Dist: anthropic>=0.34.0
+Requires-Dist: openai>=1.40.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.2.0; extra == "dev"
+Requires-Dist: pytest-cov>=5.0.0; extra == "dev"
+Requires-Dist: ruff>=0.6.0; extra == "dev"
+
+# Use-Anything
+
+Use-Anything generates agent-optimized `SKILL.md` directories from existing software interfaces.
+
+## MVP scope
+
+This phase supports only **PyPI package names** as input targets.
+
+Supported commands:
+
+- `use-anything <target>`
+- `use-anything probe <target>`
+- `use-anything validate <skill_dir>`
+
+## Setup
+
+```bash
+uv sync --extra dev
+```
+
+Set at least one API key for analysis/generation:
+
+```bash
+export ANTHROPIC_API_KEY=...
+# or
+export OPENAI_API_KEY=...
+```
+
+## Usage
+
+```bash
+# Full pipeline
+uv run use-anything requests
+
+# Probe only
+uv run use-anything requests --probe-only
+
+# Explicit probe command
+uv run use-anything probe requests
+
+# Validate generated output
+uv run use-anything validate ./use-anything-requests
+```
+
+## Claude Code usage
+
+After generation, copy or move output into Claude Code skills path, for example:
+
+```bash
+uv run use-anything requests -o ~/.claude/skills/requests
+```
+
+Then invoke by trigger phrase or slash command (if supported by skill naming).
+
+## Development
+
+```bash
+uv run pytest -q
+uv run ruff check .
+```

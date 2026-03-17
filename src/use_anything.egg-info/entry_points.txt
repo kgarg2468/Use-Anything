@@ -1,0 +1,2 @@
+[console_scripts]
+use-anything = use_anything.cli:main
