@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from use_anything.exceptions import UnsupportedTargetError
 from use_anything.probe.prober import Prober
 from use_anything.probe.pypi import infer_interfaces_from_metadata
@@ -20,15 +22,12 @@ def test_infer_interfaces_prefers_python_sdk() -> None:
     assert candidates[0].type == "python_sdk"
 
 
-def test_prober_rejects_url_target() -> None:
+def test_prober_supports_docs_url_target() -> None:
     prober = Prober()
+    result = prober.probe_target("https://docs.example.com/reference")
 
-    try:
-        prober.probe_target("https://docs.example.com")
-    except UnsupportedTargetError as exc:
-        assert "Only PyPI package names are supported" in str(exc)
-    else:
-        raise AssertionError("Expected UnsupportedTargetError")
+    assert result.target_type == "docs_url"
+    assert result.interfaces_found
 
 
 def test_prober_returns_probe_result_for_pypi(monkeypatch) -> None:
@@ -54,3 +53,10 @@ def test_prober_returns_probe_result_for_pypi(monkeypatch) -> None:
     assert result.target_type == "pypi_package"
     assert result.interfaces_found
     assert result.source_metadata["version"] == "2.32.3"
+
+
+def test_prober_rejects_non_docs_non_github_url() -> None:
+    prober = Prober()
+
+    with pytest.raises(UnsupportedTargetError, match="docs URL or GitHub repository URL"):
+        prober.probe_target("https://example.com")

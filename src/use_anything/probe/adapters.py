@@ -12,6 +12,15 @@ import httpx
 from use_anything.models import InterfaceCandidate
 from use_anything.probe.interface_scanner import discover_interface_candidates, extract_links_from_html
 
+DOCS_PREFLIGHT_PATHS = [
+    "/openapi.json",
+    "/openapi.yaml",
+    "/swagger.json",
+    "/llms.txt",
+    "/llms-full.txt",
+    "/.well-known/skills/default/skill.md",
+]
+
 
 def probe_binary(
     binary_name: str,
@@ -77,10 +86,12 @@ def probe_docs_url(
     response_html = html if html is not None else _fetch_text(url)
     links = extract_links_from_html(response_html)
     absolute_links = [urljoin(url, link) for link in links]
+    preflight_links = [urljoin(url, path) for path in DOCS_PREFLIGHT_PATHS]
+    all_links = [url, *absolute_links, *preflight_links]
 
     candidates = discover_interface_candidates(
         source_location=url,
-        urls=[url, *absolute_links],
+        urls=all_links,
         text=response_html,
     )
 
@@ -96,7 +107,7 @@ def probe_docs_url(
         )
     candidates.sort(key=lambda item: item.quality_score, reverse=True)
 
-    return candidates, {"url": url, "discovered_links": absolute_links[:50]}
+    return candidates, {"url": url, "discovered_links": all_links[:50]}
 
 
 def probe_github_repo(
