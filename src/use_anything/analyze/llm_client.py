@@ -42,8 +42,8 @@ class LLMClient:
 
         if model == CODEX_CLI_MODEL:
             return CodexCLIProvider(
-                timeout_seconds=self.timeout_seconds,
-                max_retries=self.max_retries,
+                timeout_seconds=max(self.timeout_seconds, 240),
+                max_retries=0,
             )
 
         if model.startswith("gpt") or model.startswith("o") or "openai" in model:

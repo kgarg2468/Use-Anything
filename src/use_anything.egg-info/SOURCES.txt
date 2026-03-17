@@ -33,6 +33,7 @@ src/use_anything/validate/__init__.py
 src/use_anything/validate/validator.py
 tests/test_analyze.py
 tests/test_cli.py
+tests/test_codex_provider.py
 tests/test_generate.py
 tests/test_pipeline.py
 tests/test_probe.py

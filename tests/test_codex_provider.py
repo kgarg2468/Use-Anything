@@ -25,6 +25,8 @@ def test_llmclient_selects_codex_cli_provider(monkeypatch) -> None:
     client = LLMClient(model="codex-cli")
 
     assert isinstance(client._provider, CodexCLIProvider)
+    assert client._provider.timeout_seconds == 240
+    assert client._provider.max_retries == 0
 
 
 def test_llmclient_error_mentions_codex_option_when_no_keys(monkeypatch) -> None:
