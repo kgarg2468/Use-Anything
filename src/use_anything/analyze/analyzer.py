@@ -34,6 +34,8 @@ class Analyzer:
             user_prompt=user_prompt,
             schema=ANALYZER_IR_SCHEMA,
         )
+        if not payload.get("analysis_sources"):
+            payload["analysis_sources"] = interface_context.sources or []
 
         try:
             validate(payload, ANALYZER_IR_SCHEMA)
