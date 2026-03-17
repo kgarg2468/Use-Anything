@@ -9,6 +9,7 @@ from use_anything.generate.reference_writer import (
     build_gotchas_reference,
     build_workflows_reference,
 )
+from use_anything.generate.skill_merge import merge_skill_markdown
 from use_anything.generate.skill_writer import render_skill_markdown
 from use_anything.models import AnalyzerIR, GeneratedArtifacts
 from use_anything.utils.tokens import count_tokens
@@ -23,11 +24,15 @@ class Generator:
         output_dir: Path | str,
         *,
         source_interface: str,
+        existing_skill: str | None = None,
+        force: bool = False,
     ) -> GeneratedArtifacts:
         target_dir = Path(output_dir)
         target_dir.mkdir(parents=True, exist_ok=True)
 
         skill_text = render_skill_markdown(analysis, source_interface=source_interface)
+        if existing_skill and not force:
+            skill_text = merge_skill_markdown(existing_skill=existing_skill, generated_skill=skill_text)
         skill_path = target_dir / "SKILL.md"
         skill_path.write_text(skill_text)
 
