@@ -5,11 +5,26 @@ from __future__ import annotations
 from pathlib import Path
 
 from use_anything.analyze.analyzer import Analyzer
+from use_anything.exceptions import UnsupportedTargetError
 from use_anything.generate.generator import Generator
 from use_anything.models import PipelineResult, RankedInterface
 from use_anything.probe.prober import Prober
 from use_anything.rank.ranker import Ranker
 from use_anything.validate.validator import Validator
+
+SUPPORTED_INTERFACE_TYPES = {
+    "openapi_spec",
+    "rest_api_docs",
+    "python_sdk",
+    "node_sdk",
+    "cli_tool",
+    "graphql_api",
+    "grpc_api",
+    "file_format",
+    "plugin_api",
+    "llms_txt",
+    "existing_skill",
+}
 
 
 class UseAnythingPipeline:
@@ -44,6 +59,17 @@ class UseAnythingPipeline:
         rank_result = self.ranker.rank(probe_result)
 
         if forced_interface:
+            if forced_interface not in SUPPORTED_INTERFACE_TYPES:
+                raise UnsupportedTargetError(f"Unsupported forced interface '{forced_interface}'")
+
+            discovered_types = {candidate.type for candidate in probe_result.interfaces_found}
+            if forced_interface not in discovered_types:
+                discovered_text = ", ".join(sorted(discovered_types)) or "none"
+                raise UnsupportedTargetError(
+                    f"Forced interface '{forced_interface}' was not discovered for this target. "
+                    f"Discovered interfaces: {discovered_text}"
+                )
+
             rank_result.primary = RankedInterface(
                 type=forced_interface,
                 score=1.0,
