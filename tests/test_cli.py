@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from click.testing import CliRunner
 
 from use_anything.cli import cli
@@ -95,3 +97,77 @@ def test_cli_accepts_binary_without_target(monkeypatch) -> None:
     assert result.exit_code == 0
     assert calls["target"] is None
     assert calls["binary_name"] == "ffmpeg"
+
+
+def test_cli_summary_includes_analysis_sources(monkeypatch, tmp_path: Path) -> None:
+    runner = CliRunner()
+
+    class FakePipeline:
+        def run(self, **kwargs):  # noqa: ANN003
+            from use_anything.models import (
+                AnalyzerIR,
+                GeneratedArtifacts,
+                InterfaceCandidate,
+                PipelineResult,
+                ProbeResult,
+                RankedInterface,
+                RankResult,
+                ValidationReport,
+            )
+
+            probe_result = ProbeResult(
+                target="requests",
+                target_type="pypi_package",
+                interfaces_found=[
+                    InterfaceCandidate(
+                        type="python_sdk",
+                        location="pypi:requests",
+                        quality_score=0.95,
+                        coverage="full",
+                        notes="sdk",
+                    )
+                ],
+            )
+            rank_result = RankResult(
+                primary=RankedInterface(type="python_sdk", score=0.95, reasoning="best"),
+                secondary=None,
+                rejected=[],
+            )
+            analysis = AnalyzerIR.from_dict(
+                {
+                    "software": "requests",
+                    "interface": "python_sdk",
+                    "version": "2.32.3",
+                    "setup": {
+                        "install": "pip install requests",
+                        "auth": "none",
+                        "env_vars": [],
+                        "prerequisites": [],
+                    },
+                    "capability_groups": [],
+                    "workflows": [],
+                    "gotchas": [],
+                    "analysis_sources": ["python_sdk:pypi:requests"],
+                }
+            )
+
+            return PipelineResult(
+                probe_result=probe_result,
+                rank_result=rank_result,
+                analysis=analysis,
+                artifacts=GeneratedArtifacts(
+                    skill_path=tmp_path / "SKILL.md",
+                    reference_paths={},
+                    token_counts={},
+                    line_counts={},
+                ),
+                validation_report=ValidationReport(passed=True, errors=[], warnings=[], metrics={}),
+                probe_only=False,
+            )
+
+    monkeypatch.setattr("use_anything.cli.UseAnythingPipeline", FakePipeline)
+
+    result = runner.invoke(cli, ["requests"])
+
+    assert result.exit_code == 0
+    assert '"analysis_sources"' in result.output
