@@ -4,8 +4,12 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
+import subprocess
 import time
 from dataclasses import dataclass
+from pathlib import Path
+from tempfile import NamedTemporaryFile
 from typing import Any, Protocol
 
 from use_anything.exceptions import AnalyzeError
@@ -83,6 +87,79 @@ class OpenAIProvider:
         return _extract_json(text)
 
 
+@dataclass
+class CodexCLIProvider:
+    timeout_seconds: int = 60
+    max_retries: int = 2
+    sandbox_mode: str = "read-only"
+    codex_executable: str = "codex"
+
+    def complete_json(
+        self,
+        *,
+        system_prompt: str,
+        user_prompt: str,
+        schema: dict[str, Any],
+    ) -> dict[str, Any]:
+        codex_path = shutil.which(self.codex_executable)
+        if not codex_path:
+            raise AnalyzeError(
+                "codex CLI executable not found on PATH. Install Codex CLI and run `codex login`."
+            )
+
+        prompt = _build_codex_prompt(system_prompt=system_prompt, user_prompt=user_prompt, schema=schema)
+
+        def _request() -> str:
+            with NamedTemporaryFile(prefix="use-anything-codex-", suffix=".txt", delete=False) as handle:
+                output_path = Path(handle.name)
+
+            command = [
+                codex_path,
+                "exec",
+                "--skip-git-repo-check",
+                "--sandbox",
+                self.sandbox_mode,
+                "--output-last-message",
+                str(output_path),
+                prompt,
+            ]
+
+            try:
+                completed = subprocess.run(
+                    command,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                    timeout=self.timeout_seconds,
+                )
+            except subprocess.TimeoutExpired as exc:
+                output_path.unlink(missing_ok=True)
+                raise AnalyzeError(f"codex exec timed out after {self.timeout_seconds} seconds") from exc
+
+            if completed.returncode != 0:
+                output_path.unlink(missing_ok=True)
+                details = _truncate_output(completed.stderr or completed.stdout or "")
+                raise AnalyzeError(
+                    "codex exec failed "
+                    f"(exit {completed.returncode}). "
+                    "Ensure Codex is authenticated with `codex login`. "
+                    f"Details: {details}"
+                )
+
+            text = output_path.read_text().strip() if output_path.exists() else ""
+            output_path.unlink(missing_ok=True)
+
+            if not text:
+                raise AnalyzeError(
+                    "codex exec produced no final message. "
+                    "Ensure Codex completed successfully and returned JSON."
+                )
+            return text
+
+        text = _with_retry(_request, retries=self.max_retries)
+        return _extract_json(text)
+
+
 def _with_retry(fn, retries: int) -> str:
     attempt = 0
     last_error: Exception | None = None
@@ -122,3 +199,22 @@ def _extract_json(text: str) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise AnalyzeError("LLM JSON response must be an object")
     return payload
+
+
+def _build_codex_prompt(*, system_prompt: str, user_prompt: str, schema: dict[str, Any]) -> str:
+    return (
+        f"{system_prompt}\n\n"
+        f"{user_prompt}\n\n"
+        "Return only a JSON object (no markdown fences, no prose) "
+        "matching this schema exactly:\n"
+        f"{json.dumps(schema, indent=2)}"
+    )
+
+
+def _truncate_output(output: str, limit: int = 500) -> str:
+    stripped = output.strip()
+    if not stripped:
+        return "(no stderr/stdout)"
+    if len(stripped) <= limit:
+        return stripped
+    return f"{stripped[:limit]}..."

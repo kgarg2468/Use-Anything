@@ -5,11 +5,17 @@ from __future__ import annotations
 import os
 from typing import Any
 
-from use_anything.analyze.providers import AnthropicProvider, JSONProvider, OpenAIProvider
+from use_anything.analyze.providers import (
+    AnthropicProvider,
+    CodexCLIProvider,
+    JSONProvider,
+    OpenAIProvider,
+)
 from use_anything.exceptions import AnalyzeError
 
 DEFAULT_CLAUDE_MODEL = "claude-sonnet-4-6"
 DEFAULT_OPENAI_MODEL = "gpt-4.1"
+CODEX_CLI_MODEL = "codex-cli"
 
 
 class LLMClient:
@@ -33,6 +39,12 @@ class LLMClient:
 
     def _build_provider(self) -> JSONProvider:
         model = (self.model or "").lower()
+
+        if model == CODEX_CLI_MODEL:
+            return CodexCLIProvider(
+                timeout_seconds=self.timeout_seconds,
+                max_retries=self.max_retries,
+            )
 
         if model.startswith("gpt") or model.startswith("o") or "openai" in model:
             if not self.openai_api_key:
@@ -61,7 +73,8 @@ class LLMClient:
                 )
 
         raise AnalyzeError(
-            "No API key configured. Set ANTHROPIC_API_KEY or OPENAI_API_KEY before running analysis."
+            "No API key configured. Set ANTHROPIC_API_KEY or OPENAI_API_KEY, "
+            "or run with --model codex-cli."
         )
 
     def analyze(self, *, system_prompt: str, user_prompt: str, schema: dict[str, Any]) -> dict[str, Any]:

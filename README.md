@@ -26,11 +26,20 @@ export ANTHROPIC_API_KEY=...
 export OPENAI_API_KEY=...
 ```
 
+Or use local Codex CLI authentication (no API key env vars required by Use-Anything):
+
+```bash
+codex login
+```
+
 ## Usage
 
 ```bash
 # Full pipeline
 uv run use-anything requests
+
+# Full pipeline via Codex CLI backend
+uv run use-anything requests --model codex-cli
 
 # Probe only
 uv run use-anything requests --probe-only
