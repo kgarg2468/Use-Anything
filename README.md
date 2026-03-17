@@ -2,14 +2,22 @@
 
 Use-Anything generates agent-optimized `SKILL.md` directories from existing software interfaces.
 
-## MVP scope
+## Current scope
 
-This phase supports only **PyPI package names** as input targets.
+This phase supports multiple input target types:
+
+- PyPI package names (for example `requests`)
+- GitHub repository URLs (for example `https://github.com/pallets/flask`)
+- Documentation URLs (for example `https://docs.stripe.com`)
+- Local source directories (for example `./my-project`)
+- Binaries via `--binary` (for example `--binary ffmpeg`)
 
 Supported commands:
 
 - `use-anything <target>`
+- `use-anything --binary <name>`
 - `use-anything probe <target>`
+- `use-anything probe --binary <name>`
 - `use-anything validate <skill_dir>`
 
 ## Setup
@@ -37,6 +45,18 @@ codex login
 ```bash
 # Full pipeline
 uv run use-anything requests
+
+# Full pipeline from docs URL
+uv run use-anything https://docs.python-requests.org/en/latest/
+
+# Full pipeline from GitHub repository
+uv run use-anything https://github.com/pallets/flask
+
+# Full pipeline from local directory
+uv run use-anything ./my-project
+
+# Full pipeline from binary
+uv run use-anything --binary ffmpeg
 
 # Full pipeline via Codex CLI backend
 uv run use-anything requests --model codex-cli
