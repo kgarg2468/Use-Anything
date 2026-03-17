@@ -18,9 +18,25 @@ def discover_interface_candidates(
     """Discover likely interfaces from filenames, URLs, and free-form text."""
 
     candidates: OrderedDict[str, InterfaceCandidate] = OrderedDict()
-    normalized_paths = [item.lower() for item in (paths or [])]
-    normalized_urls = [item.lower() for item in (urls or [])]
+    path_pairs = [(item, item.lower()) for item in (paths or [])]
+    url_pairs = [(item, item.lower()) for item in (urls or [])]
+    normalized_paths = [item[1] for item in path_pairs]
+    normalized_urls = [item[1] for item in url_pairs]
     normalized_text = text.lower()
+    combined_pairs = [*path_pairs, *url_pairs]
+
+    openapi_location = _first_match(
+        combined_pairs,
+        ["openapi.json", "openapi.yaml", "openapi.yml", "swagger.json", "swagger.yaml", "swagger.yml"],
+    ) or source_location
+    llms_location = _first_match(combined_pairs, ["llms.txt", "llms-full.txt"]) or source_location
+    skill_location = (
+        _first_match(combined_pairs, ["skill.md", "skills/default/skill.md", ".well-known/skills"])
+        or source_location
+    )
+    python_location = _first_match(path_pairs, ["pyproject.toml", "setup.py", "requirements.txt"]) or source_location
+    node_location = _first_match(path_pairs, ["package.json", "npm-shrinkwrap.json"]) or source_location
+    rest_location = _first_match(combined_pairs, ["/api", "/reference", "api-reference"]) or source_location
 
     _add_if_present(
         candidates,
@@ -32,7 +48,7 @@ def discover_interface_candidates(
         or _contains_any([normalized_text], ["openapi", "swagger"]),
         candidate=InterfaceCandidate(
             type="openapi_spec",
-            location=source_location,
+            location=openapi_location,
             quality_score=0.95,
             coverage="full",
             notes="Discovered OpenAPI/Swagger signals",
@@ -45,7 +61,7 @@ def discover_interface_candidates(
         present=_contains_any(normalized_paths + normalized_urls, ["llms.txt", "llms-full.txt"]),
         candidate=InterfaceCandidate(
             type="llms_txt",
-            location=source_location,
+            location=llms_location,
             quality_score=0.82,
             coverage="partial",
             notes="Found llms.txt optimized docs",
@@ -61,7 +77,7 @@ def discover_interface_candidates(
         ),
         candidate=InterfaceCandidate(
             type="existing_skill",
-            location=source_location,
+            location=skill_location,
             quality_score=0.85,
             coverage="partial",
             notes="Found existing skill file",
@@ -75,7 +91,7 @@ def discover_interface_candidates(
         or _contains_any([normalized_text], ["pip install", "import "]),
         candidate=InterfaceCandidate(
             type="python_sdk",
-            location=source_location,
+            location=python_location,
             quality_score=0.78,
             coverage="partial",
             notes="Found Python package signals",
@@ -89,7 +105,7 @@ def discover_interface_candidates(
         or _contains_any([normalized_text], ["npm install", "require(", "import from"]),
         candidate=InterfaceCandidate(
             type="node_sdk",
-            location=source_location,
+            location=node_location,
             quality_score=0.72,
             coverage="partial",
             notes="Found Node package signals",
@@ -106,7 +122,7 @@ def discover_interface_candidates(
         or _contains_any([normalized_text], ["rest api", "endpoint", "http request"]),
         candidate=InterfaceCandidate(
             type="rest_api_docs",
-            location=source_location,
+            location=rest_location,
             quality_score=0.68,
             coverage="partial",
             notes="Found REST API doc signals",
@@ -159,6 +175,14 @@ def _contains_any(haystacks: list[str], needles: list[str]) -> bool:
             if needle in haystack:
                 return True
     return False
+
+
+def _first_match(pairs: list[tuple[str, str]], needles: list[str]) -> str:
+    for original, normalized in pairs:
+        for needle in needles:
+            if needle in normalized:
+                return original
+    return ""
 
 
 def _add_if_present(
