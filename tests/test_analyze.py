@@ -58,3 +58,14 @@ def test_analyzer_rejects_invalid_payload() -> None:
 
     with pytest.raises(AnalyzeError):
         analyzer.analyze(probe_result=probe, rank_result=rank)
+
+
+def test_analyzer_backfills_analysis_sources_when_missing(sample_analysis_dict) -> None:
+    probe, rank = _probe_and_rank()
+    payload = dict(sample_analysis_dict)
+    payload.pop("analysis_sources", None)
+    analyzer = Analyzer(llm_client=FakeLLMClient(payload))
+
+    ir = analyzer.analyze(probe_result=probe, rank_result=rank)
+
+    assert "python_sdk:pypi:requests" in ir.analysis_sources
