@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
+from use_anything.exceptions import UnsupportedTargetError
 from use_anything.models import AnalyzerIR, ProbeResult, RankResult
 from use_anything.pipeline import UseAnythingPipeline
 
@@ -105,3 +108,14 @@ def test_pipeline_end_to_end_with_fakes(tmp_path: Path) -> None:
 
     assert result.validation_report.passed
     assert (output_dir / "SKILL.md").exists()
+
+
+def test_pipeline_rejects_unknown_forced_interface() -> None:
+    pipeline = UseAnythingPipeline(
+        prober=FakeProber(),
+        ranker=FakeRanker(),
+        analyzer=FakeAnalyzer(),
+    )
+
+    with pytest.raises(UnsupportedTargetError, match="Unsupported forced interface"):
+        pipeline.run(target="requests", forced_interface="banana_interface", probe_only=True)
