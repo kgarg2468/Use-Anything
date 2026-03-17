@@ -25,3 +25,37 @@ def test_validator_rejects_missing_frontmatter(tmp_skill_dir: Path) -> None:
 
     assert report.passed is False
     assert any("frontmatter" in error.lower() for error in report.errors)
+
+
+def test_validator_accepts_enhanced_skill_output(sample_analysis_dict, tmp_skill_dir: Path) -> None:
+    ir = AnalyzerIR.from_dict(sample_analysis_dict)
+    existing_skill = """---
+name: requests
+description: Existing requests helper
+license: MIT
+metadata:
+  owner: team
+---
+
+# requests
+
+## Setup
+
+old setup details
+
+## Team notes
+
+Preserve this custom section.
+"""
+
+    Generator().generate(
+        ir,
+        tmp_skill_dir,
+        source_interface="python_sdk",
+        existing_skill=existing_skill,
+        force=False,
+    )
+
+    report = Validator().validate_directory(tmp_skill_dir)
+
+    assert report.passed is True
