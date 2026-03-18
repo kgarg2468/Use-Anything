@@ -34,14 +34,22 @@ class BenchmarkRunner:
         raw_path.write_text("".join(json.dumps(record, sort_keys=True) + "\n" for record in records))
 
         completed_runs = sum(1 for record in records if record["status"] == "completed")
+        config_stats = self._compute_config_stats(records=records, configs=configs)
+        delta_vs_no_skill = self._compute_deltas(config_stats=config_stats)
+
+        benchmark_summary = {
+            "suite": suite.name,
+            "agent": agent,
+            "configs": configs,
+            "total_runs": len(records),
+            "completed_runs": completed_runs,
+            "completion_rate": (completed_runs / len(records)) if records else 0.0,
+            "config_stats": config_stats,
+            "delta_vs_no_skill": delta_vs_no_skill,
+        }
+
         return {
-            "benchmark_summary": {
-                "suite": suite.name,
-                "agent": agent,
-                "configs": configs,
-                "total_runs": len(records),
-                "completed_runs": completed_runs,
-            },
+            "benchmark_summary": benchmark_summary,
             "output_dir": str(output_dir),
         }
 
@@ -130,3 +138,51 @@ class BenchmarkRunner:
         except json.JSONDecodeError:
             return {}
         return {}
+
+    def _compute_config_stats(self, *, records: list[dict[str, Any]], configs: list[str]) -> dict[str, dict[str, float]]:
+        stats: dict[str, dict[str, float]] = {}
+        for config in configs:
+            config_records = [
+                record for record in records if record["config"] == config and record.get("status") == "completed"
+            ]
+            if not config_records:
+                stats[config] = {
+                    "count": 0.0,
+                    "pass_rate": 0.0,
+                    "tokens_mean": 0.0,
+                    "duration_ms_mean": 0.0,
+                    "skill_invocation_rate": 0.0,
+                }
+                continue
+
+            count = float(len(config_records))
+            pass_rate = sum(1 for record in config_records if record["passed"]) / count
+            tokens_mean = sum(float(record["total_tokens"]) for record in config_records) / count
+            duration_mean = sum(float(record["duration_ms"]) for record in config_records) / count
+            invocation_rate = sum(1 for record in config_records if record["skill_invoked"]) / count
+
+            stats[config] = {
+                "count": count,
+                "pass_rate": round(pass_rate, 4),
+                "tokens_mean": round(tokens_mean, 4),
+                "duration_ms_mean": round(duration_mean, 4),
+                "skill_invocation_rate": round(invocation_rate, 4),
+            }
+        return stats
+
+    def _compute_deltas(self, *, config_stats: dict[str, dict[str, float]]) -> dict[str, dict[str, float]]:
+        baseline = config_stats.get("no-skill", {})
+        baseline_pass = float(baseline.get("pass_rate", 0.0))
+        baseline_tokens = float(baseline.get("tokens_mean", 0.0))
+        baseline_duration = float(baseline.get("duration_ms_mean", 0.0))
+
+        deltas: dict[str, dict[str, float]] = {}
+        for config, stats in config_stats.items():
+            if config == "no-skill":
+                continue
+            deltas[config] = {
+                "pass_rate_delta": round(float(stats["pass_rate"]) - baseline_pass, 4),
+                "tokens_delta": round(float(stats["tokens_mean"]) - baseline_tokens, 4),
+                "duration_ms_delta": round(float(stats["duration_ms_mean"]) - baseline_duration, 4),
+            }
+        return deltas

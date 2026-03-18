@@ -171,6 +171,70 @@ def test_runner_applies_verifier_command_and_marks_failure(tmp_path: Path) -> No
     assert record["passed"] is False
     assert record["error_type"] == "verification_failed"
     assert record["total_tokens"] == 333
+
+
+def test_runner_aggregates_config_stats_and_deltas(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-summary",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-summary",
+                            "prompt": "summary task",
+                            "expected_output": "done",
+                            "replay_results": {
+                                "no-skill": {
+                                    "passed": False,
+                                    "total_tokens": 100,
+                                    "duration_ms": 1000,
+                                    "skill_invoked": False,
+                                },
+                                "generated-skill-default": {
+                                    "passed": True,
+                                    "total_tokens": 200,
+                                    "duration_ms": 1500,
+                                    "skill_invoked": True,
+                                },
+                                "generated-skill-explicit": {
+                                    "passed": True,
+                                    "total_tokens": 250,
+                                    "duration_ms": 1600,
+                                    "skill_invoked": True,
+                                },
+                                "agents-md-doc-index": {
+                                    "passed": True,
+                                    "total_tokens": 180,
+                                    "duration_ms": 1200,
+                                    "skill_invoked": False,
+                                },
+                            },
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-summary"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=list(DEFAULT_BENCHMARK_CONFIGS),
+        agent="codex",
+    )
+
+    summary = result["benchmark_summary"]
+    assert summary["config_stats"]["no-skill"]["pass_rate"] == 0.0
+    assert summary["config_stats"]["generated-skill-default"]["pass_rate"] == 1.0
+    assert summary["delta_vs_no_skill"]["generated-skill-default"]["pass_rate_delta"] == 1.0
+    assert summary["delta_vs_no_skill"]["generated-skill-default"]["tokens_delta"] == 100.0
     assert (output_dir / "raw_runs.jsonl").exists()
 
 
