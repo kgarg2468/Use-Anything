@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -24,46 +25,148 @@ class BenchmarkRunner:
     ) -> dict[str, Any]:
         output_dir.mkdir(parents=True, exist_ok=True)
 
+        expected_runs = self._expected_runs(suite=suite, configs=configs)
+        preflight = self._preflight_validate(suite=suite, configs=configs)
+
+        if not preflight["passed"]:
+            benchmark_summary = self._build_summary(
+                suite_name=suite.name,
+                agent=agent,
+                configs=configs,
+                total_runs=expected_runs,
+                completed_runs=0,
+                records=[],
+                preflight=preflight,
+            )
+            self._write_artifacts(output_dir=output_dir, records=[], benchmark_summary=benchmark_summary)
+            return {
+                "benchmark_summary": benchmark_summary,
+                "output_dir": str(output_dir),
+            }
+
         records: list[dict[str, Any]] = []
         for target in suite.targets:
             for task in target.tasks:
                 for config in configs:
-                    records.append(self._execute_task(target=target, task=task, config=config))
-
-        raw_path = output_dir / "raw_runs.jsonl"
-        raw_path.write_text("".join(json.dumps(record, sort_keys=True) + "\n" for record in records))
+                    records.append(
+                        self._execute_task(
+                            target=target,
+                            task=task,
+                            config=config,
+                            output_dir=output_dir,
+                        )
+                    )
 
         completed_runs = sum(1 for record in records if record["status"] == "completed")
-        task_summary = self._compute_task_summary(records=records)
-        config_stats = self._compute_config_stats(records=records, configs=configs)
-        delta_vs_no_skill = self._compute_deltas(config_stats=config_stats)
-
-        benchmark_summary = {
-            "suite": suite.name,
-            "agent": agent,
-            "configs": configs,
-            "total_runs": len(records),
-            "completed_runs": completed_runs,
-            "completion_rate": (completed_runs / len(records)) if records else 0.0,
-            "config_stats": config_stats,
-            "delta_vs_no_skill": delta_vs_no_skill,
-        }
-
-        (output_dir / "task_summary.json").write_text(json.dumps(task_summary, indent=2, sort_keys=True))
-        (output_dir / "benchmark_summary.json").write_text(json.dumps(benchmark_summary, indent=2, sort_keys=True))
-        (output_dir / "benchmark_report.md").write_text(
-            self._render_report_markdown(
-                suite_name=suite.name,
-                benchmark_summary=benchmark_summary,
-            )
+        benchmark_summary = self._build_summary(
+            suite_name=suite.name,
+            agent=agent,
+            configs=configs,
+            total_runs=len(records),
+            completed_runs=completed_runs,
+            records=records,
+            preflight=preflight,
         )
-
+        self._write_artifacts(output_dir=output_dir, records=records, benchmark_summary=benchmark_summary)
         return {
             "benchmark_summary": benchmark_summary,
             "output_dir": str(output_dir),
         }
 
-    def _execute_task(self, *, target: BenchmarkTarget, task: BenchmarkTask, config: str) -> dict[str, Any]:
+    def _build_summary(
+        self,
+        *,
+        suite_name: str,
+        agent: str,
+        configs: list[str],
+        total_runs: int,
+        completed_runs: int,
+        records: list[dict[str, Any]],
+        preflight: dict[str, Any],
+    ) -> dict[str, Any]:
+        config_stats = self._compute_config_stats(records=records, configs=configs)
+        delta_vs_no_skill = self._compute_deltas(config_stats=config_stats)
+        runtime_incomplete = self._count_reasons_from_records(records)
+        preflight_incomplete = self._count_reasons_from_issues(preflight["missing_matrix"])
+        incomplete_reason_counts = self._merge_reason_counts(preflight_incomplete, runtime_incomplete)
+
+        return {
+            "suite": suite_name,
+            "agent": agent,
+            "configs": configs,
+            "total_runs": total_runs,
+            "completed_runs": completed_runs,
+            "completion_rate": (completed_runs / total_runs) if total_runs else 0.0,
+            "config_stats": config_stats,
+            "delta_vs_no_skill": delta_vs_no_skill,
+            "preflight": preflight,
+            "incomplete_reason_counts": incomplete_reason_counts,
+        }
+
+    def _write_artifacts(
+        self,
+        *,
+        output_dir: Path,
+        records: list[dict[str, Any]],
+        benchmark_summary: dict[str, Any],
+    ) -> None:
+        raw_path = output_dir / "raw_runs.jsonl"
+        raw_path.write_text("".join(json.dumps(record, sort_keys=True) + "\n" for record in records))
+
+        task_summary = self._compute_task_summary(records=records)
+        (output_dir / "task_summary.json").write_text(json.dumps(task_summary, indent=2, sort_keys=True))
+        (output_dir / "benchmark_summary.json").write_text(json.dumps(benchmark_summary, indent=2, sort_keys=True))
+        (output_dir / "benchmark_report.md").write_text(
+            self._render_report_markdown(
+                suite_name=str(benchmark_summary["suite"]),
+                benchmark_summary=benchmark_summary,
+            )
+        )
+
+    def _expected_runs(self, *, suite: BenchmarkSuite, configs: list[str]) -> int:
+        return sum(len(target.tasks) for target in suite.targets) * len(configs)
+
+    def _preflight_validate(self, *, suite: BenchmarkSuite, configs: list[str]) -> dict[str, Any]:
+        missing_matrix: list[dict[str, str]] = []
+        for target in suite.targets:
+            for task in target.tasks:
+                for config in configs:
+                    has_replay = config in task.replay_results
+                    has_command = bool(task.commands.get(config))
+
+                    if not has_replay and not has_command:
+                        missing_matrix.append(
+                            {
+                                "target_id": target.id,
+                                "task_id": task.id,
+                                "config": config,
+                                "reason": "missing_execution_config",
+                            }
+                        )
+
+                    if has_command and not task.verifier_command:
+                        missing_matrix.append(
+                            {
+                                "target_id": target.id,
+                                "task_id": task.id,
+                                "config": config,
+                                "reason": "missing_verifier_command",
+                            }
+                        )
+
+        return {
+            "passed": not missing_matrix,
+            "missing_matrix": missing_matrix,
+        }
+
+    def _execute_task(
+        self,
+        *,
+        target: BenchmarkTarget,
+        task: BenchmarkTask,
+        config: str,
+        output_dir: Path,
+    ) -> dict[str, Any]:
         payload = task.replay_results.get(config)
         if payload is not None:
             return {
@@ -81,6 +184,12 @@ class BenchmarkRunner:
 
         command = task.commands.get(config)
         if command:
+            env = self._build_execution_env(
+                target=target,
+                task=task,
+                config=config,
+                output_dir=output_dir,
+            )
             start = time.perf_counter()
             completed = subprocess.run(
                 command,
@@ -89,6 +198,7 @@ class BenchmarkRunner:
                 capture_output=True,
                 text=True,
                 check=False,
+                env=env,
             )
             command_payload = self._extract_payload(completed.stdout)
             passed = bool(command_payload.get("passed", completed.returncode == 0))
@@ -102,6 +212,7 @@ class BenchmarkRunner:
                     capture_output=True,
                     text=True,
                     check=False,
+                    env=env,
                 )
                 if verifier.returncode != 0:
                     passed = False
@@ -136,6 +247,22 @@ class BenchmarkRunner:
             "error_type": "missing_execution_config",
             "status": "incomplete",
         }
+
+    def _build_execution_env(
+        self,
+        *,
+        target: BenchmarkTarget,
+        task: BenchmarkTask,
+        config: str,
+        output_dir: Path,
+    ) -> dict[str, str]:
+        env = dict(os.environ)
+        env["USE_ANYTHING_BENCH_TARGET_ID"] = target.id
+        env["USE_ANYTHING_BENCH_TARGET"] = target.target
+        env["USE_ANYTHING_BENCH_TASK_ID"] = task.id
+        env["USE_ANYTHING_BENCH_CONFIG"] = config
+        env["USE_ANYTHING_BENCH_OUTPUT_DIR"] = str(output_dir)
+        return env
 
     def _extract_payload(self, stdout: str) -> dict[str, Any]:
         candidate = stdout.strip()
@@ -225,6 +352,28 @@ class BenchmarkRunner:
             }
         return deltas
 
+    def _count_reasons_from_records(self, records: list[dict[str, Any]]) -> dict[str, int]:
+        counts: dict[str, int] = {}
+        for record in records:
+            if record.get("status") != "incomplete":
+                continue
+            reason = str(record.get("error_type") or "unknown")
+            counts[reason] = counts.get(reason, 0) + 1
+        return counts
+
+    def _count_reasons_from_issues(self, issues: list[dict[str, str]]) -> dict[str, int]:
+        counts: dict[str, int] = {}
+        for issue in issues:
+            reason = issue.get("reason", "unknown")
+            counts[reason] = counts.get(reason, 0) + 1
+        return counts
+
+    def _merge_reason_counts(self, left: dict[str, int], right: dict[str, int]) -> dict[str, int]:
+        merged = dict(left)
+        for reason, count in right.items():
+            merged[reason] = merged.get(reason, 0) + count
+        return merged
+
     def _render_report_markdown(self, *, suite_name: str, benchmark_summary: dict[str, Any]) -> str:
         lines = [
             f"# Benchmark Report: {suite_name}",
@@ -232,12 +381,28 @@ class BenchmarkRunner:
             f"- Total runs: {benchmark_summary['total_runs']}",
             f"- Completed runs: {benchmark_summary['completed_runs']}",
             f"- Completion rate: {benchmark_summary['completion_rate']:.4f}",
+            f"- Preflight passed: {benchmark_summary['preflight']['passed']}",
             "",
-            "## Config Stats",
+            "## Incomplete Reason Counts",
             "",
-            "| Config | Pass Rate | Mean Tokens | Mean Duration (ms) | Skill Invocation |",
-            "|---|---:|---:|---:|---:|",
         ]
+
+        reason_counts = benchmark_summary.get("incomplete_reason_counts", {})
+        if reason_counts:
+            for reason, count in sorted(reason_counts.items()):
+                lines.append(f"- {reason}: {count}")
+        else:
+            lines.append("- none")
+
+        lines.extend(
+            [
+                "",
+                "## Config Stats",
+                "",
+                "| Config | Pass Rate | Mean Tokens | Mean Duration (ms) | Skill Invocation |",
+                "|---|---:|---:|---:|---:|",
+            ]
+        )
 
         for config, stats in benchmark_summary["config_stats"].items():
             lines.append(

@@ -127,6 +127,86 @@ def test_runner_executes_no_skill_from_replay_results(tmp_path: Path) -> None:
     assert result["benchmark_summary"]["completed_runs"] == 1
 
 
+def test_runner_preflight_fails_when_selected_config_is_missing(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-preflight-missing-config",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-1",
+                            "prompt": "Send a GET request",
+                            "expected_output": "request works",
+                            "commands": {
+                                "no-skill": "python -c \"import json; print(json.dumps({'passed': True}))\"",
+                            },
+                            "verifier_command": "python -c \"import sys; sys.exit(0)\"",
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-preflight"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["no-skill", "generated-skill-default"],
+        agent="codex",
+    )
+
+    summary = result["benchmark_summary"]
+    assert summary["preflight"]["passed"] is False
+    assert summary["completed_runs"] == 0
+    assert summary["incomplete_reason_counts"]["missing_execution_config"] == 1
+
+
+def test_runner_preflight_fails_when_verifier_missing_for_command_task(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-preflight-missing-verifier",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-1",
+                            "prompt": "Send a GET request",
+                            "expected_output": "request works",
+                            "commands": {
+                                "no-skill": "python -c \"import json; print(json.dumps({'passed': True}))\"",
+                            },
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-preflight-verifier"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["no-skill"],
+        agent="codex",
+    )
+
+    summary = result["benchmark_summary"]
+    assert summary["preflight"]["passed"] is False
+    assert summary["incomplete_reason_counts"]["missing_verifier_command"] == 1
+
+
 def test_runner_applies_verifier_command_and_marks_failure(tmp_path: Path) -> None:
     suite_path = tmp_path / "suite.json"
     _write_suite(
@@ -310,6 +390,7 @@ def test_runner_executes_generated_skill_default_from_command(tmp_path: Path) ->
                                     "'duration_ms': 900, 'skill_invoked': True}))\""
                                 )
                             },
+                            "verifier_command": "python -c \"import sys; sys.exit(0)\"",
                         }
                     ],
                 }
@@ -351,6 +432,7 @@ def test_runner_executes_generated_skill_explicit_from_command(tmp_path: Path) -
                                     "print(json.dumps({'passed': True, 'total_tokens': 220, 'duration_ms': 800}))\""
                                 )
                             },
+                            "verifier_command": "python -c \"import sys; sys.exit(0)\"",
                         }
                     ],
                 }
@@ -392,6 +474,7 @@ def test_runner_executes_agents_md_baseline_from_command(tmp_path: Path) -> None
                                     "print(json.dumps({'passed': True, 'total_tokens': 180, 'duration_ms': 700}))\""
                                 )
                             },
+                            "verifier_command": "python -c \"import sys; sys.exit(0)\"",
                         }
                     ],
                 }
@@ -410,3 +493,45 @@ def test_runner_executes_agents_md_baseline_from_command(tmp_path: Path) -> None
 
     assert result["benchmark_summary"]["total_runs"] == 1
     assert result["benchmark_summary"]["completed_runs"] == 1
+
+
+def test_runner_completes_all_four_configs_with_commands_and_verifier(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-four-configs",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-1",
+                            "prompt": "task",
+                            "expected_output": "done",
+                            "commands": {
+                                "no-skill": "python -c \"import json; print(json.dumps({'passed': True}))\"",
+                                "generated-skill-default": "python -c \"import json; print(json.dumps({'passed': True, 'skill_invoked': True}))\"",
+                                "generated-skill-explicit": "python -c \"import json; print(json.dumps({'passed': True, 'skill_invoked': True}))\"",
+                                "agents-md-doc-index": "python -c \"import json; print(json.dumps({'passed': True}))\"",
+                            },
+                            "verifier_command": "python -c \"import sys; sys.exit(0)\"",
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-four-configs"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=list(DEFAULT_BENCHMARK_CONFIGS),
+        agent="codex",
+    )
+
+    assert result["benchmark_summary"]["total_runs"] == 4
+    assert result["benchmark_summary"]["completed_runs"] == 4
