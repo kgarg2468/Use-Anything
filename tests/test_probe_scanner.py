@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import use_anything.probe.adapters as adapters
 from use_anything.probe.adapters import probe_docs_url
 from use_anything.probe.interface_scanner import discover_interface_candidates
 
@@ -20,12 +21,11 @@ def test_discover_interface_candidates_from_paths() -> None:
     assert "existing_skill" in types
 
 
-def test_probe_docs_url_uses_preflight_paths_when_html_has_no_links() -> None:
+def test_probe_docs_url_does_not_emit_unverified_preflight_candidates(monkeypatch) -> None:
+    monkeypatch.setattr(adapters, "_fetch_url", lambda url, timeout=15.0: (404, "text/plain", ""))
+
     candidates, _ = probe_docs_url("https://docs.example.dev", html="<html><body>No links</body></html>")
 
     types = {candidate.type for candidate in candidates}
-    assert "openapi_spec" in types
-    assert "llms_txt" in types
-
-    openapi_candidate = next(candidate for candidate in candidates if candidate.type == "openapi_spec")
-    assert openapi_candidate.location.endswith("/openapi.json")
+    assert "openapi_spec" not in types
+    assert "llms_txt" not in types
