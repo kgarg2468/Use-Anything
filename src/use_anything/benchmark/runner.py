@@ -149,7 +149,12 @@ class BenchmarkRunner:
             return {}
         return {}
 
-    def _compute_config_stats(self, *, records: list[dict[str, Any]], configs: list[str]) -> dict[str, dict[str, float]]:
+    def _compute_config_stats(
+        self,
+        *,
+        records: list[dict[str, Any]],
+        configs: list[str],
+    ) -> dict[str, dict[str, float]]:
         stats: dict[str, dict[str, float]] = {}
         for config in configs:
             config_records = [

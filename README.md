@@ -72,7 +72,24 @@ uv run use-anything probe requests
 
 # Validate generated output
 uv run use-anything validate ./use-anything-requests
+
+# Run benchmark suite (Codex comprehensive scaffold)
+uv run use-anything benchmark \
+  --suite ./benchmark/comprehensive-codex-suite.json \
+  --out ./benchmark/benchmark-1-run
 ```
+
+Benchmark output files:
+
+- `benchmark/benchmark-1-run/raw_runs.jsonl`
+- `benchmark/benchmark-1-run/task_summary.json`
+- `benchmark/benchmark-1-run/benchmark_summary.json`
+- `benchmark/benchmark-1-run/benchmark_report.md`
+
+Benchmark suite notes:
+
+- The included `benchmark/comprehensive-codex-suite.json` contains 20 targets and 5 tasks per target.
+- Add either `commands` (shell commands per config) or `replay_results` for each task before running production benchmarks.
 
 ## Enhancement behavior
 

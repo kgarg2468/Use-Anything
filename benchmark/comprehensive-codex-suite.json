@@ -1,0 +1,1139 @@
+{
+  "name": "comprehensive-codex-benchmark",
+  "agent": "codex",
+  "optimization_goal": "accuracy-first",
+  "configs": [
+    "no-skill",
+    "generated-skill-default",
+    "generated-skill-explicit",
+    "agents-md-doc-index"
+  ],
+  "metadata": {
+    "notes": "Comprehensive scaffold: add commands or replay_results per task before running production benchmarks.",
+    "target_count": 20,
+    "tasks_per_target": 5,
+    "task_count": 100
+  },
+  "targets": [
+    {
+      "id": "requests",
+      "target": "requests",
+      "tasks": [
+        {
+          "id": "requests-setup-and-hello",
+          "prompt": "[requests] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "requests-core-workflow",
+          "prompt": "[requests] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "requests-error-handling",
+          "prompt": "[requests] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "requests-edge-case",
+          "prompt": "[requests] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "requests-performance-check",
+          "prompt": "[requests] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flask",
+      "target": "flask",
+      "tasks": [
+        {
+          "id": "flask-setup-and-hello",
+          "prompt": "[flask] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "flask-core-workflow",
+          "prompt": "[flask] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "flask-error-handling",
+          "prompt": "[flask] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "flask-edge-case",
+          "prompt": "[flask] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "flask-performance-check",
+          "prompt": "[flask] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fastapi",
+      "target": "fastapi",
+      "tasks": [
+        {
+          "id": "fastapi-setup-and-hello",
+          "prompt": "[fastapi] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "fastapi-core-workflow",
+          "prompt": "[fastapi] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "fastapi-error-handling",
+          "prompt": "[fastapi] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "fastapi-edge-case",
+          "prompt": "[fastapi] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "fastapi-performance-check",
+          "prompt": "[fastapi] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pandas",
+      "target": "pandas",
+      "tasks": [
+        {
+          "id": "pandas-setup-and-hello",
+          "prompt": "[pandas] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pandas-core-workflow",
+          "prompt": "[pandas] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pandas-error-handling",
+          "prompt": "[pandas] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pandas-edge-case",
+          "prompt": "[pandas] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pandas-performance-check",
+          "prompt": "[pandas] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "numpy",
+      "target": "numpy",
+      "tasks": [
+        {
+          "id": "numpy-setup-and-hello",
+          "prompt": "[numpy] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "numpy-core-workflow",
+          "prompt": "[numpy] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "numpy-error-handling",
+          "prompt": "[numpy] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "numpy-edge-case",
+          "prompt": "[numpy] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "numpy-performance-check",
+          "prompt": "[numpy] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pydantic",
+      "target": "pydantic",
+      "tasks": [
+        {
+          "id": "pydantic-setup-and-hello",
+          "prompt": "[pydantic] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pydantic-core-workflow",
+          "prompt": "[pydantic] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pydantic-error-handling",
+          "prompt": "[pydantic] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pydantic-edge-case",
+          "prompt": "[pydantic] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pydantic-performance-check",
+          "prompt": "[pydantic] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sqlalchemy",
+      "target": "sqlalchemy",
+      "tasks": [
+        {
+          "id": "sqlalchemy-setup-and-hello",
+          "prompt": "[sqlalchemy] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "sqlalchemy-core-workflow",
+          "prompt": "[sqlalchemy] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "sqlalchemy-error-handling",
+          "prompt": "[sqlalchemy] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "sqlalchemy-edge-case",
+          "prompt": "[sqlalchemy] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "sqlalchemy-performance-check",
+          "prompt": "[sqlalchemy] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "celery",
+      "target": "celery",
+      "tasks": [
+        {
+          "id": "celery-setup-and-hello",
+          "prompt": "[celery] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "celery-core-workflow",
+          "prompt": "[celery] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "celery-error-handling",
+          "prompt": "[celery] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "celery-edge-case",
+          "prompt": "[celery] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "celery-performance-check",
+          "prompt": "[celery] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "django",
+      "target": "django",
+      "tasks": [
+        {
+          "id": "django-setup-and-hello",
+          "prompt": "[django] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "django-core-workflow",
+          "prompt": "[django] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "django-error-handling",
+          "prompt": "[django] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "django-edge-case",
+          "prompt": "[django] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "django-performance-check",
+          "prompt": "[django] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "click",
+      "target": "click",
+      "tasks": [
+        {
+          "id": "click-setup-and-hello",
+          "prompt": "[click] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "click-core-workflow",
+          "prompt": "[click] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "click-error-handling",
+          "prompt": "[click] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "click-edge-case",
+          "prompt": "[click] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "click-performance-check",
+          "prompt": "[click] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rich",
+      "target": "rich",
+      "tasks": [
+        {
+          "id": "rich-setup-and-hello",
+          "prompt": "[rich] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "rich-core-workflow",
+          "prompt": "[rich] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "rich-error-handling",
+          "prompt": "[rich] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "rich-edge-case",
+          "prompt": "[rich] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "rich-performance-check",
+          "prompt": "[rich] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pytest",
+      "target": "pytest",
+      "tasks": [
+        {
+          "id": "pytest-setup-and-hello",
+          "prompt": "[pytest] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pytest-core-workflow",
+          "prompt": "[pytest] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pytest-error-handling",
+          "prompt": "[pytest] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pytest-edge-case",
+          "prompt": "[pytest] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pytest-performance-check",
+          "prompt": "[pytest] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "httpx",
+      "target": "httpx",
+      "tasks": [
+        {
+          "id": "httpx-setup-and-hello",
+          "prompt": "[httpx] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "httpx-core-workflow",
+          "prompt": "[httpx] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "httpx-error-handling",
+          "prompt": "[httpx] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "httpx-edge-case",
+          "prompt": "[httpx] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "httpx-performance-check",
+          "prompt": "[httpx] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boto3",
+      "target": "boto3",
+      "tasks": [
+        {
+          "id": "boto3-setup-and-hello",
+          "prompt": "[boto3] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "boto3-core-workflow",
+          "prompt": "[boto3] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "boto3-error-handling",
+          "prompt": "[boto3] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "boto3-edge-case",
+          "prompt": "[boto3] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "boto3-performance-check",
+          "prompt": "[boto3] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jinja2",
+      "target": "jinja2",
+      "tasks": [
+        {
+          "id": "jinja2-setup-and-hello",
+          "prompt": "[jinja2] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "jinja2-core-workflow",
+          "prompt": "[jinja2] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "jinja2-error-handling",
+          "prompt": "[jinja2] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "jinja2-edge-case",
+          "prompt": "[jinja2] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "jinja2-performance-check",
+          "prompt": "[jinja2] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beautifulsoup4",
+      "target": "beautifulsoup4",
+      "tasks": [
+        {
+          "id": "beautifulsoup4-setup-and-hello",
+          "prompt": "[beautifulsoup4] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "beautifulsoup4-core-workflow",
+          "prompt": "[beautifulsoup4] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "beautifulsoup4-error-handling",
+          "prompt": "[beautifulsoup4] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "beautifulsoup4-edge-case",
+          "prompt": "[beautifulsoup4] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "beautifulsoup4-performance-check",
+          "prompt": "[beautifulsoup4] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "matplotlib",
+      "target": "matplotlib",
+      "tasks": [
+        {
+          "id": "matplotlib-setup-and-hello",
+          "prompt": "[matplotlib] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "matplotlib-core-workflow",
+          "prompt": "[matplotlib] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "matplotlib-error-handling",
+          "prompt": "[matplotlib] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "matplotlib-edge-case",
+          "prompt": "[matplotlib] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "matplotlib-performance-check",
+          "prompt": "[matplotlib] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scikit-learn",
+      "target": "scikit-learn",
+      "tasks": [
+        {
+          "id": "scikit-learn-setup-and-hello",
+          "prompt": "[scikit-learn] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "scikit-learn-core-workflow",
+          "prompt": "[scikit-learn] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "scikit-learn-error-handling",
+          "prompt": "[scikit-learn] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "scikit-learn-edge-case",
+          "prompt": "[scikit-learn] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "scikit-learn-performance-check",
+          "prompt": "[scikit-learn] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pillow",
+      "target": "pillow",
+      "tasks": [
+        {
+          "id": "pillow-setup-and-hello",
+          "prompt": "[pillow] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pillow-core-workflow",
+          "prompt": "[pillow] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pillow-error-handling",
+          "prompt": "[pillow] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pillow-edge-case",
+          "prompt": "[pillow] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "pillow-performance-check",
+          "prompt": "[pillow] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "typer",
+      "target": "typer",
+      "tasks": [
+        {
+          "id": "typer-setup-and-hello",
+          "prompt": "[typer] Set up a minimal working example and verify a hello-world style call.",
+          "expected_output": "A reproducible minimal setup and successful basic call.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "typer-core-workflow",
+          "prompt": "[typer] Implement the most common end-to-end workflow for this interface.",
+          "expected_output": "A successful core workflow with expected output.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "typer-error-handling",
+          "prompt": "[typer] Exercise expected error paths and document robust handling.",
+          "expected_output": "A run that handles expected errors without crashing.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "typer-edge-case",
+          "prompt": "[typer] Run at least one edge-case input and verify behavior.",
+          "expected_output": "A validated edge-case outcome matching requirements.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        },
+        {
+          "id": "typer-performance-check",
+          "prompt": "[typer] Measure practical runtime behavior and collect execution metrics.",
+          "expected_output": "A captured timing/token profile with interpretation.",
+          "assertions": [
+            "Execution finishes without unexpected fatal errors",
+            "Output includes evidence tied to the requested workflow",
+            "Result quality is sufficient for practical use"
+          ]
+        }
+      ]
+    }
+  ]
+}

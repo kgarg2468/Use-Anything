@@ -143,7 +143,10 @@ def validate_command(skill_dir: Path) -> None:
 )
 @click.option(
     "--configs",
-    help="Comma-separated config list (default: no-skill,generated-skill-default,generated-skill-explicit,agents-md-doc-index)",
+    help=(
+        "Comma-separated config list (default: "
+        "no-skill,generated-skill-default,generated-skill-explicit,agents-md-doc-index)"
+    ),
 )
 def benchmark_command(
     suite_path: Path,

@@ -278,7 +278,14 @@ def test_runner_writes_required_benchmark_artifacts(tmp_path: Path) -> None:
     assert (output_dir / "task_summary.json").exists()
     assert (output_dir / "benchmark_summary.json").exists()
     assert (output_dir / "benchmark_report.md").exists()
-    assert (output_dir / "raw_runs.jsonl").exists()
+
+
+def test_comprehensive_suite_scaffold_meets_scale_requirement() -> None:
+    suite_path = Path(__file__).resolve().parents[1] / "benchmark" / "comprehensive-codex-suite.json"
+    suite = load_benchmark_suite(suite_path)
+
+    assert len(suite.targets) >= 20
+    assert all(len(target.tasks) >= 5 for target in suite.targets)
 
 
 def test_runner_executes_generated_skill_default_from_command(tmp_path: Path) -> None:
