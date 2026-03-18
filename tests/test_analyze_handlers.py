@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import httpx
-
 import use_anything.analyze.interface_handlers as interface_handlers
 from use_anything.analyze.interface_handlers import build_interface_context
 from use_anything.models import InterfaceCandidate, ProbeResult
