@@ -34,6 +34,7 @@ class BenchmarkRunner:
         raw_path.write_text("".join(json.dumps(record, sort_keys=True) + "\n" for record in records))
 
         completed_runs = sum(1 for record in records if record["status"] == "completed")
+        task_summary = self._compute_task_summary(records=records)
         config_stats = self._compute_config_stats(records=records, configs=configs)
         delta_vs_no_skill = self._compute_deltas(config_stats=config_stats)
 
@@ -47,6 +48,15 @@ class BenchmarkRunner:
             "config_stats": config_stats,
             "delta_vs_no_skill": delta_vs_no_skill,
         }
+
+        (output_dir / "task_summary.json").write_text(json.dumps(task_summary, indent=2, sort_keys=True))
+        (output_dir / "benchmark_summary.json").write_text(json.dumps(benchmark_summary, indent=2, sort_keys=True))
+        (output_dir / "benchmark_report.md").write_text(
+            self._render_report_markdown(
+                suite_name=suite.name,
+                benchmark_summary=benchmark_summary,
+            )
+        )
 
         return {
             "benchmark_summary": benchmark_summary,
@@ -170,6 +180,29 @@ class BenchmarkRunner:
             }
         return stats
 
+    def _compute_task_summary(self, *, records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        grouped: dict[tuple[str, str, str], dict[str, Any]] = {}
+        for record in records:
+            key = (record["target_id"], record["target"], record["task_id"])
+            entry = grouped.setdefault(
+                key,
+                {
+                    "target_id": record["target_id"],
+                    "target": record["target"],
+                    "task_id": record["task_id"],
+                    "configs": {},
+                },
+            )
+            entry["configs"][record["config"]] = {
+                "status": record["status"],
+                "passed": record["passed"],
+                "total_tokens": record["total_tokens"],
+                "duration_ms": record["duration_ms"],
+                "skill_invoked": record["skill_invoked"],
+                "error_type": record["error_type"],
+            }
+        return sorted(grouped.values(), key=lambda item: (item["target_id"], item["task_id"]))
+
     def _compute_deltas(self, *, config_stats: dict[str, dict[str, float]]) -> dict[str, dict[str, float]]:
         baseline = config_stats.get("no-skill", {})
         baseline_pass = float(baseline.get("pass_rate", 0.0))
@@ -186,3 +219,41 @@ class BenchmarkRunner:
                 "duration_ms_delta": round(float(stats["duration_ms_mean"]) - baseline_duration, 4),
             }
         return deltas
+
+    def _render_report_markdown(self, *, suite_name: str, benchmark_summary: dict[str, Any]) -> str:
+        lines = [
+            f"# Benchmark Report: {suite_name}",
+            "",
+            f"- Total runs: {benchmark_summary['total_runs']}",
+            f"- Completed runs: {benchmark_summary['completed_runs']}",
+            f"- Completion rate: {benchmark_summary['completion_rate']:.4f}",
+            "",
+            "## Config Stats",
+            "",
+            "| Config | Pass Rate | Mean Tokens | Mean Duration (ms) | Skill Invocation |",
+            "|---|---:|---:|---:|---:|",
+        ]
+
+        for config, stats in benchmark_summary["config_stats"].items():
+            lines.append(
+                f"| {config} | {stats['pass_rate']:.4f} | {stats['tokens_mean']:.4f} | "
+                f"{stats['duration_ms_mean']:.4f} | {stats['skill_invocation_rate']:.4f} |"
+            )
+
+        lines.extend(
+            [
+                "",
+                "## Delta vs No-Skill",
+                "",
+                "| Config | Pass Rate Delta | Tokens Delta | Duration Delta (ms) |",
+                "|---|---:|---:|---:|",
+            ]
+        )
+        for config, delta in benchmark_summary["delta_vs_no_skill"].items():
+            lines.append(
+                f"| {config} | {delta['pass_rate_delta']:.4f} | {delta['tokens_delta']:.4f} | "
+                f"{delta['duration_ms_delta']:.4f} |"
+            )
+
+        lines.append("")
+        return "\n".join(lines)

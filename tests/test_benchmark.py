@@ -235,6 +235,49 @@ def test_runner_aggregates_config_stats_and_deltas(tmp_path: Path) -> None:
     assert summary["config_stats"]["generated-skill-default"]["pass_rate"] == 1.0
     assert summary["delta_vs_no_skill"]["generated-skill-default"]["pass_rate_delta"] == 1.0
     assert summary["delta_vs_no_skill"]["generated-skill-default"]["tokens_delta"] == 100.0
+
+
+def test_runner_writes_required_benchmark_artifacts(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-artifacts",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "artifact-task",
+                            "prompt": "artifact task",
+                            "expected_output": "done",
+                            "replay_results": {
+                                "no-skill": {"passed": False, "total_tokens": 100, "duration_ms": 1000},
+                                "generated-skill-default": {"passed": True, "total_tokens": 180, "duration_ms": 1200},
+                                "generated-skill-explicit": {"passed": True, "total_tokens": 190, "duration_ms": 1100},
+                                "agents-md-doc-index": {"passed": True, "total_tokens": 160, "duration_ms": 1050},
+                            },
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-artifacts"
+
+    BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=list(DEFAULT_BENCHMARK_CONFIGS),
+        agent="codex",
+    )
+
+    assert (output_dir / "raw_runs.jsonl").exists()
+    assert (output_dir / "task_summary.json").exists()
+    assert (output_dir / "benchmark_summary.json").exists()
+    assert (output_dir / "benchmark_report.md").exists()
     assert (output_dir / "raw_runs.jsonl").exists()
 
 
