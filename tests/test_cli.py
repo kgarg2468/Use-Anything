@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from click.testing import CliRunner
@@ -212,3 +213,55 @@ def test_cli_passes_force_flag_to_pipeline(monkeypatch) -> None:
 
     assert result.exit_code == 0
     assert calls["force"] is True
+
+
+def test_cli_benchmark_command_uses_default_output_and_configs(monkeypatch, tmp_path: Path) -> None:
+    runner = CliRunner()
+    calls: dict[str, object] = {}
+
+    suite_path = tmp_path / "suite.json"
+    suite_path.write_text(
+        json.dumps(
+            {
+                "name": "demo-suite",
+                "targets": [
+                    {
+                        "id": "requests",
+                        "target": "requests",
+                        "tasks": [
+                            {
+                                "id": "task-1",
+                                "prompt": "Do task 1",
+                                "expected_output": "done",
+                            }
+                        ],
+                    }
+                ],
+            }
+        )
+    )
+
+    class FakeRunner:
+        def run(self, *, suite, output_dir, configs, agent):  # noqa: ANN001
+            calls["suite"] = suite
+            calls["output_dir"] = output_dir
+            calls["configs"] = configs
+            calls["agent"] = agent
+            return {
+                "benchmark_summary": {"total_runs": 4},
+                "output_dir": str(output_dir),
+            }
+
+    monkeypatch.setattr("use_anything.cli.BenchmarkRunner", FakeRunner)
+
+    result = runner.invoke(cli, ["benchmark", "--suite", str(suite_path)])
+
+    assert result.exit_code == 0
+    assert '"total_runs": 4' in result.output
+    assert str(Path.cwd() / "benchmark" / "benchmark-1-run") in result.output
+    assert calls["configs"] == [
+        "no-skill",
+        "generated-skill-default",
+        "generated-skill-explicit",
+        "agents-md-doc-index",
+    ]
