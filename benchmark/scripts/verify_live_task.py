@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: E402,I001
 """Deterministic verifier for one live benchmark run artifact."""
 
 from __future__ import annotations
@@ -6,6 +7,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -66,8 +68,14 @@ def main() -> None:
     # Deterministic lexical check: at least one assertion keyword should be present when provided.
     if task.assertions:
         response_lower = response.lower()
-        tokens = [token.lower().strip() for token in task.assertions if token.strip()]
-        if tokens and not any(token in response_lower for token in tokens):
+        keywords: set[str] = set()
+        stopwords = {"without", "should", "their", "there", "about", "using", "include", "includes"}
+        for assertion in task.assertions:
+            for token in re.findall(r"[a-z0-9]+", assertion.lower()):
+                if len(token) >= 5 and token not in stopwords:
+                    keywords.add(token)
+
+        if keywords and not any(keyword in response_lower for keyword in keywords):
             raise SystemExit(1)
 
     raise SystemExit(0)

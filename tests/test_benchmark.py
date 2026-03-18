@@ -524,8 +524,14 @@ def test_runner_completes_all_four_configs_with_commands_and_verifier(tmp_path: 
                             "expected_output": "done",
                             "commands": {
                                 "no-skill": "python -c \"import json; print(json.dumps({'passed': True}))\"",
-                                "generated-skill-default": "python -c \"import json; print(json.dumps({'passed': True, 'skill_invoked': True}))\"",
-                                "generated-skill-explicit": "python -c \"import json; print(json.dumps({'passed': True, 'skill_invoked': True}))\"",
+                                "generated-skill-default": (
+                                    "python -c \"import json; "
+                                    "print(json.dumps({'passed': True, 'skill_invoked': True}))\""
+                                ),
+                                "generated-skill-explicit": (
+                                    "python -c \"import json; "
+                                    "print(json.dumps({'passed': True, 'skill_invoked': True}))\""
+                                ),
                                 "agents-md-doc-index": "python -c \"import json; print(json.dumps({'passed': True}))\"",
                             },
                             "verifier_command": "python -c \"import sys; sys.exit(0)\"",

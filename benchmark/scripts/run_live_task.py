@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: E402,I001
 """Execute one live benchmark task and emit strict JSON output."""
 
 from __future__ import annotations

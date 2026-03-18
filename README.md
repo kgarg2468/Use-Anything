@@ -89,7 +89,30 @@ Benchmark output files:
 Benchmark suite notes:
 
 - The included `benchmark/comprehensive-codex-suite.json` contains 20 targets and 5 tasks per target.
-- Add either `commands` (shell commands per config) or `replay_results` for each task before running production benchmarks.
+- The comprehensive suite is hydrated with all 4 benchmark configs per task and verifier commands.
+- Runner preflight now fails fast with a machine-readable missing matrix when a selected config is missing or verifier wiring is absent.
+
+Benchmark 1 rerun orchestration:
+
+```bash
+# Pilot (2 targets) and skip full run
+python3 benchmark/scripts/rerun_benchmark1.py --skip-full-run --pilot-targets 2
+
+# Full rerun (pilot gate + full run if pilot passes)
+python3 benchmark/scripts/rerun_benchmark1.py
+```
+
+Rerun behavior:
+
+- Archives previous canonical artifacts under `benchmark/benchmark-1-run/archive/<timestamp>/`
+- Runs pilot gate first (`completion_rate >= 0.95` and `missing_execution_config == 0`)
+- Runs full benchmark only when pilot gate passes
+
+Local smoke mode (for harness validation only):
+
+```bash
+USE_ANYTHING_BENCH_FAKE=1 python3 benchmark/scripts/rerun_benchmark1.py
+```
 
 ## Enhancement behavior
 
