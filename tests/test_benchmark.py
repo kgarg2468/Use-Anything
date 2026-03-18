@@ -168,3 +168,85 @@ def test_runner_executes_generated_skill_default_from_command(tmp_path: Path) ->
 
     assert result["benchmark_summary"]["total_runs"] == 1
     assert result["benchmark_summary"]["completed_runs"] == 1
+
+
+def test_runner_executes_generated_skill_explicit_from_command(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-demo-explicit",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-explicit",
+                            "prompt": "Use generated skill explicitly",
+                            "expected_output": "done",
+                            "commands": {
+                                "generated-skill-explicit": (
+                                    "python -c \"import json; "
+                                    "print(json.dumps({'passed': True, 'total_tokens': 220, 'duration_ms': 800}))\""
+                                )
+                            },
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-explicit"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["generated-skill-explicit"],
+        agent="codex",
+    )
+
+    assert result["benchmark_summary"]["total_runs"] == 1
+    assert result["benchmark_summary"]["completed_runs"] == 1
+
+
+def test_runner_executes_agents_md_baseline_from_command(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-demo-agents",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-agents",
+                            "prompt": "Use AGENTS.md docs baseline",
+                            "expected_output": "done",
+                            "commands": {
+                                "agents-md-doc-index": (
+                                    "python -c \"import json; "
+                                    "print(json.dumps({'passed': True, 'total_tokens': 180, 'duration_ms': 700}))\""
+                                )
+                            },
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-agents"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["agents-md-doc-index"],
+        agent="codex",
+    )
+
+    assert result["benchmark_summary"]["total_runs"] == 1
+    assert result["benchmark_summary"]["completed_runs"] == 1
