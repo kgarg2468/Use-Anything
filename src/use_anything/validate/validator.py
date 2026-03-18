@@ -10,6 +10,22 @@ import yaml
 from use_anything.models import ValidationReport
 from use_anything.utils.tokens import count_tokens
 
+SKILL_BODY_LINE_LIMIT = 500
+SKILL_BODY_TOKEN_LIMIT = 5000
+REFERENCE_TOKEN_LIMIT = 10000
+REFERENCE_LINE_LIMIT = 5000
+SKILL_DIRECTORY_TOKEN_LIMIT = 30000
+REQUIRED_REFERENCE_FILES = [
+    "API_REFERENCE.md",
+    "WORKFLOWS.md",
+    "GOTCHAS.md",
+]
+REQUIRED_REFERENCE_LINKS = [
+    "references/API_REFERENCE.md",
+    "references/WORKFLOWS.md",
+    "references/GOTCHAS.md",
+]
+
 
 class Validator:
     """Validate generated skill directories against MVP quality and format gates."""
@@ -41,19 +57,24 @@ class Validator:
         metrics["skill_lines"] = len(body.splitlines())
         metrics["skill_tokens"] = count_tokens(body)
 
-        if metrics["skill_lines"] > 500:
-            errors.append(f"SKILL.md body has {metrics['skill_lines']} lines (limit 500)")
-        if metrics["skill_tokens"] > 5000:
-            errors.append(f"SKILL.md body has {metrics['skill_tokens']} tokens (limit 5000)")
+        if metrics["skill_lines"] > SKILL_BODY_LINE_LIMIT:
+            errors.append(f"SKILL.md body has {metrics['skill_lines']} lines (limit {SKILL_BODY_LINE_LIMIT})")
+        if metrics["skill_tokens"] > SKILL_BODY_TOKEN_LIMIT:
+            errors.append(f"SKILL.md body has {metrics['skill_tokens']} tokens (limit {SKILL_BODY_TOKEN_LIMIT})")
 
         self._validate_sections(body, errors)
+        self._validate_reference_links(content, errors)
 
         if re.search(r"\b(TODO|TBD|insert here)\b", content, flags=re.IGNORECASE):
             errors.append("SKILL.md contains placeholder text (TODO/TBD/insert here)")
 
-        references = root / "references"
-        if not references.exists():
-            warnings.append("references/ directory is missing")
+        self._validate_reference_files(root, errors, metrics)
+        metrics["skill_directory_tokens"] = metrics.get("skill_tokens", 0) + metrics.get("references_tokens", 0)
+        if metrics["skill_directory_tokens"] > SKILL_DIRECTORY_TOKEN_LIMIT:
+            errors.append(
+                "Generated skill directory exceeds token budget "
+                f"({metrics['skill_directory_tokens']} > {SKILL_DIRECTORY_TOKEN_LIMIT})"
+            )
 
         return ValidationReport(
             passed=not errors,
@@ -140,3 +161,47 @@ class Validator:
         if not match:
             return ""
         return match.group(1)
+
+    def _validate_reference_links(self, content: str, errors: list[str]) -> None:
+        for reference_link in REQUIRED_REFERENCE_LINKS:
+            if reference_link not in content:
+                errors.append(f"SKILL.md must reference {reference_link}")
+
+    def _validate_reference_files(
+        self,
+        root: Path,
+        errors: list[str],
+        metrics: dict[str, int],
+    ) -> None:
+        references = root / "references"
+        if not references.exists():
+            errors.append("references/ directory is missing")
+            return
+
+        total_tokens = 0
+        for file_name in REQUIRED_REFERENCE_FILES:
+            path = references / file_name
+            if not path.exists():
+                errors.append(f"Missing required reference file: references/{file_name}")
+                continue
+
+            content = path.read_text()
+            line_count = len(content.splitlines())
+            token_count = count_tokens(content)
+            total_tokens += token_count
+
+            metrics[f"references/{file_name}_lines"] = line_count
+            metrics[f"references/{file_name}_tokens"] = token_count
+
+            if token_count > REFERENCE_TOKEN_LIMIT:
+                errors.append(
+                    f"{file_name} exceeds token limit ({token_count} > {REFERENCE_TOKEN_LIMIT})"
+                )
+            if line_count > REFERENCE_LINE_LIMIT:
+                errors.append(
+                    f"{file_name} exceeds line limit ({line_count} > {REFERENCE_LINE_LIMIT})"
+                )
+            if not content.strip():
+                errors.append(f"references/{file_name} is empty")
+
+        metrics["references_tokens"] = total_tokens
