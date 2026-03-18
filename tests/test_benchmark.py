@@ -10,6 +10,7 @@ from use_anything.benchmark.models import (
     BenchmarkSuite,
     load_benchmark_suite,
 )
+from use_anything.benchmark.runner import BenchmarkRunner
 
 
 def _write_suite(path: Path, payload: dict) -> None:
@@ -81,3 +82,47 @@ def test_load_benchmark_suite_defaults_configs(tmp_path: Path) -> None:
     suite = load_benchmark_suite(suite_path)
 
     assert suite.configs == DEFAULT_BENCHMARK_CONFIGS
+
+
+def test_runner_executes_no_skill_from_replay_results(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-demo",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-1",
+                            "prompt": "Send a GET request",
+                            "expected_output": "request works",
+                            "replay_results": {
+                                "no-skill": {
+                                    "passed": True,
+                                    "total_tokens": 1234,
+                                    "duration_ms": 2500,
+                                    "skill_invoked": False,
+                                }
+                            },
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-1-run"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["no-skill"],
+        agent="codex",
+    )
+
+    assert result["benchmark_summary"]["total_runs"] == 1
+    assert result["benchmark_summary"]["completed_runs"] == 1
+    assert (output_dir / "raw_runs.jsonl").exists()
