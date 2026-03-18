@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import httpx
+
+import use_anything.analyze.interface_handlers as interface_handlers
 from use_anything.analyze.interface_handlers import build_interface_context
 from use_anything.models import InterfaceCandidate, ProbeResult
 
@@ -101,3 +104,62 @@ def test_build_interface_context_prioritizes_llms_and_existing_skill_sources() -
     assert context.sources[0] == "llms_txt:https://docs.example.dev/llms.txt"
     assert context.sources[1] == "existing_skill:https://docs.example.dev/skill.md"
     assert "Supplemental prioritized sources" in context.summary
+
+
+def test_build_interface_context_loads_remote_openapi_document(monkeypatch) -> None:
+    class FakeResponse:
+        status_code = 200
+        headers = {"content-type": "application/json"}
+        text = '{"openapi":"3.1.0","info":{"title":"Remote Demo","version":"9.9.9"},"paths":{"/items":{"get":{}}}}'
+
+        def raise_for_status(self) -> None:
+            return None
+
+    monkeypatch.setattr(interface_handlers.httpx, "get", lambda url, timeout=15.0: FakeResponse())  # noqa: ARG005
+
+    probe_result = ProbeResult(
+        target="demo",
+        target_type="docs_url",
+        interfaces_found=[
+            InterfaceCandidate(
+                type="openapi_spec",
+                location="https://docs.example.dev/openapi.json",
+                quality_score=0.95,
+                coverage="full",
+                notes="OpenAPI",
+            )
+        ],
+    )
+
+    context = build_interface_context(probe_result=probe_result, interface_type="openapi_spec")
+
+    assert "Remote Demo" in context.summary
+    assert "GET /items" in context.summary
+
+
+def test_build_interface_context_adds_bounded_source_excerpts() -> None:
+    long_description = " ".join(f"token-{index}" for index in range(700))
+    probe_result = ProbeResult(
+        target="requests",
+        target_type="pypi_package",
+        interfaces_found=[
+            InterfaceCandidate(
+                type="python_sdk",
+                location="pypi:requests",
+                quality_score=0.95,
+                coverage="full",
+                notes="sdk",
+                metadata={"evidence_excerpt": "Short evidence excerpt"},
+            )
+        ],
+        source_metadata={
+            "summary": "HTTP helpers",
+            "description": long_description,
+        },
+    )
+
+    context = build_interface_context(probe_result=probe_result, interface_type="python_sdk")
+
+    assert "Source excerpts" in context.summary
+    assert "metadata.summary" in context.summary
+    assert "[truncated]" in context.summary

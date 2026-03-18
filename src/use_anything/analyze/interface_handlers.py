@@ -7,9 +7,13 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import httpx
 import yaml
 
 from use_anything.models import InterfaceCandidate, ProbeResult
+
+MAX_SOURCE_EXCERPT_CHARS = 600
+MAX_DESCRIPTION_CHARS = 1200
 
 
 @dataclass(frozen=True)
@@ -33,13 +37,17 @@ def build_interface_context(*, probe_result: ProbeResult, interface_type: str) -
     else:
         context = _build_generic_context(candidate, probe_result.source_metadata)
 
-    if not prioritized_sources:
-        return context
+    summary = context.summary
+    if prioritized_sources:
+        summary = context.summary + "\nSupplemental prioritized sources:\n" + "\n".join(
+            f"- {source}" for source in prioritized_sources
+        )
+
+    source_excerpts = _collect_source_excerpts(candidate, probe_result.source_metadata)
+    if source_excerpts:
+        summary = summary + "\nSource excerpts:\n" + "\n".join(f"- {excerpt}" for excerpt in source_excerpts)
 
     merged_sources = _dedupe_sources([*prioritized_sources, *context.sources])
-    summary = context.summary + "\nSupplemental prioritized sources:\n" + "\n".join(
-        f"- {source}" for source in prioritized_sources
-    )
     return InterfaceContext(summary=summary, sources=merged_sources)
 
 
@@ -137,12 +145,32 @@ def _load_openapi_document(candidate: InterfaceCandidate) -> dict[str, Any]:
     if isinstance(raw, dict):
         return raw
 
-    path = Path(candidate.location)
+    location = candidate.location
+    if location.startswith("http://") or location.startswith("https://"):
+        return _load_openapi_from_http(location)
+
+    path = Path(location)
     if not path.exists() or not path.is_file():
         return {}
 
     content = path.read_text(encoding="utf-8")
-    if path.suffix.lower() == ".json":
+    return _parse_openapi_content(content, path.suffix.lower())
+
+
+def _load_openapi_from_http(location: str) -> dict[str, Any]:
+    try:
+        response = httpx.get(location, timeout=15.0)
+        response.raise_for_status()
+    except httpx.HTTPError:
+        return {}
+
+    content_type = response.headers.get("content-type", "").lower()
+    suffix = ".json" if "json" in content_type else ".yaml"
+    return _parse_openapi_content(response.text, suffix)
+
+
+def _parse_openapi_content(content: str, suffix: str) -> dict[str, Any]:
+    if suffix == ".json":
         try:
             loaded = json.loads(content)
         except json.JSONDecodeError:
@@ -155,6 +183,41 @@ def _load_openapi_document(candidate: InterfaceCandidate) -> dict[str, Any]:
         return {}
 
     return loaded_yaml if isinstance(loaded_yaml, dict) else {}
+
+
+def _collect_source_excerpts(candidate: InterfaceCandidate, source_metadata: dict[str, Any]) -> list[str]:
+    excerpts: list[str] = []
+
+    summary = _truncate_text(str(source_metadata.get("summary", "")), MAX_SOURCE_EXCERPT_CHARS)
+    description = _truncate_text(str(source_metadata.get("description", "")), MAX_DESCRIPTION_CHARS)
+    candidate_excerpt = _truncate_text(str(candidate.metadata.get("evidence_excerpt", "")), MAX_SOURCE_EXCERPT_CHARS)
+
+    if summary:
+        excerpts.append(f"metadata.summary: {summary}")
+    if description:
+        excerpts.append(f"metadata.description: {description}")
+    if candidate_excerpt:
+        excerpts.append(f"candidate.metadata.evidence_excerpt: {candidate_excerpt}")
+
+    command_output = source_metadata.get("command_output", {}) if isinstance(source_metadata, dict) else {}
+    help_text = _truncate_text(str(command_output.get("help", "")), MAX_SOURCE_EXCERPT_CHARS)
+    version_text = _truncate_text(str(command_output.get("version", "")), MAX_SOURCE_EXCERPT_CHARS)
+
+    if help_text:
+        excerpts.append(f"command_output.help: {help_text}")
+    if version_text:
+        excerpts.append(f"command_output.version: {version_text}")
+
+    return excerpts
+
+
+def _truncate_text(value: str, limit: int) -> str:
+    normalized = " ".join(value.split())
+    if not normalized:
+        return ""
+    if len(normalized) <= limit:
+        return normalized
+    return f"{normalized[:limit]} [truncated]"
 
 
 def _extract_openapi_operations(document: dict[str, Any]) -> list[str]:
