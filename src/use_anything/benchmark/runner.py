@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import time
 from pathlib import Path
 from typing import Any
 
@@ -45,18 +47,48 @@ class BenchmarkRunner:
 
     def _execute_task(self, *, target: BenchmarkTarget, task: BenchmarkTask, config: str) -> dict[str, Any]:
         payload = task.replay_results.get(config)
-        if payload is None:
+        if payload is not None:
             return {
                 "target_id": target.id,
                 "target": target.target,
                 "task_id": task.id,
                 "config": config,
-                "passed": False,
-                "total_tokens": 0,
-                "duration_ms": 0,
-                "skill_invoked": False,
-                "error_type": "missing_execution_config",
-                "status": "incomplete",
+                "passed": bool(payload.get("passed", False)),
+                "total_tokens": int(payload.get("total_tokens", 0)),
+                "duration_ms": int(payload.get("duration_ms", 0)),
+                "skill_invoked": bool(payload.get("skill_invoked", False)),
+                "error_type": payload.get("error_type"),
+                "status": "completed",
+            }
+
+        command = task.commands.get(config)
+        if command:
+            start = time.perf_counter()
+            completed = subprocess.run(
+                command,
+                shell=True,
+                cwd=task.workdir or None,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            elapsed_ms = int((time.perf_counter() - start) * 1000)
+            command_payload = self._extract_payload(completed.stdout)
+            error_type = command_payload.get("error_type")
+            if completed.returncode != 0 and not error_type:
+                error_type = "command_failed"
+
+            return {
+                "target_id": target.id,
+                "target": target.target,
+                "task_id": task.id,
+                "config": config,
+                "passed": bool(command_payload.get("passed", completed.returncode == 0)),
+                "total_tokens": int(command_payload.get("total_tokens", 0)),
+                "duration_ms": int(command_payload.get("duration_ms", elapsed_ms)),
+                "skill_invoked": bool(command_payload.get("skill_invoked", config != "no-skill")),
+                "error_type": error_type,
+                "status": "completed",
             }
 
         return {
@@ -64,10 +96,22 @@ class BenchmarkRunner:
             "target": target.target,
             "task_id": task.id,
             "config": config,
-            "passed": bool(payload.get("passed", False)),
-            "total_tokens": int(payload.get("total_tokens", 0)),
-            "duration_ms": int(payload.get("duration_ms", 0)),
-            "skill_invoked": bool(payload.get("skill_invoked", False)),
-            "error_type": payload.get("error_type"),
-            "status": "completed",
+            "passed": False,
+            "total_tokens": 0,
+            "duration_ms": 0,
+            "skill_invoked": False,
+            "error_type": "missing_execution_config",
+            "status": "incomplete",
         }
+
+    def _extract_payload(self, stdout: str) -> dict[str, Any]:
+        candidate = stdout.strip()
+        if not candidate:
+            return {}
+        try:
+            parsed = json.loads(candidate)
+            if isinstance(parsed, dict):
+                return parsed
+        except json.JSONDecodeError:
+            return {}
+        return {}

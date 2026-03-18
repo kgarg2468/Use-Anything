@@ -126,3 +126,45 @@ def test_runner_executes_no_skill_from_replay_results(tmp_path: Path) -> None:
     assert result["benchmark_summary"]["total_runs"] == 1
     assert result["benchmark_summary"]["completed_runs"] == 1
     assert (output_dir / "raw_runs.jsonl").exists()
+
+
+def test_runner_executes_generated_skill_default_from_command(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-demo-default",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-default",
+                            "prompt": "Use generated skill defaults",
+                            "expected_output": "done",
+                            "commands": {
+                                "generated-skill-default": (
+                                    "python -c \"import json; "
+                                    "print(json.dumps({'passed': True, 'total_tokens': 200, "
+                                    "'duration_ms': 900, 'skill_invoked': True}))\""
+                                )
+                            },
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-default"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["generated-skill-default"],
+        agent="codex",
+    )
+
+    assert result["benchmark_summary"]["total_runs"] == 1
+    assert result["benchmark_summary"]["completed_runs"] == 1
