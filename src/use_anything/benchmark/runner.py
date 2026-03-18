@@ -72,9 +72,24 @@ class BenchmarkRunner:
                 text=True,
                 check=False,
             )
-            elapsed_ms = int((time.perf_counter() - start) * 1000)
             command_payload = self._extract_payload(completed.stdout)
+            passed = bool(command_payload.get("passed", completed.returncode == 0))
             error_type = command_payload.get("error_type")
+
+            if task.verifier_command:
+                verifier = subprocess.run(
+                    task.verifier_command,
+                    shell=True,
+                    cwd=task.workdir or None,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                if verifier.returncode != 0:
+                    passed = False
+                    error_type = "verification_failed"
+
+            elapsed_ms = int((time.perf_counter() - start) * 1000)
             if completed.returncode != 0 and not error_type:
                 error_type = "command_failed"
 
@@ -83,7 +98,7 @@ class BenchmarkRunner:
                 "target": target.target,
                 "task_id": task.id,
                 "config": config,
-                "passed": bool(command_payload.get("passed", completed.returncode == 0)),
+                "passed": passed,
                 "total_tokens": int(command_payload.get("total_tokens", 0)),
                 "duration_ms": int(command_payload.get("duration_ms", elapsed_ms)),
                 "skill_invoked": bool(command_payload.get("skill_invoked", config != "no-skill")),

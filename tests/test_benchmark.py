@@ -125,6 +125,52 @@ def test_runner_executes_no_skill_from_replay_results(tmp_path: Path) -> None:
 
     assert result["benchmark_summary"]["total_runs"] == 1
     assert result["benchmark_summary"]["completed_runs"] == 1
+
+
+def test_runner_applies_verifier_command_and_marks_failure(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-demo-verifier",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-verifier",
+                            "prompt": "run with verifier",
+                            "expected_output": "done",
+                            "commands": {
+                                "no-skill": (
+                                    "python -c \"import json; "
+                                    "print(json.dumps({'passed': True, 'total_tokens': 333, 'duration_ms': 1200}))\""
+                                )
+                            },
+                            "verifier_command": "python -c \"import sys; sys.exit(1)\"",
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-verifier"
+
+    BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["no-skill"],
+        agent="codex",
+    )
+
+    raw_runs = (output_dir / "raw_runs.jsonl").read_text().strip().splitlines()
+    assert len(raw_runs) == 1
+    record = json.loads(raw_runs[0])
+    assert record["passed"] is False
+    assert record["error_type"] == "verification_failed"
+    assert record["total_tokens"] == 333
     assert (output_dir / "raw_runs.jsonl").exists()
 
 
