@@ -27,7 +27,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "requests-core-workflow",
@@ -37,7 +45,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "requests-error-handling",
@@ -47,7 +63,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "requests-edge-case",
@@ -57,7 +81,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "requests-performance-check",
@@ -67,7 +99,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -83,7 +123,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "flask-core-workflow",
@@ -93,7 +141,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "flask-error-handling",
@@ -103,7 +159,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "flask-edge-case",
@@ -113,7 +177,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "flask-performance-check",
@@ -123,7 +195,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -139,7 +219,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "fastapi-core-workflow",
@@ -149,7 +237,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "fastapi-error-handling",
@@ -159,7 +255,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "fastapi-edge-case",
@@ -169,7 +273,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "fastapi-performance-check",
@@ -179,7 +291,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -195,7 +315,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pandas-core-workflow",
@@ -205,7 +333,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pandas-error-handling",
@@ -215,7 +351,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pandas-edge-case",
@@ -225,7 +369,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pandas-performance-check",
@@ -235,7 +387,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -251,7 +411,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "numpy-core-workflow",
@@ -261,7 +429,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "numpy-error-handling",
@@ -271,7 +447,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "numpy-edge-case",
@@ -281,7 +465,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "numpy-performance-check",
@@ -291,7 +483,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -307,7 +507,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pydantic-core-workflow",
@@ -317,7 +525,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pydantic-error-handling",
@@ -327,7 +543,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pydantic-edge-case",
@@ -337,7 +561,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pydantic-performance-check",
@@ -347,7 +579,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -363,7 +603,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "sqlalchemy-core-workflow",
@@ -373,7 +621,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "sqlalchemy-error-handling",
@@ -383,7 +639,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "sqlalchemy-edge-case",
@@ -393,7 +657,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "sqlalchemy-performance-check",
@@ -403,7 +675,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -419,7 +699,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "celery-core-workflow",
@@ -429,7 +717,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "celery-error-handling",
@@ -439,7 +735,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "celery-edge-case",
@@ -449,7 +753,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "celery-performance-check",
@@ -459,7 +771,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -475,7 +795,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "django-core-workflow",
@@ -485,7 +813,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "django-error-handling",
@@ -495,7 +831,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "django-edge-case",
@@ -505,7 +849,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "django-performance-check",
@@ -515,7 +867,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -531,7 +891,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "click-core-workflow",
@@ -541,7 +909,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "click-error-handling",
@@ -551,7 +927,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "click-edge-case",
@@ -561,7 +945,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "click-performance-check",
@@ -571,7 +963,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -587,7 +987,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "rich-core-workflow",
@@ -597,7 +1005,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "rich-error-handling",
@@ -607,7 +1023,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "rich-edge-case",
@@ -617,7 +1041,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "rich-performance-check",
@@ -627,7 +1059,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -643,7 +1083,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pytest-core-workflow",
@@ -653,7 +1101,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pytest-error-handling",
@@ -663,7 +1119,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pytest-edge-case",
@@ -673,7 +1137,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pytest-performance-check",
@@ -683,7 +1155,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -699,7 +1179,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "httpx-core-workflow",
@@ -709,7 +1197,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "httpx-error-handling",
@@ -719,7 +1215,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "httpx-edge-case",
@@ -729,7 +1233,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "httpx-performance-check",
@@ -739,7 +1251,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -755,7 +1275,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "boto3-core-workflow",
@@ -765,7 +1293,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "boto3-error-handling",
@@ -775,7 +1311,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "boto3-edge-case",
@@ -785,7 +1329,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "boto3-performance-check",
@@ -795,7 +1347,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -811,7 +1371,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "jinja2-core-workflow",
@@ -821,7 +1389,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "jinja2-error-handling",
@@ -831,7 +1407,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "jinja2-edge-case",
@@ -841,7 +1425,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "jinja2-performance-check",
@@ -851,7 +1443,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -867,7 +1467,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "beautifulsoup4-core-workflow",
@@ -877,7 +1485,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "beautifulsoup4-error-handling",
@@ -887,7 +1503,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "beautifulsoup4-edge-case",
@@ -897,7 +1521,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "beautifulsoup4-performance-check",
@@ -907,7 +1539,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -923,7 +1563,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "matplotlib-core-workflow",
@@ -933,7 +1581,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "matplotlib-error-handling",
@@ -943,7 +1599,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "matplotlib-edge-case",
@@ -953,7 +1617,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "matplotlib-performance-check",
@@ -963,7 +1635,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -979,7 +1659,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "scikit-learn-core-workflow",
@@ -989,7 +1677,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "scikit-learn-error-handling",
@@ -999,7 +1695,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "scikit-learn-edge-case",
@@ -1009,7 +1713,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "scikit-learn-performance-check",
@@ -1019,7 +1731,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -1035,7 +1755,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pillow-core-workflow",
@@ -1045,7 +1773,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pillow-error-handling",
@@ -1055,7 +1791,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pillow-edge-case",
@@ -1065,7 +1809,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "pillow-performance-check",
@@ -1075,7 +1827,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     },
@@ -1091,7 +1851,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-setup-and-hello --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-setup-and-hello --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-setup-and-hello --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "typer-core-workflow",
@@ -1101,7 +1869,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-core-workflow --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-core-workflow --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-core-workflow --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "typer-error-handling",
@@ -1111,7 +1887,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-error-handling --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-error-handling --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-error-handling --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "typer-edge-case",
@@ -1121,7 +1905,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-edge-case --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-edge-case --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-edge-case --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         },
         {
           "id": "typer-performance-check",
@@ -1131,7 +1923,15 @@
             "Execution finishes without unexpected fatal errors",
             "Output includes evidence tied to the requested workflow",
             "Result quality is sufficient for practical use"
-          ]
+          ],
+          "commands": {
+            "no-skill": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-performance-check --config no-skill --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-default": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-performance-check --config generated-skill-default --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "generated-skill-explicit": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-performance-check --config generated-skill-explicit --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run",
+            "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
+          },
+          "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
         }
       ]
     }

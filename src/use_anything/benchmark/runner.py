@@ -184,11 +184,13 @@ class BenchmarkRunner:
 
         command = task.commands.get(config)
         if command:
+            run_id = f"{int(time.time() * 1000)}-{target.id}-{task.id}-{config}"
             env = self._build_execution_env(
                 target=target,
                 task=task,
                 config=config,
                 output_dir=output_dir,
+                run_id=run_id,
             )
             start = time.perf_counter()
             completed = subprocess.run(
@@ -227,6 +229,7 @@ class BenchmarkRunner:
                 "target": target.target,
                 "task_id": task.id,
                 "config": config,
+                "run_id": run_id,
                 "passed": passed,
                 "total_tokens": int(command_payload.get("total_tokens", 0)),
                 "duration_ms": int(command_payload.get("duration_ms", elapsed_ms)),
@@ -255,6 +258,7 @@ class BenchmarkRunner:
         task: BenchmarkTask,
         config: str,
         output_dir: Path,
+        run_id: str,
     ) -> dict[str, str]:
         env = dict(os.environ)
         env["USE_ANYTHING_BENCH_TARGET_ID"] = target.id
@@ -262,6 +266,7 @@ class BenchmarkRunner:
         env["USE_ANYTHING_BENCH_TASK_ID"] = task.id
         env["USE_ANYTHING_BENCH_CONFIG"] = config
         env["USE_ANYTHING_BENCH_OUTPUT_DIR"] = str(output_dir)
+        env["USE_ANYTHING_BENCH_RUN_ID"] = run_id
         return env
 
     def _extract_payload(self, stdout: str) -> dict[str, Any]:

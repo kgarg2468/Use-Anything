@@ -32,21 +32,22 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--suite", required=True)
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--run-id")
     args = parser.parse_args()
 
     target_id = os.environ.get("USE_ANYTHING_BENCH_TARGET_ID", "").strip()
     task_id = os.environ.get("USE_ANYTHING_BENCH_TASK_ID", "").strip()
     config = os.environ.get("USE_ANYTHING_BENCH_CONFIG", "").strip()
+    run_id = (args.run_id or os.environ.get("USE_ANYTHING_BENCH_RUN_ID", "")).strip()
 
-    if not target_id or not task_id or not config:
+    if not target_id or not task_id or not config or not run_id:
         raise SystemExit(2)
 
     suite_path = Path(args.suite).resolve()
     output_dir = Path(args.output_dir).resolve()
 
     _, task = _find_target_task(suite_path=suite_path, target_id=target_id, task_id=task_id)
-    artifact_path = output_dir / "live-runs" / f"{args.run_id}__{target_id}__{task_id}__{config}.json"
+    artifact_path = output_dir / "live-runs" / f"{run_id}__{target_id}__{task_id}__{config}.json"
     if not artifact_path.exists():
         raise SystemExit(1)
 

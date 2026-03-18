@@ -133,7 +133,7 @@ def main() -> None:
     parser.add_argument("--target-id", required=True)
     parser.add_argument("--task-id", required=True)
     parser.add_argument("--config", required=True)
-    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--run-id")
     parser.add_argument("--workdir", required=True)
     parser.add_argument("--output-dir", required=True)
     args = parser.parse_args()
@@ -141,6 +141,7 @@ def main() -> None:
     suite_path = Path(args.suite).resolve()
     workdir = Path(args.workdir).resolve()
     output_dir = Path(args.output_dir).resolve()
+    run_id = args.run_id or os.environ.get("USE_ANYTHING_BENCH_RUN_ID") or str(int(time.time() * 1000))
 
     target, task = _find_target_task(suite_path=suite_path, target_id=args.target_id, task_id=args.task_id)
     prompt = _build_prompt(target=target, task=task, config=args.config, workdir=workdir)
@@ -171,7 +172,7 @@ def main() -> None:
     total_tokens = _estimate_tokens(prompt, response)
 
     artifact = {
-        "run_id": args.run_id,
+        "run_id": run_id,
         "target_id": args.target_id,
         "task_id": args.task_id,
         "config": args.config,
@@ -186,7 +187,7 @@ def main() -> None:
 
     live_dir = output_dir / "live-runs"
     live_dir.mkdir(parents=True, exist_ok=True)
-    artifact_path = live_dir / f"{args.run_id}__{args.target_id}__{args.task_id}__{args.config}.json"
+    artifact_path = live_dir / f"{run_id}__{args.target_id}__{args.task_id}__{args.config}.json"
     artifact_path.write_text(json.dumps(artifact, indent=2, sort_keys=True), encoding="utf-8")
 
     payload = {

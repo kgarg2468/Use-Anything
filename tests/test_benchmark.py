@@ -368,6 +368,18 @@ def test_comprehensive_suite_scaffold_meets_scale_requirement() -> None:
     assert all(len(target.tasks) >= 5 for target in suite.targets)
 
 
+def test_comprehensive_suite_has_commands_and_verifier_for_all_configs() -> None:
+    suite_path = Path(__file__).resolve().parents[1] / "benchmark" / "comprehensive-codex-suite.json"
+    suite = load_benchmark_suite(suite_path)
+
+    for target in suite.targets:
+        for task in target.tasks:
+            assert task.verifier_command
+            for config in DEFAULT_BENCHMARK_CONFIGS:
+                assert config in task.commands
+                assert task.commands[config].strip()
+
+
 def test_runner_executes_generated_skill_default_from_command(tmp_path: Path) -> None:
     suite_path = tmp_path / "suite.json"
     _write_suite(
