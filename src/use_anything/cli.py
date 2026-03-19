@@ -148,11 +148,19 @@ def validate_command(skill_dir: Path) -> None:
         "no-skill,generated-skill-default,generated-skill-explicit,agents-md-doc-index)"
     ),
 )
+@click.option(
+    "--min-completion-rate",
+    type=click.FloatRange(min=0.0, max=1.0),
+    default=1.0,
+    show_default=True,
+    help="Fail benchmark command if completion_rate is below this threshold.",
+)
 def benchmark_command(
     suite_path: Path,
     agent: str,
     output_dir: Path | None,
     configs: str | None,
+    min_completion_rate: float,
 ) -> None:
     """Run a benchmark suite and write benchmark artifacts."""
 
@@ -169,6 +177,25 @@ def benchmark_command(
         agent=agent,
     )
     click.echo(json.dumps(summary, indent=2))
+
+    benchmark_summary = summary.get("benchmark_summary", {})
+    preflight = benchmark_summary.get("preflight", {})
+    if not preflight.get("passed", True):
+        click.echo(
+            "Benchmark failed: preflight validation did not pass. "
+            f"Missing entries: {len(preflight.get('missing_matrix', []))}.",
+            err=True,
+        )
+        raise SystemExit(1)
+
+    completion_rate = float(benchmark_summary.get("completion_rate", 0.0))
+    if completion_rate < min_completion_rate:
+        click.echo(
+            "Benchmark failed: completion_rate below threshold. "
+            f"Observed={completion_rate:.4f}, required={min_completion_rate:.4f}.",
+            err=True,
+        )
+        raise SystemExit(1)
 
 
 def main() -> None:
