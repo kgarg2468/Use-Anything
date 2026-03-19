@@ -508,6 +508,93 @@ def test_runner_propagates_output_dir_to_task_and_verifier(tmp_path: Path, monke
     assert not wrong_output.exists()
 
 
+def test_runner_marks_command_timeout(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("USE_ANYTHING_BENCH_TASK_TIMEOUT_SECONDS", "1")
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-command-timeout",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-timeout",
+                            "prompt": "sleep command",
+                            "expected_output": "done",
+                            "commands": {
+                                "no-skill": "python -c \"import time; time.sleep(2)\"",
+                            },
+                            "verifier_command": "python -c \"import sys; sys.exit(0)\"",
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-command-timeout"
+
+    BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["no-skill"],
+        agent="codex",
+    )
+
+    raw_runs = (output_dir / "raw_runs.jsonl").read_text().strip().splitlines()
+    record = json.loads(raw_runs[0])
+    assert record["passed"] is False
+    assert record["error_type"] == "command_timeout"
+
+
+def test_runner_marks_verifier_timeout(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("USE_ANYTHING_BENCH_VERIFIER_TIMEOUT_SECONDS", "1")
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-verifier-timeout",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-timeout",
+                            "prompt": "verifier timeout",
+                            "expected_output": "done",
+                            "commands": {
+                                "no-skill": (
+                                    "python -c \"import json; "
+                                    "print(json.dumps({'passed': True, 'total_tokens': 12, 'duration_ms': 6}))\""
+                                ),
+                            },
+                            "verifier_command": "python -c \"import time; time.sleep(2)\"",
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-verifier-timeout"
+
+    BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["no-skill"],
+        agent="codex",
+    )
+
+    raw_runs = (output_dir / "raw_runs.jsonl").read_text().strip().splitlines()
+    record = json.loads(raw_runs[0])
+    assert record["passed"] is False
+    assert record["error_type"] == "verification_timeout"
+
+
 def test_comprehensive_suite_scaffold_meets_scale_requirement() -> None:
     suite_path = Path(__file__).resolve().parents[1] / "benchmark" / "comprehensive-codex-suite.json"
     suite = load_benchmark_suite(suite_path)
