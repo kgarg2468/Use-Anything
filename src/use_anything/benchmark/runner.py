@@ -295,6 +295,9 @@ class BenchmarkRunner:
         env["USE_ANYTHING_BENCH_TASK_ID"] = task.id
         env["USE_ANYTHING_BENCH_CONFIG"] = config
         env["USE_ANYTHING_BENCH_OUTPUT_DIR"] = str(output_dir)
+        env["USE_ANYTHING_BENCH_WORKDIR"] = str(
+            Path(task.workdir).expanduser().resolve() if task.workdir else Path.cwd().resolve()
+        )
         env["USE_ANYTHING_BENCH_RUN_ID"] = run_id
         env["USE_ANYTHING_BENCH_SKILL_PATH"] = str(
             self._resolve_generated_skill_path(

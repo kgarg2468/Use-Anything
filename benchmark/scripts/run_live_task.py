@@ -58,7 +58,7 @@ def _build_prompt(
     if task.assertions:
         sections.append("Assertions:\n- " + "\n- ".join(task.assertions))
 
-    skill_path = ROOT / f"use-anything-{target.id}" / "SKILL.md"
+    skill_path = _resolve_skill_path(target=target, workdir=workdir)
     agents_md_path = workdir / "AGENTS.md"
 
     if config == "no-skill":
@@ -89,6 +89,16 @@ def _build_prompt(
 
     sections.append("Return a concise practical answer for this task.")
     return "\n\n".join(sections)
+
+
+def _resolve_skill_path(*, target: BenchmarkTarget, workdir: Path) -> Path:
+    env_path = os.environ.get("USE_ANYTHING_BENCH_SKILL_PATH", "").strip()
+    if env_path:
+        candidate = Path(env_path).expanduser()
+        if not candidate.is_absolute():
+            candidate = workdir / candidate
+        return candidate.resolve()
+    return (ROOT / f"use-anything-{target.id}" / "SKILL.md").resolve()
 
 
 def _execute_codex(prompt: str, workdir: Path) -> tuple[int, str, str | None]:
@@ -135,13 +145,18 @@ def main() -> None:
     parser.add_argument("--task-id", required=True)
     parser.add_argument("--config", required=True)
     parser.add_argument("--run-id")
-    parser.add_argument("--workdir", required=True)
-    parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--workdir")
+    parser.add_argument("--output-dir")
     args = parser.parse_args()
 
     suite_path = Path(args.suite).resolve()
-    workdir = Path(args.workdir).resolve()
-    output_dir = Path(args.output_dir).resolve()
+    workdir_value = os.environ.get("USE_ANYTHING_BENCH_WORKDIR", "").strip() or (args.workdir or "").strip()
+    output_dir_value = os.environ.get("USE_ANYTHING_BENCH_OUTPUT_DIR", "").strip() or (args.output_dir or "").strip()
+    if not workdir_value or not output_dir_value:
+        raise SystemExit(2)
+
+    workdir = Path(workdir_value).resolve()
+    output_dir = Path(output_dir_value).resolve()
     run_id = args.run_id or os.environ.get("USE_ANYTHING_BENCH_RUN_ID") or str(int(time.time() * 1000))
 
     target, task = _find_target_task(suite_path=suite_path, target_id=args.target_id, task_id=args.task_id)

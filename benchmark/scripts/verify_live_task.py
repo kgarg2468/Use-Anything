@@ -46,7 +46,8 @@ def main() -> None:
         raise SystemExit(2)
 
     suite_path = Path(args.suite).resolve()
-    output_dir = Path(args.output_dir).resolve()
+    output_dir_value = os.environ.get("USE_ANYTHING_BENCH_OUTPUT_DIR", "").strip() or str(args.output_dir).strip()
+    output_dir = Path(output_dir_value).resolve()
 
     _, task = _find_target_task(suite_path=suite_path, target_id=target_id, task_id=task_id)
     artifact_path = output_dir / "live-runs" / f"{run_id}__{target_id}__{task_id}__{config}.json"
