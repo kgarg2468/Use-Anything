@@ -18,6 +18,10 @@ class BenchmarkRunner:
     GENERATED_SKILL_CONFIGS = {"generated-skill-default", "generated-skill-explicit"}
     SKILL_PATH_TEMPLATE_ENV = "USE_ANYTHING_BENCH_SKILL_PATH_TEMPLATE"
     DEFAULT_SKILL_PATH_TEMPLATE = "{workdir}/use-anything-{target_id}/SKILL.md"
+    TASK_TIMEOUT_ENV = "USE_ANYTHING_BENCH_TASK_TIMEOUT_SECONDS"
+    VERIFIER_TIMEOUT_ENV = "USE_ANYTHING_BENCH_VERIFIER_TIMEOUT_SECONDS"
+    DEFAULT_TASK_TIMEOUT_SECONDS = 300
+    DEFAULT_VERIFIER_TIMEOUT_SECONDS = 120
 
     def run(
         self,
@@ -220,15 +224,36 @@ class BenchmarkRunner:
                 run_id=run_id,
             )
             start = time.perf_counter()
-            completed = subprocess.run(
-                command,
-                shell=True,
-                cwd=task.workdir or None,
-                capture_output=True,
-                text=True,
-                check=False,
-                env=env,
+            task_timeout_seconds = self._timeout_seconds(
+                env_name=self.TASK_TIMEOUT_ENV,
+                default=self.DEFAULT_TASK_TIMEOUT_SECONDS,
             )
+            try:
+                completed = subprocess.run(
+                    command,
+                    shell=True,
+                    cwd=task.workdir or None,
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                    env=env,
+                    timeout=task_timeout_seconds,
+                )
+            except subprocess.TimeoutExpired:
+                elapsed_ms = int((time.perf_counter() - start) * 1000)
+                return {
+                    "target_id": target.id,
+                    "target": target.target,
+                    "task_id": task.id,
+                    "config": config,
+                    "run_id": run_id,
+                    "passed": False,
+                    "total_tokens": 0,
+                    "duration_ms": elapsed_ms,
+                    "skill_invoked": bool(config != "no-skill"),
+                    "error_type": "command_timeout",
+                    "status": "completed",
+                }
             command_payload = self._extract_payload(completed.stdout)
             passed = bool(command_payload.get("passed", completed.returncode == 0))
             error_type = command_payload.get("error_type")
@@ -236,18 +261,28 @@ class BenchmarkRunner:
                 passed = False
 
             if task.verifier_command:
-                verifier = subprocess.run(
-                    task.verifier_command,
-                    shell=True,
-                    cwd=task.workdir or None,
-                    capture_output=True,
-                    text=True,
-                    check=False,
-                    env=env,
+                verifier_timeout_seconds = self._timeout_seconds(
+                    env_name=self.VERIFIER_TIMEOUT_ENV,
+                    default=self.DEFAULT_VERIFIER_TIMEOUT_SECONDS,
                 )
-                if verifier.returncode != 0:
+                try:
+                    verifier = subprocess.run(
+                        task.verifier_command,
+                        shell=True,
+                        cwd=task.workdir or None,
+                        capture_output=True,
+                        text=True,
+                        check=False,
+                        env=env,
+                        timeout=verifier_timeout_seconds,
+                    )
+                except subprocess.TimeoutExpired:
                     passed = False
-                    error_type = "verification_failed"
+                    error_type = "verification_timeout"
+                else:
+                    if verifier.returncode != 0:
+                        passed = False
+                        error_type = "verification_failed"
 
             elapsed_ms = int((time.perf_counter() - start) * 1000)
             if completed.returncode != 0 and not error_type:
@@ -340,6 +375,16 @@ class BenchmarkRunner:
         if not resolved.is_absolute():
             resolved = workdir / resolved
         return resolved.resolve()
+
+    def _timeout_seconds(self, *, env_name: str, default: int) -> int:
+        raw = os.environ.get(env_name, "").strip()
+        if not raw:
+            return default
+        try:
+            parsed = int(raw)
+        except ValueError:
+            return default
+        return parsed if parsed > 0 else default
 
     def _extract_payload(self, stdout: str) -> dict[str, Any]:
         candidate = stdout.strip()
