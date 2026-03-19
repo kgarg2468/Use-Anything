@@ -205,6 +205,8 @@ class BenchmarkRunner:
             command_payload = self._extract_payload(completed.stdout)
             passed = bool(command_payload.get("passed", completed.returncode == 0))
             error_type = command_payload.get("error_type")
+            if completed.returncode != 0:
+                passed = False
 
             if task.verifier_command:
                 verifier = subprocess.run(
