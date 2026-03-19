@@ -248,7 +248,11 @@ def test_cli_benchmark_command_uses_default_output_and_configs(monkeypatch, tmp_
             calls["configs"] = configs
             calls["agent"] = agent
             return {
-                "benchmark_summary": {"total_runs": 4},
+                "benchmark_summary": {
+                    "total_runs": 4,
+                    "completion_rate": 1.0,
+                    "preflight": {"passed": True, "missing_matrix": []},
+                },
                 "output_dir": str(output_dir),
             }
 
@@ -265,3 +269,90 @@ def test_cli_benchmark_command_uses_default_output_and_configs(monkeypatch, tmp_
         "generated-skill-explicit",
         "agents-md-doc-index",
     ]
+
+
+def test_cli_benchmark_command_fails_on_preflight(monkeypatch, tmp_path: Path) -> None:
+    runner = CliRunner()
+    suite_path = tmp_path / "suite.json"
+    suite_path.write_text(
+        json.dumps(
+            {
+                "name": "demo-suite",
+                "targets": [
+                    {
+                        "id": "requests",
+                        "target": "requests",
+                        "tasks": [
+                            {
+                                "id": "task-1",
+                                "prompt": "Do task 1",
+                                "expected_output": "done",
+                            }
+                        ],
+                    }
+                ],
+            }
+        )
+    )
+
+    class FakeRunner:
+        def run(self, *, suite, output_dir, configs, agent):  # noqa: ANN001, ARG002
+            return {
+                "benchmark_summary": {
+                    "total_runs": 1,
+                    "completion_rate": 0.0,
+                    "preflight": {"passed": False, "missing_matrix": [{"reason": "missing_execution_config"}]},
+                },
+                "output_dir": str(output_dir),
+            }
+
+    monkeypatch.setattr("use_anything.cli.BenchmarkRunner", FakeRunner)
+    result = runner.invoke(cli, ["benchmark", "--suite", str(suite_path)])
+
+    assert result.exit_code == 1
+    assert "preflight validation did not pass" in result.output
+
+
+def test_cli_benchmark_command_fails_on_completion_threshold(monkeypatch, tmp_path: Path) -> None:
+    runner = CliRunner()
+    suite_path = tmp_path / "suite.json"
+    suite_path.write_text(
+        json.dumps(
+            {
+                "name": "demo-suite",
+                "targets": [
+                    {
+                        "id": "requests",
+                        "target": "requests",
+                        "tasks": [
+                            {
+                                "id": "task-1",
+                                "prompt": "Do task 1",
+                                "expected_output": "done",
+                            }
+                        ],
+                    }
+                ],
+            }
+        )
+    )
+
+    class FakeRunner:
+        def run(self, *, suite, output_dir, configs, agent):  # noqa: ANN001, ARG002
+            return {
+                "benchmark_summary": {
+                    "total_runs": 10,
+                    "completion_rate": 0.5,
+                    "preflight": {"passed": True, "missing_matrix": []},
+                },
+                "output_dir": str(output_dir),
+            }
+
+    monkeypatch.setattr("use_anything.cli.BenchmarkRunner", FakeRunner)
+    result = runner.invoke(
+        cli,
+        ["benchmark", "--suite", str(suite_path), "--min-completion-rate", "0.8"],
+    )
+
+    assert result.exit_code == 1
+    assert "completion_rate below threshold" in result.output
