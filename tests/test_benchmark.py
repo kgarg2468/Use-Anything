@@ -253,6 +253,52 @@ def test_runner_applies_verifier_command_and_marks_failure(tmp_path: Path) -> No
     assert record["total_tokens"] == 333
 
 
+def test_runner_nonzero_command_cannot_report_passed_true(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-nonzero-command",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-command-failed",
+                            "prompt": "nonzero command should fail",
+                            "expected_output": "done",
+                            "commands": {
+                                "no-skill": (
+                                    "python -c \"import json,sys; "
+                                    "print(json.dumps({'passed': True, 'total_tokens': 10, 'duration_ms': 5})); "
+                                    "sys.exit(3)\""
+                                )
+                            },
+                            "verifier_command": "python -c \"import sys; sys.exit(0)\"",
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-command-failed"
+
+    BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["no-skill"],
+        agent="codex",
+    )
+
+    raw_runs = (output_dir / "raw_runs.jsonl").read_text().strip().splitlines()
+    assert len(raw_runs) == 1
+    record = json.loads(raw_runs[0])
+    assert record["passed"] is False
+    assert record["error_type"] == "command_failed"
+
+
 def test_runner_aggregates_config_stats_and_deltas(tmp_path: Path) -> None:
     suite_path = tmp_path / "suite.json"
     _write_suite(
