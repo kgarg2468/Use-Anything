@@ -207,6 +207,48 @@ def test_runner_preflight_fails_when_verifier_missing_for_command_task(tmp_path:
     assert summary["incomplete_reason_counts"]["missing_verifier_command"] == 1
 
 
+def test_runner_preflight_fails_when_generated_skill_missing(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-preflight-missing-generated-skill",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-1",
+                            "prompt": "Send a GET request",
+                            "expected_output": "request works",
+                            "commands": {
+                                "generated-skill-default": (
+                                    "python -c \"import json; print(json.dumps({'passed': True}))\""
+                                ),
+                            },
+                            "verifier_command": "python -c \"import sys; sys.exit(0)\"",
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "benchmark-preflight-generated-skill"
+
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["generated-skill-default"],
+        agent="codex",
+    )
+
+    summary = result["benchmark_summary"]
+    assert summary["preflight"]["passed"] is False
+    assert summary["incomplete_reason_counts"]["missing_generated_skill_context"] == 1
+
+
 def test_runner_applies_verifier_command_and_marks_failure(tmp_path: Path) -> None:
     suite_path = tmp_path / "suite.json"
     _write_suite(
