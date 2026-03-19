@@ -34,9 +34,25 @@ class BenchmarkRunner:
         output_dir.mkdir(parents=True, exist_ok=True)
 
         expected_runs = self._expected_runs(suite=suite, configs=configs)
+        self._write_progress_checkpoint(
+            output_dir=output_dir,
+            status="running",
+            completed_runs=0,
+            total_runs=expected_runs,
+            current=None,
+            reason=None,
+        )
         preflight = self._preflight_validate(suite=suite, configs=configs, output_dir=output_dir)
 
         if not preflight["passed"]:
+            self._write_progress_checkpoint(
+                output_dir=output_dir,
+                status="failed",
+                completed_runs=0,
+                total_runs=expected_runs,
+                current=None,
+                reason="preflight_failed",
+            )
             benchmark_summary = self._build_summary(
                 suite_name=suite.name,
                 agent=agent,
@@ -53,9 +69,11 @@ class BenchmarkRunner:
             }
 
         records: list[dict[str, Any]] = []
+        completed_so_far = 0
         for target in suite.targets:
             for task in target.tasks:
                 for config in configs:
+                    current = f"{target.id}/{task.id}/{config}"
                     records.append(
                         self._execute_task(
                             target=target,
@@ -63,6 +81,15 @@ class BenchmarkRunner:
                             config=config,
                             output_dir=output_dir,
                         )
+                    )
+                    completed_so_far += 1
+                    self._write_progress_checkpoint(
+                        output_dir=output_dir,
+                        status="running",
+                        completed_runs=completed_so_far,
+                        total_runs=expected_runs,
+                        current=current,
+                        reason=None,
                     )
 
         completed_runs = sum(1 for record in records if record["status"] == "completed")
@@ -76,6 +103,14 @@ class BenchmarkRunner:
             preflight=preflight,
         )
         self._write_artifacts(output_dir=output_dir, records=records, benchmark_summary=benchmark_summary)
+        self._write_progress_checkpoint(
+            output_dir=output_dir,
+            status="completed",
+            completed_runs=completed_runs,
+            total_runs=len(records),
+            current=None,
+            reason=None,
+        )
         return {
             "benchmark_summary": benchmark_summary,
             "output_dir": str(output_dir),
@@ -385,6 +420,30 @@ class BenchmarkRunner:
         except ValueError:
             return default
         return parsed if parsed > 0 else default
+
+    def _write_progress_checkpoint(
+        self,
+        *,
+        output_dir: Path,
+        status: str,
+        completed_runs: int,
+        total_runs: int,
+        current: str | None,
+        reason: str | None,
+    ) -> None:
+        lines = [
+            "# Benchmark Progress",
+            "",
+            f"- status: {status}",
+            f"- completed_runs: {completed_runs}",
+            f"- total_runs: {total_runs}",
+            f"- updated_at_unix_ms: {int(time.time() * 1000)}",
+        ]
+        if current:
+            lines.append(f"- current: {current}")
+        if reason:
+            lines.append(f"- reason: {reason}")
+        (output_dir / "run-progress.md").write_text("\n".join(lines) + "\n")
 
     def _extract_payload(self, stdout: str) -> dict[str, Any]:
         candidate = stdout.strip()
