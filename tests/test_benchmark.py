@@ -448,6 +448,66 @@ def test_runner_writes_required_benchmark_artifacts(tmp_path: Path) -> None:
     assert (output_dir / "benchmark_report.md").exists()
 
 
+def test_runner_propagates_output_dir_to_task_and_verifier(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("USE_ANYTHING_BENCH_FAKE", "1")
+
+    suite_path = tmp_path / "suite.json"
+    wrong_output = tmp_path / "wrong-output"
+    repo_root = Path(__file__).resolve().parents[1]
+    _write_suite(
+        suite_path,
+        {
+            "name": "runner-output-dir-propagation",
+            "targets": [
+                {
+                    "id": "requests",
+                    "target": "requests",
+                    "tasks": [
+                        {
+                            "id": "task-1",
+                            "prompt": "run live task",
+                            "expected_output": "done",
+                            "assertions": ["workflow", "output"],
+                            "commands": {
+                                "no-skill": (
+                                    f"python3 benchmark/scripts/run_live_task.py "
+                                    f"--suite {suite_path} "
+                                    "--target-id requests "
+                                    "--task-id task-1 "
+                                    "--config no-skill "
+                                    "--workdir /tmp/should-not-be-used "
+                                    f"--output-dir {wrong_output}"
+                                )
+                            },
+                            "verifier_command": (
+                                f"python3 benchmark/scripts/verify_live_task.py "
+                                f"--suite {suite_path} "
+                                f"--output-dir {wrong_output}"
+                            ),
+                            "workdir": str(repo_root),
+                        }
+                    ],
+                }
+            ],
+        },
+    )
+
+    suite = load_benchmark_suite(suite_path)
+    output_dir = tmp_path / "actual-output"
+    result = BenchmarkRunner().run(
+        suite=suite,
+        output_dir=output_dir,
+        configs=["no-skill"],
+        agent="codex",
+    )
+
+    summary = result["benchmark_summary"]
+    assert summary["completed_runs"] == 1
+    live_runs = list((output_dir / "live-runs").glob("*.json"))
+    assert len(live_runs) == 1
+    assert not wrong_output.exists()
+
+
 def test_comprehensive_suite_scaffold_meets_scale_requirement() -> None:
     suite_path = Path(__file__).resolve().parents[1] / "benchmark" / "comprehensive-codex-suite.json"
     suite = load_benchmark_suite(suite_path)
