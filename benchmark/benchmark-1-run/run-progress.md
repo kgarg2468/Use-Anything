@@ -29,3 +29,4 @@ python3 benchmark/scripts/rerun_benchmark1.py \
 ## Checkpoints
 
 - 2026-03-19T04:10:35Z kickoff created
+- 2026-03-19T04:16:41Z detached orchestrator started (live mode)
