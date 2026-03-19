@@ -101,7 +101,7 @@ def _resolve_skill_path(*, target: BenchmarkTarget, workdir: Path) -> Path:
     return (ROOT / f"use-anything-{target.id}" / "SKILL.md").resolve()
 
 
-def _execute_codex(prompt: str, workdir: Path) -> tuple[int, str, str | None]:
+def _execute_codex(prompt: str, workdir: Path, timeout_seconds: int) -> tuple[int, str, str | None]:
     codex = shutil.which("codex")
     if not codex:
         return 2, "", "codex_not_found"
@@ -120,13 +120,18 @@ def _execute_codex(prompt: str, workdir: Path) -> tuple[int, str, str | None]:
         prompt,
     ]
 
-    completed = subprocess.run(
-        command,
-        cwd=str(workdir),
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    try:
+        completed = subprocess.run(
+            command,
+            cwd=str(workdir),
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=timeout_seconds,
+        )
+    except subprocess.TimeoutExpired:
+        output_file.unlink(missing_ok=True)
+        return 124, "", "codex_exec_timeout"
 
     response = output_file.read_text(encoding="utf-8").strip() if output_file.exists() else ""
     output_file.unlink(missing_ok=True)
@@ -174,7 +179,18 @@ def main() -> None:
         returncode = 0
         error_type = None
     else:
-        returncode, response, error_type = _execute_codex(prompt=prompt, workdir=workdir)
+        timeout_raw = os.environ.get("USE_ANYTHING_BENCH_CODEX_TIMEOUT_SECONDS", "").strip()
+        try:
+            timeout_seconds = int(timeout_raw) if timeout_raw else 240
+        except ValueError:
+            timeout_seconds = 240
+        if timeout_seconds <= 0:
+            timeout_seconds = 240
+        returncode, response, error_type = _execute_codex(
+            prompt=prompt,
+            workdir=workdir,
+            timeout_seconds=timeout_seconds,
+        )
 
     duration_ms = int((time.perf_counter() - start) * 1000)
     passed = returncode == 0 and bool(response)

@@ -54,6 +54,16 @@ def cli(ctx: click.Context) -> None:
 @click.option("-o", "--output-dir", type=click.Path(path_type=Path), help="Output directory")
 @click.option("--probe-only", is_flag=True, help="Run only probe and rank phases")
 @click.option("--force", is_flag=True, help="Bypass enhancement merge and regenerate canonical output")
+@click.option(
+    "--analysis-timeout-seconds",
+    type=click.IntRange(min=1),
+    help="Timeout for analysis model calls. For codex-cli defaults to 600 when omitted.",
+)
+@click.option(
+    "--analysis-max-retries",
+    type=click.IntRange(min=0),
+    help="Retry count for analysis model calls. For codex-cli defaults to 1 when omitted.",
+)
 def run_command(
     target: str | None,
     binary_name: str | None,
@@ -62,6 +72,8 @@ def run_command(
     output_dir: Path | None,
     probe_only: bool,
     force: bool,
+    analysis_timeout_seconds: int | None,
+    analysis_max_retries: int | None,
 ) -> None:
     """Run full or probe-only generation path for a single target."""
 
@@ -75,6 +87,8 @@ def run_command(
             output_dir=output_dir,
             probe_only=probe_only,
             force=force,
+            analysis_timeout_seconds=analysis_timeout_seconds,
+            analysis_max_retries=analysis_max_retries,
         )
     except (UnsupportedTargetError, ProbeError, AnalyzeError) as exc:
         raise click.ClickException(str(exc)) from exc

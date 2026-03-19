@@ -27,6 +27,9 @@ SUPPORTED_INTERFACE_TYPES = {
     "llms_txt",
     "existing_skill",
 }
+CODEX_CLI_MODEL = "codex-cli"
+DEFAULT_CODEX_ANALYSIS_TIMEOUT_SECONDS = 600
+DEFAULT_CODEX_ANALYSIS_MAX_RETRIES = 1
 
 
 class UseAnythingPipeline:
@@ -57,6 +60,8 @@ class UseAnythingPipeline:
         output_dir: Path | str | None = None,
         probe_only: bool = False,
         force: bool = False,
+        analysis_timeout_seconds: int | None = None,
+        analysis_max_retries: int | None = None,
     ) -> PipelineResult:
         probe_result = self.prober.probe_target(target, binary_name=binary_name)
         rank_result = self.ranker.rank(probe_result)
@@ -86,7 +91,20 @@ class UseAnythingPipeline:
                 probe_only=True,
             )
 
-        analyzer = self.analyzer or Analyzer(model=model)
+        normalized_model = (model or "").strip().lower()
+        resolved_timeout_seconds = analysis_timeout_seconds
+        resolved_max_retries = analysis_max_retries
+        if normalized_model == CODEX_CLI_MODEL:
+            if resolved_timeout_seconds is None:
+                resolved_timeout_seconds = DEFAULT_CODEX_ANALYSIS_TIMEOUT_SECONDS
+            if resolved_max_retries is None:
+                resolved_max_retries = DEFAULT_CODEX_ANALYSIS_MAX_RETRIES
+
+        analyzer = self.analyzer or Analyzer(
+            model=model,
+            timeout_seconds=resolved_timeout_seconds,
+            max_retries=resolved_max_retries,
+        )
         analysis = analyzer.analyze(probe_result=probe_result, rank_result=rank_result)
 
         target_output = Path(output_dir) if output_dir else Path.cwd() / f"use-anything-{probe_result.target}"

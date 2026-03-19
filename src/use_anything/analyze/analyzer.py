@@ -15,8 +15,22 @@ from use_anything.models import AnalyzerIR, ProbeResult, RankResult
 class Analyzer:
     """Deep-read the selected interface and return structured IR."""
 
-    def __init__(self, *, llm_client: LLMClient | None = None, model: str | None = None) -> None:
-        self.llm_client = llm_client or LLMClient(model=model)
+    def __init__(
+        self,
+        *,
+        llm_client: LLMClient | None = None,
+        model: str | None = None,
+        timeout_seconds: int | None = None,
+        max_retries: int | None = None,
+    ) -> None:
+        if llm_client is not None:
+            self.llm_client = llm_client
+            return
+        self.llm_client = LLMClient(
+            model=model,
+            timeout_seconds=timeout_seconds or 60,
+            max_retries=2 if max_retries is None else max_retries,
+        )
 
     def analyze(self, probe_result: ProbeResult, rank_result: RankResult) -> AnalyzerIR:
         interface_context = build_interface_context(
