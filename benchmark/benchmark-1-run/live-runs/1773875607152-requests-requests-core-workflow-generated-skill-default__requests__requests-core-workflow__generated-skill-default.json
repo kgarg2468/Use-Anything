@@ -1,0 +1,13 @@
+{
+  "config": "generated-skill-default",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: requests (requests)\n\nTask ID: requests-core-workflow\n\nPrompt: [requests] Implement the most common end-to-end workflow for this interface.\n\nExpected output: A successful core workflow with expected output.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: generated-skill-default. Generated skill context (optional use):\n\nNo generated skill file found at /Users/krishgarg/Documents/Projects/Use-Anything/use-anything-requests/SKILL.md\n\nReturn a concise practical answer for this task.",
+  "response": "requests workflow output for requests-core-workflow using generated-skill-default.",
+  "run_id": "1773875607152-requests-requests-core-workflow-generated-skill-default",
+  "skill_invoked": true,
+  "target_id": "requests",
+  "task_id": "requests-core-workflow",
+  "total_tokens": 80
+}

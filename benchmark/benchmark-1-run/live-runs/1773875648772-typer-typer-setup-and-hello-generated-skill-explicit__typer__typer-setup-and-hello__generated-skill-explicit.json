@@ -1,0 +1,13 @@
+{
+  "config": "generated-skill-explicit",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: typer (typer)\n\nTask ID: typer-setup-and-hello\n\nPrompt: [typer] Set up a minimal working example and verify a hello-world style call.\n\nExpected output: A reproducible minimal setup and successful basic call.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: generated-skill-explicit. You MUST apply generated skill guidance.\n\nNo generated skill file found at /Users/krishgarg/Documents/Projects/Use-Anything/use-anything-typer/SKILL.md\n\nReturn a concise practical answer for this task.",
+  "response": "typer workflow output for typer-setup-and-hello using generated-skill-explicit.",
+  "run_id": "1773875648772-typer-typer-setup-and-hello-generated-skill-explicit",
+  "skill_invoked": true,
+  "target_id": "typer",
+  "task_id": "typer-setup-and-hello",
+  "total_tokens": 85
+}

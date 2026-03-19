@@ -1,0 +1,13 @@
+{
+  "config": "generated-skill-default",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: httpx (httpx)\n\nTask ID: httpx-performance-check\n\nPrompt: [httpx] Measure practical runtime behavior and collect execution metrics.\n\nExpected output: A captured timing/token profile with interpretation.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: generated-skill-default. Generated skill context (optional use):\n\nNo generated skill file found at /Users/krishgarg/Documents/Projects/Use-Anything/use-anything-httpx/SKILL.md\n\nReturn a concise practical answer for this task.",
+  "response": "httpx workflow output for httpx-performance-check using generated-skill-default.",
+  "run_id": "1773875636339-httpx-httpx-performance-check-generated-skill-default",
+  "skill_invoked": true,
+  "target_id": "httpx",
+  "task_id": "httpx-performance-check",
+  "total_tokens": 78
+}

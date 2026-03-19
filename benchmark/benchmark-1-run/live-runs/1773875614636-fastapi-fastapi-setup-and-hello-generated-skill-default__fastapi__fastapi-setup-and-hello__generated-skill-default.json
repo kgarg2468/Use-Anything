@@ -1,0 +1,13 @@
+{
+  "config": "generated-skill-default",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: fastapi (fastapi)\n\nTask ID: fastapi-setup-and-hello\n\nPrompt: [fastapi] Set up a minimal working example and verify a hello-world style call.\n\nExpected output: A reproducible minimal setup and successful basic call.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: generated-skill-default. Generated skill context (optional use):\n\nNo generated skill file found at /Users/krishgarg/Documents/Projects/Use-Anything/use-anything-fastapi/SKILL.md\n\nReturn a concise practical answer for this task.",
+  "response": "fastapi workflow output for fastapi-setup-and-hello using generated-skill-default.",
+  "run_id": "1773875614636-fastapi-fastapi-setup-and-hello-generated-skill-default",
+  "skill_invoked": true,
+  "target_id": "fastapi",
+  "task_id": "fastapi-setup-and-hello",
+  "total_tokens": 84
+}

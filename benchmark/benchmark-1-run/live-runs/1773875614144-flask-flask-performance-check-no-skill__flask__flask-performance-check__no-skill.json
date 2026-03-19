@@ -1,0 +1,13 @@
+{
+  "config": "no-skill",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: flask (flask)\n\nTask ID: flask-performance-check\n\nPrompt: [flask] Measure practical runtime behavior and collect execution metrics.\n\nExpected output: A captured timing/token profile with interpretation.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: no-skill. Use only task prompt and normal reasoning.\n\nReturn a concise practical answer for this task.",
+  "response": "flask workflow output for flask-performance-check using no-skill.",
+  "run_id": "1773875614144-flask-flask-performance-check-no-skill",
+  "skill_invoked": false,
+  "target_id": "flask",
+  "task_id": "flask-performance-check",
+  "total_tokens": 73
+}

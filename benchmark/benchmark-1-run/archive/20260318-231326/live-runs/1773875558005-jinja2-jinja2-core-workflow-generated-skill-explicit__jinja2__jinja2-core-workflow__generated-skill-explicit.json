@@ -1,0 +1,13 @@
+{
+  "config": "generated-skill-explicit",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: jinja2 (jinja2)\n\nTask ID: jinja2-core-workflow\n\nPrompt: [jinja2] Implement the most common end-to-end workflow for this interface.\n\nExpected output: A successful core workflow with expected output.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: generated-skill-explicit. You MUST apply generated skill guidance.\n\nNo generated skill file found at /Users/krishgarg/Documents/Projects/Use-Anything/use-anything-jinja2/SKILL.md\n\nReturn a concise practical answer for this task.",
+  "response": "jinja2 workflow output for jinja2-core-workflow using generated-skill-explicit.",
+  "run_id": "1773875558005-jinja2-jinja2-core-workflow-generated-skill-explicit",
+  "skill_invoked": true,
+  "target_id": "jinja2",
+  "task_id": "jinja2-core-workflow",
+  "total_tokens": 81
+}

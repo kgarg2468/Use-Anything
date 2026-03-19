@@ -1,0 +1,13 @@
+{
+  "config": "no-skill",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: rich (rich)\n\nTask ID: rich-edge-case\n\nPrompt: [rich] Run at least one edge-case input and verify behavior.\n\nExpected output: A validated edge-case outcome matching requirements.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: no-skill. Use only task prompt and normal reasoning.\n\nReturn a concise practical answer for this task.",
+  "response": "rich workflow output for rich-edge-case using no-skill.",
+  "run_id": "1773875631779-rich-rich-edge-case-no-skill",
+  "skill_invoked": false,
+  "target_id": "rich",
+  "task_id": "rich-edge-case",
+  "total_tokens": 74
+}

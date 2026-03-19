@@ -1,0 +1,13 @@
+{
+  "config": "agents-md-doc-index",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: typer (typer)\n\nTask ID: typer-error-handling\n\nPrompt: [typer] Exercise expected error paths and document robust handling.\n\nExpected output: A run that handles expected errors without crashing.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: agents-md-doc-index. Use AGENTS.md/doc index context only.\n\nNo AGENTS.md found at /Users/krishgarg/Documents/Projects/Use-Anything/AGENTS.md\n\nReturn a concise practical answer for this task.",
+  "response": "typer workflow output for typer-error-handling using agents-md-doc-index.",
+  "run_id": "1773875649665-typer-typer-error-handling-agents-md-doc-index",
+  "skill_invoked": false,
+  "target_id": "typer",
+  "task_id": "typer-error-handling",
+  "total_tokens": 78
+}

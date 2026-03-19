@@ -1,0 +1,13 @@
+{
+  "config": "agents-md-doc-index",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: celery (celery)\n\nTask ID: celery-performance-check\n\nPrompt: [celery] Measure practical runtime behavior and collect execution metrics.\n\nExpected output: A captured timing/token profile with interpretation.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: agents-md-doc-index. Use AGENTS.md/doc index context only.\n\nNo AGENTS.md found at /Users/krishgarg/Documents/Projects/Use-Anything/AGENTS.md\n\nReturn a concise practical answer for this task.",
+  "response": "celery workflow output for celery-performance-check using agents-md-doc-index.",
+  "run_id": "1773875626491-celery-celery-performance-check-agents-md-doc-index",
+  "skill_invoked": false,
+  "target_id": "celery",
+  "task_id": "celery-performance-check",
+  "total_tokens": 76
+}

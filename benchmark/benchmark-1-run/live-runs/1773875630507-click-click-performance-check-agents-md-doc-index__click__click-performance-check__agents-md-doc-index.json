@@ -1,0 +1,13 @@
+{
+  "config": "agents-md-doc-index",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: click (click)\n\nTask ID: click-performance-check\n\nPrompt: [click] Measure practical runtime behavior and collect execution metrics.\n\nExpected output: A captured timing/token profile with interpretation.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: agents-md-doc-index. Use AGENTS.md/doc index context only.\n\nNo AGENTS.md found at /Users/krishgarg/Documents/Projects/Use-Anything/AGENTS.md\n\nReturn a concise practical answer for this task.",
+  "response": "click workflow output for click-performance-check using agents-md-doc-index.",
+  "run_id": "1773875630507-click-click-performance-check-agents-md-doc-index",
+  "skill_invoked": false,
+  "target_id": "click",
+  "task_id": "click-performance-check",
+  "total_tokens": 76
+}

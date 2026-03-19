@@ -1,0 +1,13 @@
+{
+  "config": "agents-md-doc-index",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: fastapi (fastapi)\n\nTask ID: fastapi-edge-case\n\nPrompt: [fastapi] Run at least one edge-case input and verify behavior.\n\nExpected output: A validated edge-case outcome matching requirements.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: agents-md-doc-index. Use AGENTS.md/doc index context only.\n\nNo AGENTS.md found at /Users/krishgarg/Documents/Projects/Use-Anything/AGENTS.md\n\nReturn a concise practical answer for this task.",
+  "response": "fastapi workflow output for fastapi-edge-case using agents-md-doc-index.",
+  "run_id": "1773875534609-fastapi-fastapi-edge-case-agents-md-doc-index",
+  "skill_invoked": false,
+  "target_id": "fastapi",
+  "task_id": "fastapi-edge-case",
+  "total_tokens": 77
+}

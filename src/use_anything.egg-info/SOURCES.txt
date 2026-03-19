@@ -14,6 +14,7 @@ src/use_anything.egg-info/requires.txt
 src/use_anything.egg-info/top_level.txt
 src/use_anything/analyze/__init__.py
 src/use_anything/analyze/analyzer.py
+src/use_anything/analyze/interface_handlers.py
 src/use_anything/analyze/llm_client.py
 src/use_anything/analyze/prompts.py
 src/use_anything/analyze/providers.py
@@ -21,6 +22,7 @@ src/use_anything/analyze/schema.py
 src/use_anything/generate/__init__.py
 src/use_anything/generate/generator.py
 src/use_anything/generate/reference_writer.py
+src/use_anything/generate/skill_merge.py
 src/use_anything/generate/skill_writer.py
 src/use_anything/probe/__init__.py
 src/use_anything/probe/adapters.py
@@ -35,6 +37,7 @@ src/use_anything/utils/tokens.py
 src/use_anything/validate/__init__.py
 src/use_anything/validate/validator.py
 tests/test_analyze.py
+tests/test_analyze_handlers.py
 tests/test_cli.py
 tests/test_codex_provider.py
 tests/test_generate.py
@@ -43,5 +46,6 @@ tests/test_probe.py
 tests/test_probe_adapters.py
 tests/test_probe_scanner.py
 tests/test_rank.py
+tests/test_skill_merge.py
 tests/test_target_classification.py
 tests/test_validate.py

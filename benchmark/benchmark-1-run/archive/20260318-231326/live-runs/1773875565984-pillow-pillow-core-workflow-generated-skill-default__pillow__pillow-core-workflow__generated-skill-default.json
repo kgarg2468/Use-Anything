@@ -1,0 +1,13 @@
+{
+  "config": "generated-skill-default",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: pillow (pillow)\n\nTask ID: pillow-core-workflow\n\nPrompt: [pillow] Implement the most common end-to-end workflow for this interface.\n\nExpected output: A successful core workflow with expected output.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: generated-skill-default. Generated skill context (optional use):\n\nNo generated skill file found at /Users/krishgarg/Documents/Projects/Use-Anything/use-anything-pillow/SKILL.md\n\nReturn a concise practical answer for this task.",
+  "response": "pillow workflow output for pillow-core-workflow using generated-skill-default.",
+  "run_id": "1773875565984-pillow-pillow-core-workflow-generated-skill-default",
+  "skill_invoked": true,
+  "target_id": "pillow",
+  "task_id": "pillow-core-workflow",
+  "total_tokens": 80
+}

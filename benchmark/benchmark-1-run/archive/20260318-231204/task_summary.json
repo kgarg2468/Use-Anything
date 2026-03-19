@@ -1,0 +1,392 @@
+[
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": "verification_failed",
+        "passed": false,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-setup-and-hello"
+  }
+]

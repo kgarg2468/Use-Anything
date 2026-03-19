@@ -1,0 +1,13 @@
+{
+  "config": "generated-skill-default",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: pytest (pytest)\n\nTask ID: pytest-error-handling\n\nPrompt: [pytest] Exercise expected error paths and document robust handling.\n\nExpected output: A run that handles expected errors without crashing.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: generated-skill-default. Generated skill context (optional use):\n\nNo generated skill file found at /Users/krishgarg/Documents/Projects/Use-Anything/use-anything-pytest/SKILL.md\n\nReturn a concise practical answer for this task.",
+  "response": "pytest workflow output for pytest-error-handling using generated-skill-default.",
+  "run_id": "1773875552189-pytest-pytest-error-handling-generated-skill-default",
+  "skill_invoked": true,
+  "target_id": "pytest",
+  "task_id": "pytest-error-handling",
+  "total_tokens": 80
+}

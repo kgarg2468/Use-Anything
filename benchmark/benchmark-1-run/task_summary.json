@@ -1,0 +1,3902 @@
+[
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "beautifulsoup4",
+    "target_id": "beautifulsoup4",
+    "task_id": "beautifulsoup4-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "beautifulsoup4",
+    "target_id": "beautifulsoup4",
+    "task_id": "beautifulsoup4-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "beautifulsoup4",
+    "target_id": "beautifulsoup4",
+    "task_id": "beautifulsoup4-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "beautifulsoup4",
+    "target_id": "beautifulsoup4",
+    "task_id": "beautifulsoup4-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "beautifulsoup4",
+    "target_id": "beautifulsoup4",
+    "task_id": "beautifulsoup4-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "boto3",
+    "target_id": "boto3",
+    "task_id": "boto3-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "boto3",
+    "target_id": "boto3",
+    "task_id": "boto3-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "boto3",
+    "target_id": "boto3",
+    "task_id": "boto3-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "boto3",
+    "target_id": "boto3",
+    "task_id": "boto3-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "boto3",
+    "target_id": "boto3",
+    "task_id": "boto3-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "celery",
+    "target_id": "celery",
+    "task_id": "celery-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "celery",
+    "target_id": "celery",
+    "task_id": "celery-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "celery",
+    "target_id": "celery",
+    "task_id": "celery-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "celery",
+    "target_id": "celery",
+    "task_id": "celery-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "celery",
+    "target_id": "celery",
+    "task_id": "celery-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "click",
+    "target_id": "click",
+    "task_id": "click-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "click",
+    "target_id": "click",
+    "task_id": "click-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "click",
+    "target_id": "click",
+    "task_id": "click-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "click",
+    "target_id": "click",
+    "task_id": "click-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "click",
+    "target_id": "click",
+    "task_id": "click-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "django",
+    "target_id": "django",
+    "task_id": "django-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "django",
+    "target_id": "django",
+    "task_id": "django-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "django",
+    "target_id": "django",
+    "task_id": "django-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "django",
+    "target_id": "django",
+    "task_id": "django-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "django",
+    "target_id": "django",
+    "task_id": "django-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "fastapi",
+    "target_id": "fastapi",
+    "task_id": "fastapi-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "fastapi",
+    "target_id": "fastapi",
+    "task_id": "fastapi-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "fastapi",
+    "target_id": "fastapi",
+    "task_id": "fastapi-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "fastapi",
+    "target_id": "fastapi",
+    "task_id": "fastapi-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "fastapi",
+    "target_id": "fastapi",
+    "task_id": "fastapi-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "flask",
+    "target_id": "flask",
+    "task_id": "flask-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "httpx",
+    "target_id": "httpx",
+    "task_id": "httpx-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "httpx",
+    "target_id": "httpx",
+    "task_id": "httpx-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "httpx",
+    "target_id": "httpx",
+    "task_id": "httpx-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "httpx",
+    "target_id": "httpx",
+    "task_id": "httpx-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "httpx",
+    "target_id": "httpx",
+    "task_id": "httpx-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "jinja2",
+    "target_id": "jinja2",
+    "task_id": "jinja2-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "jinja2",
+    "target_id": "jinja2",
+    "task_id": "jinja2-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "jinja2",
+    "target_id": "jinja2",
+    "task_id": "jinja2-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "jinja2",
+    "target_id": "jinja2",
+    "task_id": "jinja2-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "jinja2",
+    "target_id": "jinja2",
+    "task_id": "jinja2-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "matplotlib",
+    "target_id": "matplotlib",
+    "task_id": "matplotlib-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "matplotlib",
+    "target_id": "matplotlib",
+    "task_id": "matplotlib-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "matplotlib",
+    "target_id": "matplotlib",
+    "task_id": "matplotlib-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "matplotlib",
+    "target_id": "matplotlib",
+    "task_id": "matplotlib-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "matplotlib",
+    "target_id": "matplotlib",
+    "task_id": "matplotlib-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "numpy",
+    "target_id": "numpy",
+    "task_id": "numpy-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "numpy",
+    "target_id": "numpy",
+    "task_id": "numpy-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "numpy",
+    "target_id": "numpy",
+    "task_id": "numpy-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "numpy",
+    "target_id": "numpy",
+    "task_id": "numpy-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "numpy",
+    "target_id": "numpy",
+    "task_id": "numpy-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "pandas",
+    "target_id": "pandas",
+    "task_id": "pandas-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "pandas",
+    "target_id": "pandas",
+    "task_id": "pandas-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "pandas",
+    "target_id": "pandas",
+    "task_id": "pandas-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "pandas",
+    "target_id": "pandas",
+    "task_id": "pandas-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "pandas",
+    "target_id": "pandas",
+    "task_id": "pandas-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "pillow",
+    "target_id": "pillow",
+    "task_id": "pillow-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "pillow",
+    "target_id": "pillow",
+    "task_id": "pillow-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "pillow",
+    "target_id": "pillow",
+    "task_id": "pillow-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "pillow",
+    "target_id": "pillow",
+    "task_id": "pillow-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "pillow",
+    "target_id": "pillow",
+    "task_id": "pillow-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "pydantic",
+    "target_id": "pydantic",
+    "task_id": "pydantic-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "pydantic",
+    "target_id": "pydantic",
+    "task_id": "pydantic-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "pydantic",
+    "target_id": "pydantic",
+    "task_id": "pydantic-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "pydantic",
+    "target_id": "pydantic",
+    "task_id": "pydantic-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "pydantic",
+    "target_id": "pydantic",
+    "task_id": "pydantic-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "pytest",
+    "target_id": "pytest",
+    "task_id": "pytest-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "pytest",
+    "target_id": "pytest",
+    "task_id": "pytest-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "pytest",
+    "target_id": "pytest",
+    "task_id": "pytest-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "pytest",
+    "target_id": "pytest",
+    "task_id": "pytest-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "pytest",
+    "target_id": "pytest",
+    "task_id": "pytest-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "requests",
+    "target_id": "requests",
+    "task_id": "requests-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "rich",
+    "target_id": "rich",
+    "task_id": "rich-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "rich",
+    "target_id": "rich",
+    "task_id": "rich-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "rich",
+    "target_id": "rich",
+    "task_id": "rich-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "rich",
+    "target_id": "rich",
+    "task_id": "rich-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "rich",
+    "target_id": "rich",
+    "task_id": "rich-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "scikit-learn",
+    "target_id": "scikit-learn",
+    "task_id": "scikit-learn-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "scikit-learn",
+    "target_id": "scikit-learn",
+    "task_id": "scikit-learn-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "scikit-learn",
+    "target_id": "scikit-learn",
+    "task_id": "scikit-learn-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "scikit-learn",
+    "target_id": "scikit-learn",
+    "task_id": "scikit-learn-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "scikit-learn",
+    "target_id": "scikit-learn",
+    "task_id": "scikit-learn-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "sqlalchemy",
+    "target_id": "sqlalchemy",
+    "task_id": "sqlalchemy-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "sqlalchemy",
+    "target_id": "sqlalchemy",
+    "task_id": "sqlalchemy-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "sqlalchemy",
+    "target_id": "sqlalchemy",
+    "task_id": "sqlalchemy-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "sqlalchemy",
+    "target_id": "sqlalchemy",
+    "task_id": "sqlalchemy-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "sqlalchemy",
+    "target_id": "sqlalchemy",
+    "task_id": "sqlalchemy-setup-and-hello"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "typer",
+    "target_id": "typer",
+    "task_id": "typer-core-workflow"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 77
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 74
+      }
+    },
+    "target": "typer",
+    "target_id": "typer",
+    "task_id": "typer-edge-case"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 80
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 81
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 75
+      }
+    },
+    "target": "typer",
+    "target_id": "typer",
+    "task_id": "typer-error-handling"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 76
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 78
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 79
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 73
+      }
+    },
+    "target": "typer",
+    "target_id": "typer",
+    "task_id": "typer-performance-check"
+  },
+  {
+    "configs": {
+      "agents-md-doc-index": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 82
+      },
+      "generated-skill-default": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 84
+      },
+      "generated-skill-explicit": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": true,
+        "status": "completed",
+        "total_tokens": 85
+      },
+      "no-skill": {
+        "duration_ms": 0,
+        "error_type": null,
+        "passed": true,
+        "skill_invoked": false,
+        "status": "completed",
+        "total_tokens": 79
+      }
+    },
+    "target": "typer",
+    "target_id": "typer",
+    "task_id": "typer-setup-and-hello"
+  }
+]

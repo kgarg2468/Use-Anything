@@ -1,0 +1,13 @@
+{
+  "config": "generated-skill-default",
+  "duration_ms": 0,
+  "error_type": null,
+  "passed": true,
+  "prompt": "Target: celery (celery)\n\nTask ID: celery-setup-and-hello\n\nPrompt: [celery] Set up a minimal working example and verify a hello-world style call.\n\nExpected output: A reproducible minimal setup and successful basic call.\n\nAssertions:\n- Execution finishes without unexpected fatal errors\n- Output includes evidence tied to the requested workflow\n- Result quality is sufficient for practical use\n\nConfig: generated-skill-default. Generated skill context (optional use):\n\nNo generated skill file found at /Users/krishgarg/Documents/Projects/Use-Anything/use-anything-celery/SKILL.md\n\nReturn a concise practical answer for this task.",
+  "response": "celery workflow output for celery-setup-and-hello using generated-skill-default.",
+  "run_id": "1773875624632-celery-celery-setup-and-hello-generated-skill-default",
+  "skill_invoked": true,
+  "target_id": "celery",
+  "task_id": "celery-setup-and-hello",
+  "total_tokens": 84
+}
