@@ -15,6 +15,10 @@ from use_anything.benchmark.models import BenchmarkSuite, BenchmarkTarget, Bench
 class BenchmarkRunner:
     """Run benchmark suites and return structured summaries."""
 
+    GENERATED_SKILL_CONFIGS = {"generated-skill-default", "generated-skill-explicit"}
+    SKILL_PATH_TEMPLATE_ENV = "USE_ANYTHING_BENCH_SKILL_PATH_TEMPLATE"
+    DEFAULT_SKILL_PATH_TEMPLATE = "{workdir}/use-anything-{target_id}/SKILL.md"
+
     def run(
         self,
         *,
@@ -26,7 +30,7 @@ class BenchmarkRunner:
         output_dir.mkdir(parents=True, exist_ok=True)
 
         expected_runs = self._expected_runs(suite=suite, configs=configs)
-        preflight = self._preflight_validate(suite=suite, configs=configs)
+        preflight = self._preflight_validate(suite=suite, configs=configs, output_dir=output_dir)
 
         if not preflight["passed"]:
             benchmark_summary = self._build_summary(
@@ -126,7 +130,13 @@ class BenchmarkRunner:
     def _expected_runs(self, *, suite: BenchmarkSuite, configs: list[str]) -> int:
         return sum(len(target.tasks) for target in suite.targets) * len(configs)
 
-    def _preflight_validate(self, *, suite: BenchmarkSuite, configs: list[str]) -> dict[str, Any]:
+    def _preflight_validate(
+        self,
+        *,
+        suite: BenchmarkSuite,
+        configs: list[str],
+        output_dir: Path,
+    ) -> dict[str, Any]:
         missing_matrix: list[dict[str, str]] = []
         for target in suite.targets:
             for task in target.tasks:
@@ -153,6 +163,23 @@ class BenchmarkRunner:
                                 "reason": "missing_verifier_command",
                             }
                         )
+
+                    if has_command and config in self.GENERATED_SKILL_CONFIGS:
+                        skill_path = self._resolve_generated_skill_path(
+                            target=target,
+                            task=task,
+                            config=config,
+                            output_dir=output_dir,
+                        )
+                        if not skill_path.exists():
+                            missing_matrix.append(
+                                {
+                                    "target_id": target.id,
+                                    "task_id": task.id,
+                                    "config": config,
+                                    "reason": "missing_generated_skill_context",
+                                }
+                            )
 
         return {
             "passed": not missing_matrix,
@@ -269,7 +296,47 @@ class BenchmarkRunner:
         env["USE_ANYTHING_BENCH_CONFIG"] = config
         env["USE_ANYTHING_BENCH_OUTPUT_DIR"] = str(output_dir)
         env["USE_ANYTHING_BENCH_RUN_ID"] = run_id
+        env["USE_ANYTHING_BENCH_SKILL_PATH"] = str(
+            self._resolve_generated_skill_path(
+                target=target,
+                task=task,
+                config=config,
+                output_dir=output_dir,
+            )
+        )
         return env
+
+    def _resolve_generated_skill_path(
+        self,
+        *,
+        target: BenchmarkTarget,
+        task: BenchmarkTask,
+        config: str,
+        output_dir: Path,
+    ) -> Path:
+        workdir = Path(task.workdir).expanduser().resolve() if task.workdir else Path.cwd().resolve()
+        template = os.environ.get(self.SKILL_PATH_TEMPLATE_ENV, self.DEFAULT_SKILL_PATH_TEMPLATE)
+        try:
+            rendered = template.format(
+                target_id=target.id,
+                target=target.target,
+                config=config,
+                output_dir=str(output_dir.resolve()),
+                workdir=str(workdir),
+            )
+        except (KeyError, ValueError):
+            rendered = self.DEFAULT_SKILL_PATH_TEMPLATE.format(
+                target_id=target.id,
+                target=target.target,
+                config=config,
+                output_dir=str(output_dir.resolve()),
+                workdir=str(workdir),
+            )
+
+        resolved = Path(rendered).expanduser()
+        if not resolved.is_absolute():
+            resolved = workdir / resolved
+        return resolved.resolve()
 
     def _extract_payload(self, stdout: str) -> dict[str, Any]:
         candidate = stdout.strip()
