@@ -36,7 +36,15 @@ def discover_interface_candidates(
     )
     python_location = _first_match(path_pairs, ["pyproject.toml", "setup.py", "requirements.txt"]) or source_location
     node_location = _first_match(path_pairs, ["package.json", "npm-shrinkwrap.json"]) or source_location
-    rest_location = _first_match(combined_pairs, ["/api", "/reference", "api-reference"]) or source_location
+    rest_path_matches = [original for original, normalized in path_pairs if _is_rest_doc_path(normalized)]
+    rest_url_matches = [
+        original
+        for original, normalized in url_pairs
+        if _contains_any([normalized], ["/api", "/reference", "api-reference"])
+    ]
+    rest_location = (rest_path_matches[0] if rest_path_matches else "") or (
+        rest_url_matches[0] if rest_url_matches else source_location
+    )
 
     _add_if_present(
         candidates,
@@ -115,10 +123,7 @@ def discover_interface_candidates(
     _add_if_present(
         candidates,
         key="rest_api_docs",
-        present=_contains_any(
-            normalized_paths + normalized_urls,
-            ["/api", "/reference", "api-reference"],
-        )
+        present=bool(rest_path_matches or rest_url_matches)
         or _contains_any([normalized_text], ["rest api", "endpoint", "http request"]),
         candidate=InterfaceCandidate(
             type="rest_api_docs",
@@ -175,6 +180,26 @@ def _contains_any(haystacks: list[str], needles: list[str]) -> bool:
             if needle in haystack:
                 return True
     return False
+
+
+def _is_rest_doc_path(path: str) -> bool:
+    if not _is_doc_like_path(path):
+        return False
+    return _contains_any([path], ["/api", "/reference", "api-reference", "endpoints"])
+
+
+def _is_doc_like_path(path: str) -> bool:
+    doc_markers = (
+        "docs/",
+        "doc/",
+        "reference/",
+        "references/",
+        "api/",
+        "guides/",
+        "readme",
+    )
+    doc_suffixes = (".md", ".rst", ".txt", ".html", ".htm")
+    return path.startswith(doc_markers) or any(marker in path for marker in doc_markers) or path.endswith(doc_suffixes)
 
 
 def _first_match(pairs: list[tuple[str, str]], needles: list[str]) -> str:

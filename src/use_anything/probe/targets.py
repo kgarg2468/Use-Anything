@@ -42,8 +42,10 @@ def classify_target(target: str | None, *, binary_name: str | None = None) -> Cl
         host = (parsed.netloc or "").lower()
         path = parsed.path.rstrip("/")
 
-        if host in {"github.com", "www.github.com"} and _looks_like_github_repo(path):
-            return ClassifiedTarget(target_type="github_repo", normalized_target=normalized_target.rstrip("/"))
+        if host in {"github.com", "www.github.com"}:
+            normalized_repo = _normalize_github_repo_url(normalized_target)
+            if normalized_repo:
+                return ClassifiedTarget(target_type="github_repo", normalized_target=normalized_repo)
 
         if _looks_like_docs_url(host, path):
             return ClassifiedTarget(target_type="docs_url", normalized_target=normalized_target.rstrip("/"))
@@ -73,6 +75,30 @@ def _is_url(value: str) -> bool:
 def _looks_like_github_repo(path: str) -> bool:
     segments = [segment for segment in path.split("/") if segment]
     return len(segments) >= 2
+
+
+def _normalize_github_repo_url(url: str) -> str | None:
+    parsed = urlparse(url)
+    host = (parsed.netloc or "").lower()
+    if host not in {"github.com", "www.github.com"}:
+        return None
+
+    segments = [segment for segment in parsed.path.split("/") if segment]
+    if len(segments) < 2:
+        return None
+
+    owner = segments[0].strip()
+    repo = segments[1].strip().removesuffix(".git")
+    if not owner or not repo:
+        return None
+
+    if len(segments) == 2:
+        return f"https://github.com/{owner}/{repo}"
+
+    if len(segments) >= 4 and segments[2] in {"tree", "blob"} and segments[3].strip():
+        return f"https://github.com/{owner}/{repo}"
+
+    return None
 
 
 def _looks_like_docs_url(host: str, path: str) -> bool:

@@ -6,7 +6,7 @@ import json
 import subprocess
 from pathlib import Path
 from typing import Any
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import httpx
 import yaml
@@ -237,13 +237,23 @@ def _fetch_github_tree(repo_url: str) -> dict[str, Any]:
 
 
 def _parse_github_owner_repo(repo_url: str) -> tuple[str, str]:
-    trimmed = repo_url.removesuffix("/")
-    parts = trimmed.split("/")
-    if len(parts) < 2:
+    parsed = urlparse(repo_url)
+    host = (parsed.netloc or "").lower()
+    if host not in {"github.com", "www.github.com"}:
         return "", ""
 
-    owner = parts[-2]
-    repo = parts[-1].removesuffix(".git")
+    segments = [segment for segment in parsed.path.split("/") if segment]
+    if len(segments) < 2:
+        return "", ""
+
+    owner = segments[0].strip()
+    repo = segments[1].strip().removesuffix(".git")
+    if not owner or not repo:
+        return "", ""
+
+    if len(segments) > 2 and not (len(segments) >= 4 and segments[2] in {"tree", "blob"} and segments[3].strip()):
+        return "", ""
+
     return owner, repo
 
 
