@@ -22,6 +22,20 @@ def test_classify_github_repo_url() -> None:
     assert result.normalized_target == "https://github.com/pallets/flask"
 
 
+def test_classify_github_repo_tree_url_normalizes_to_repo_root() -> None:
+    result = classify_target("https://github.com/pallets/flask/tree/main")
+
+    assert result.target_type == "github_repo"
+    assert result.normalized_target == "https://github.com/pallets/flask"
+
+
+def test_classify_github_repo_blob_url_normalizes_to_repo_root() -> None:
+    result = classify_target("https://github.com/pallets/flask/blob/main/README.md")
+
+    assert result.target_type == "github_repo"
+    assert result.normalized_target == "https://github.com/pallets/flask"
+
+
 def test_classify_docs_url() -> None:
     result = classify_target("https://docs.python-requests.org/en/latest/")
 
@@ -54,6 +68,7 @@ def test_classify_binary_option() -> None:
         ("", None, "Either TARGET or --binary must be provided"),
         ("not valid target!", None, "valid package name"),
         ("https://example.com", None, "docs URL or GitHub repository URL"),
+        ("https://github.com/pallets/flask/issues/1", None, "docs URL or GitHub repository URL"),
     ],
 )
 def test_classify_invalid_inputs(target: str | None, binary_name: str | None, expected: str) -> None:

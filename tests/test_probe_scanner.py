@@ -29,3 +29,17 @@ def test_probe_docs_url_does_not_emit_unverified_preflight_candidates(monkeypatc
     types = {candidate.type for candidate in candidates}
     assert "openapi_spec" not in types
     assert "llms_txt" not in types
+
+
+def test_discover_interface_candidates_avoids_rest_doc_false_positive_from_code_paths() -> None:
+    candidates = discover_interface_candidates(
+        source_location="/tmp/repo",
+        paths=[
+            "pyproject.toml",
+            "src/use_anything/generate/reference_writer.py",
+        ],
+    )
+
+    types = {candidate.type for candidate in candidates}
+    assert "python_sdk" in types
+    assert "rest_api_docs" not in types

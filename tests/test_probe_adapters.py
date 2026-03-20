@@ -6,6 +6,7 @@ import httpx
 
 import use_anything.probe.adapters as adapters
 from use_anything.probe.adapters import (
+    _parse_github_owner_repo,
     _fetch_github_tree,
     probe_binary,
     probe_docs_url,
@@ -128,3 +129,15 @@ def test_fetch_github_tree_uses_default_branch_when_available(monkeypatch) -> No
     assert payload["default_branch"] == "stable"
     assert payload["resolved_ref"] == "stable"
     assert payload["tree_paths"] == ["pyproject.toml", "README.md"]
+
+
+def test_parse_github_owner_repo_normalizes_tree_and_blob_paths() -> None:
+    assert _parse_github_owner_repo("https://github.com/example/project/tree/main") == ("example", "project")
+    assert _parse_github_owner_repo("https://github.com/example/project/blob/main/README.md") == (
+        "example",
+        "project",
+    )
+
+
+def test_parse_github_owner_repo_rejects_unsupported_suffixes() -> None:
+    assert _parse_github_owner_repo("https://github.com/example/project/issues/1") == ("", "")
