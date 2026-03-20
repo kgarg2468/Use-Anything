@@ -6,7 +6,7 @@ import pytest
 
 from use_anything.exceptions import UnsupportedTargetError
 from use_anything.models import AnalyzerIR, ProbeResult, RankResult, ValidationReport
-from use_anything.pipeline import UseAnythingPipeline
+from use_anything.pipeline import UseAnythingPipeline, _default_output_slug
 
 
 class FakeProber:
@@ -287,3 +287,22 @@ def test_pipeline_allows_codex_analysis_limit_overrides(monkeypatch, tmp_path: P
     assert captured["model"] == "codex-cli"
     assert captured["timeout_seconds"] == 720
     assert captured["max_retries"] == 4
+
+
+def test_default_output_slug_sanitizes_url_targets() -> None:
+    slug = _default_output_slug("https://github.com/pallets/flask")
+
+    assert slug == "github.com-pallets-flask"
+    assert ":" not in slug
+    assert "/" not in slug
+
+
+def test_default_output_slug_sanitizes_local_directory_targets(tmp_path: Path) -> None:
+    project_dir = (tmp_path / "My Sample Project").resolve()
+    project_dir.mkdir()
+
+    slug = _default_output_slug(str(project_dir))
+
+    assert ":" not in slug
+    assert "/" not in slug
+    assert "my-sample-project" in slug
