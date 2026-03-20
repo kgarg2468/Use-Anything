@@ -231,3 +231,59 @@ def test_pipeline_skips_existing_skill_when_forced(tmp_path: Path) -> None:
 
     assert generator.last_existing_skill is None
     assert generator.last_force is True
+
+
+def test_pipeline_applies_codex_default_analysis_limits(monkeypatch, tmp_path: Path) -> None:
+    captured: dict[str, object] = {}
+
+    class RecordingAnalyzer:
+        def __init__(self, *, model=None, timeout_seconds=None, max_retries=None):  # noqa: ANN001
+            captured["model"] = model
+            captured["timeout_seconds"] = timeout_seconds
+            captured["max_retries"] = max_retries
+
+        def analyze(self, probe_result: ProbeResult, rank_result: RankResult) -> AnalyzerIR:
+            return FakeAnalyzer().analyze(probe_result, rank_result)
+
+    monkeypatch.setattr("use_anything.pipeline.Analyzer", RecordingAnalyzer)
+    pipeline = UseAnythingPipeline(
+        prober=FakeProber(),
+        ranker=FakeRanker(),
+    )
+
+    pipeline.run(target="requests", model="codex-cli", output_dir=tmp_path / "generated")
+
+    assert captured["model"] == "codex-cli"
+    assert captured["timeout_seconds"] == 600
+    assert captured["max_retries"] == 1
+
+
+def test_pipeline_allows_codex_analysis_limit_overrides(monkeypatch, tmp_path: Path) -> None:
+    captured: dict[str, object] = {}
+
+    class RecordingAnalyzer:
+        def __init__(self, *, model=None, timeout_seconds=None, max_retries=None):  # noqa: ANN001
+            captured["model"] = model
+            captured["timeout_seconds"] = timeout_seconds
+            captured["max_retries"] = max_retries
+
+        def analyze(self, probe_result: ProbeResult, rank_result: RankResult) -> AnalyzerIR:
+            return FakeAnalyzer().analyze(probe_result, rank_result)
+
+    monkeypatch.setattr("use_anything.pipeline.Analyzer", RecordingAnalyzer)
+    pipeline = UseAnythingPipeline(
+        prober=FakeProber(),
+        ranker=FakeRanker(),
+    )
+
+    pipeline.run(
+        target="requests",
+        model="codex-cli",
+        output_dir=tmp_path / "generated",
+        analysis_timeout_seconds=720,
+        analysis_max_retries=4,
+    )
+
+    assert captured["model"] == "codex-cli"
+    assert captured["timeout_seconds"] == 720
+    assert captured["max_retries"] == 4

@@ -215,6 +215,58 @@ def test_cli_passes_force_flag_to_pipeline(monkeypatch) -> None:
     assert calls["force"] is True
 
 
+def test_cli_passes_analysis_limit_options_to_pipeline(monkeypatch) -> None:
+    runner = CliRunner()
+    calls: dict[str, object] = {}
+
+    class FakePipeline:
+        def run(self, **kwargs):  # noqa: ANN003
+            calls.update(kwargs)
+            from use_anything.models import InterfaceCandidate, PipelineResult, ProbeResult, RankedInterface, RankResult
+
+            probe_result = ProbeResult(
+                target="requests",
+                target_type="pypi_package",
+                interfaces_found=[
+                    InterfaceCandidate(
+                        type="python_sdk",
+                        location="pypi:requests",
+                        quality_score=0.95,
+                        coverage="full",
+                        notes="sdk",
+                    )
+                ],
+            )
+            rank_result = RankResult(
+                primary=RankedInterface(type="python_sdk", score=0.95, reasoning="best"),
+                secondary=None,
+                rejected=[],
+            )
+            return PipelineResult(
+                probe_result=probe_result,
+                rank_result=rank_result,
+                probe_only=True,
+            )
+
+    monkeypatch.setattr("use_anything.cli.UseAnythingPipeline", FakePipeline)
+
+    result = runner.invoke(
+        cli,
+        [
+            "requests",
+            "--probe-only",
+            "--analysis-timeout-seconds",
+            "700",
+            "--analysis-max-retries",
+            "3",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert calls["analysis_timeout_seconds"] == 700
+    assert calls["analysis_max_retries"] == 3
+
+
 def test_cli_benchmark_command_uses_default_output_and_configs(monkeypatch, tmp_path: Path) -> None:
     runner = CliRunner()
     calls: dict[str, object] = {}

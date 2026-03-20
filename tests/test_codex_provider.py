@@ -25,8 +25,19 @@ def test_llmclient_selects_codex_cli_provider(monkeypatch) -> None:
     client = LLMClient(model="codex-cli")
 
     assert isinstance(client._provider, CodexCLIProvider)
-    assert client._provider.timeout_seconds == 240
-    assert client._provider.max_retries == 0
+    assert client._provider.timeout_seconds == 60
+    assert client._provider.max_retries == 2
+
+
+def test_llmclient_allows_codex_timeout_and_retry_overrides(monkeypatch) -> None:
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+
+    client = LLMClient(model="codex-cli", timeout_seconds=600, max_retries=1)
+
+    assert isinstance(client._provider, CodexCLIProvider)
+    assert client._provider.timeout_seconds == 600
+    assert client._provider.max_retries == 1
 
 
 def test_llmclient_error_mentions_codex_option_when_no_keys(monkeypatch) -> None:
