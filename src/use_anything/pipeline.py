@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
+from urllib.parse import urlparse
 
 import httpx
 
@@ -107,7 +109,9 @@ class UseAnythingPipeline:
         )
         analysis = analyzer.analyze(probe_result=probe_result, rank_result=rank_result)
 
-        target_output = Path(output_dir) if output_dir else Path.cwd() / f"use-anything-{probe_result.target}"
+        target_output = (
+            Path(output_dir) if output_dir else Path.cwd() / f"use-anything-{_default_output_slug(probe_result.target)}"
+        )
         existing_skill = None if force else self._load_existing_skill_content(probe_result.interfaces_found)
         artifacts = self.generator.generate(
             analysis,
@@ -146,3 +150,14 @@ class UseAnythingPipeline:
                 return None
 
         return None
+
+
+def _default_output_slug(target: str) -> str:
+    value = (target or "").strip().lower()
+    parsed = urlparse(value)
+    if parsed.scheme and parsed.netloc:
+        value = f"{parsed.netloc}{parsed.path}".strip("/")
+    value = value.replace("\\", "/").replace("/", "-")
+    value = re.sub(r"[^a-z0-9._-]+", "-", value)
+    value = re.sub(r"-{2,}", "-", value).strip("-._")
+    return value or "target"
