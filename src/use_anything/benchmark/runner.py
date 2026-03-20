@@ -30,6 +30,8 @@ class BenchmarkRunner:
         output_dir: Path,
         configs: list[str],
         agent: str,
+        task_timeout_seconds: int | None = None,
+        verifier_timeout_seconds: int | None = None,
     ) -> dict[str, Any]:
         output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -80,6 +82,8 @@ class BenchmarkRunner:
                             task=task,
                             config=config,
                             output_dir=output_dir,
+                            task_timeout_seconds=task_timeout_seconds,
+                            verifier_timeout_seconds=verifier_timeout_seconds,
                         )
                     )
                     completed_so_far += 1
@@ -232,6 +236,8 @@ class BenchmarkRunner:
         task: BenchmarkTask,
         config: str,
         output_dir: Path,
+        task_timeout_seconds: int | None,
+        verifier_timeout_seconds: int | None,
     ) -> dict[str, Any]:
         payload = task.replay_results.get(config)
         if payload is not None:
@@ -260,6 +266,7 @@ class BenchmarkRunner:
             )
             start = time.perf_counter()
             task_timeout_seconds = self._timeout_seconds(
+                override=task_timeout_seconds,
                 env_name=self.TASK_TIMEOUT_ENV,
                 default=self.DEFAULT_TASK_TIMEOUT_SECONDS,
             )
@@ -297,6 +304,7 @@ class BenchmarkRunner:
 
             if task.verifier_command:
                 verifier_timeout_seconds = self._timeout_seconds(
+                    override=verifier_timeout_seconds,
                     env_name=self.VERIFIER_TIMEOUT_ENV,
                     default=self.DEFAULT_VERIFIER_TIMEOUT_SECONDS,
                 )
@@ -411,7 +419,9 @@ class BenchmarkRunner:
             resolved = workdir / resolved
         return resolved.resolve()
 
-    def _timeout_seconds(self, *, env_name: str, default: int) -> int:
+    def _timeout_seconds(self, *, override: int | None, env_name: str, default: int) -> int:
+        if override is not None and override > 0:
+            return override
         raw = os.environ.get(env_name, "").strip()
         if not raw:
             return default

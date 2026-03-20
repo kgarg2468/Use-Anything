@@ -387,7 +387,7 @@ def test_cli_benchmark_command_uses_default_output_and_configs(monkeypatch, tmp_
     )
 
     class FakeRunner:
-        def run(self, *, suite, output_dir, configs, agent):  # noqa: ANN001
+        def run(self, *, suite, output_dir, configs, agent, **kwargs):  # noqa: ANN001, ARG002
             calls["suite"] = suite
             calls["output_dir"] = output_dir
             calls["configs"] = configs
@@ -441,7 +441,7 @@ def test_cli_benchmark_command_fails_on_preflight(monkeypatch, tmp_path: Path) -
     )
 
     class FakeRunner:
-        def run(self, *, suite, output_dir, configs, agent):  # noqa: ANN001, ARG002
+        def run(self, *, suite, output_dir, configs, agent, **kwargs):  # noqa: ANN001, ARG002
             return {
                 "benchmark_summary": {
                     "total_runs": 1,
@@ -483,7 +483,7 @@ def test_cli_benchmark_command_fails_on_completion_threshold(monkeypatch, tmp_pa
     )
 
     class FakeRunner:
-        def run(self, *, suite, output_dir, configs, agent):  # noqa: ANN001, ARG002
+        def run(self, *, suite, output_dir, configs, agent, **kwargs):  # noqa: ANN001, ARG002
             return {
                 "benchmark_summary": {
                     "total_runs": 10,
@@ -501,3 +501,59 @@ def test_cli_benchmark_command_fails_on_completion_threshold(monkeypatch, tmp_pa
 
     assert result.exit_code == 1
     assert "completion_rate below threshold" in result.output
+
+
+def test_cli_benchmark_passes_timeout_options_to_runner(monkeypatch, tmp_path: Path) -> None:
+    runner = CliRunner()
+    captured: dict[str, object] = {}
+    suite_path = tmp_path / "suite.json"
+    suite_path.write_text(
+        json.dumps(
+            {
+                "name": "demo-suite",
+                "targets": [
+                    {
+                        "id": "requests",
+                        "target": "requests",
+                        "tasks": [
+                            {
+                                "id": "task-1",
+                                "prompt": "Do task 1",
+                                "expected_output": "done",
+                            }
+                        ],
+                    }
+                ],
+            }
+        )
+    )
+
+    class FakeRunner:
+        def run(self, *, suite, output_dir, configs, agent, **kwargs):  # noqa: ANN001, ARG002
+            captured.update(kwargs)
+            return {
+                "benchmark_summary": {
+                    "total_runs": 1,
+                    "completion_rate": 1.0,
+                    "preflight": {"passed": True, "missing_matrix": []},
+                },
+                "output_dir": str(output_dir),
+            }
+
+    monkeypatch.setattr("use_anything.cli.BenchmarkRunner", FakeRunner)
+    result = runner.invoke(
+        cli,
+        [
+            "benchmark",
+            "--suite",
+            str(suite_path),
+            "--task-timeout-seconds",
+            "77",
+            "--verifier-timeout-seconds",
+            "33",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert captured["task_timeout_seconds"] == 77
+    assert captured["verifier_timeout_seconds"] == 33

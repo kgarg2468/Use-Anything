@@ -17,6 +17,14 @@ def _write_suite(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, indent=2))
 
 
+def _create_generated_skill_context(tmp_path: Path, *, target_id: str) -> Path:
+    workdir = tmp_path / "workdir"
+    skill_dir = workdir / f"use-anything-{target_id}"
+    skill_dir.mkdir(parents=True, exist_ok=True)
+    (skill_dir / "SKILL.md").write_text("# demo\n")
+    return workdir
+
+
 def test_load_benchmark_suite_rejects_missing_required_fields(tmp_path: Path) -> None:
     suite_path = tmp_path / "suite.json"
     _write_suite(suite_path, {"name": "demo"})
@@ -616,6 +624,7 @@ def test_comprehensive_suite_has_commands_and_verifier_for_all_configs() -> None
 
 
 def test_runner_executes_generated_skill_default_from_command(tmp_path: Path) -> None:
+    workdir = _create_generated_skill_context(tmp_path, target_id="requests")
     suite_path = tmp_path / "suite.json"
     _write_suite(
         suite_path,
@@ -638,6 +647,7 @@ def test_runner_executes_generated_skill_default_from_command(tmp_path: Path) ->
                                 )
                             },
                             "verifier_command": "python -c \"import sys; sys.exit(0)\"",
+                            "workdir": str(workdir),
                         }
                     ],
                 }
@@ -659,6 +669,7 @@ def test_runner_executes_generated_skill_default_from_command(tmp_path: Path) ->
 
 
 def test_runner_executes_generated_skill_explicit_from_command(tmp_path: Path) -> None:
+    workdir = _create_generated_skill_context(tmp_path, target_id="requests")
     suite_path = tmp_path / "suite.json"
     _write_suite(
         suite_path,
@@ -680,6 +691,7 @@ def test_runner_executes_generated_skill_explicit_from_command(tmp_path: Path) -
                                 )
                             },
                             "verifier_command": "python -c \"import sys; sys.exit(0)\"",
+                            "workdir": str(workdir),
                         }
                     ],
                 }
@@ -743,6 +755,7 @@ def test_runner_executes_agents_md_baseline_from_command(tmp_path: Path) -> None
 
 
 def test_runner_completes_all_four_configs_with_commands_and_verifier(tmp_path: Path) -> None:
+    workdir = _create_generated_skill_context(tmp_path, target_id="requests")
     suite_path = tmp_path / "suite.json"
     _write_suite(
         suite_path,
@@ -770,6 +783,7 @@ def test_runner_completes_all_four_configs_with_commands_and_verifier(tmp_path: 
                                 "agents-md-doc-index": "python -c \"import json; print(json.dumps({'passed': True}))\"",
                             },
                             "verifier_command": "python -c \"import sys; sys.exit(0)\"",
+                            "workdir": str(workdir),
                         }
                     ],
                 }

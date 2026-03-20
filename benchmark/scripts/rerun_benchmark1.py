@@ -150,6 +150,8 @@ def main() -> None:
     parser.add_argument("--agent", default="codex")
     parser.add_argument("--pilot-targets", type=int, default=2)
     parser.add_argument("--skip-full-run", action="store_true")
+    parser.add_argument("--task-timeout-seconds", type=int)
+    parser.add_argument("--verifier-timeout-seconds", type=int)
     args = parser.parse_args()
 
     suite_path = Path(args.suite).resolve()
@@ -167,6 +169,8 @@ def main() -> None:
             output_dir=output_dir,
             configs=list(full_suite.configs),
             agent=args.agent,
+            task_timeout_seconds=args.task_timeout_seconds,
+            verifier_timeout_seconds=args.verifier_timeout_seconds,
         )
         pilot_summary = pilot_result["benchmark_summary"]
 
@@ -193,6 +197,8 @@ def main() -> None:
             output_dir=output_dir,
             configs=list(full_suite.configs),
             agent=args.agent,
+            task_timeout_seconds=args.task_timeout_seconds,
+            verifier_timeout_seconds=args.verifier_timeout_seconds,
         )
         response["status"] = "full_completed"
         response["full_summary"] = full_result["benchmark_summary"]

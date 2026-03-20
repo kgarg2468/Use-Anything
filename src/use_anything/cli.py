@@ -168,6 +168,16 @@ def validate_command(skill_dir: Path) -> None:
     ),
 )
 @click.option(
+    "--task-timeout-seconds",
+    type=click.IntRange(min=1),
+    help="Timeout for each benchmark task command subprocess.",
+)
+@click.option(
+    "--verifier-timeout-seconds",
+    type=click.IntRange(min=1),
+    help="Timeout for each benchmark verifier subprocess.",
+)
+@click.option(
     "--min-completion-rate",
     type=click.FloatRange(min=0.0, max=1.0),
     default=1.0,
@@ -179,6 +189,8 @@ def benchmark_command(
     agent: str,
     output_dir: Path | None,
     configs: str | None,
+    task_timeout_seconds: int | None,
+    verifier_timeout_seconds: int | None,
     min_completion_rate: float,
 ) -> None:
     """Run a benchmark suite and write benchmark artifacts."""
@@ -194,6 +206,8 @@ def benchmark_command(
         output_dir=destination,
         configs=selected_configs,
         agent=agent,
+        task_timeout_seconds=task_timeout_seconds,
+        verifier_timeout_seconds=verifier_timeout_seconds,
     )
     click.echo(json.dumps(summary, indent=2))
 
