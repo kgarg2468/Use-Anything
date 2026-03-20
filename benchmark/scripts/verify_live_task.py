@@ -66,8 +66,12 @@ def main() -> None:
     if len(response) < 20:
         raise SystemExit(1)
 
-    # Deterministic lexical check: at least one assertion keyword should be present when provided.
-    if task.assertions:
+    required_evidence = [item.strip() for item in task.required_evidence if item.strip()]
+    if required_evidence:
+        if not _required_evidence_matched(required_evidence=required_evidence, response=response):
+            raise SystemExit(1)
+    elif task.assertions:
+        # Fallback lexical check only when required evidence is not explicitly configured.
         response_lower = response.lower()
         keywords: set[str] = set()
         stopwords = {"without", "should", "their", "there", "about", "using", "include", "includes"}
@@ -80,6 +84,24 @@ def main() -> None:
             raise SystemExit(1)
 
     raise SystemExit(0)
+
+
+def _required_evidence_matched(*, required_evidence: list[str], response: str) -> bool:
+    matched = 0
+    response_lower = response.lower()
+
+    for rule in required_evidence:
+        if rule.startswith("re:"):
+            pattern = rule[3:]
+            if pattern and re.search(pattern, response, flags=re.IGNORECASE):
+                matched += 1
+            continue
+
+        if rule.lower() in response_lower:
+            matched += 1
+
+    required_matches = min(len(required_evidence), 2)
+    return matched >= required_matches
 
 
 if __name__ == "__main__":

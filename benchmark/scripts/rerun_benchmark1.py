@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 from datetime import UTC, datetime
 from pathlib import Path
@@ -25,6 +26,12 @@ ARTIFACT_NAMES = [
     "benchmark_summary.json",
     "benchmark_report.md",
 ]
+AUXILIARY_STATUS_FILES = [
+    "orchestrator-status.txt",
+    "rerun.pid",
+    "run-progress.md",
+    "rerun-live.log",
+]
 
 
 def _archive_existing_outputs(output_dir: Path) -> Path | None:
@@ -32,6 +39,11 @@ def _archive_existing_outputs(output_dir: Path) -> Path | None:
     existing: list[Path] = []
 
     for name in ARTIFACT_NAMES:
+        path = output_dir / name
+        if path.exists():
+            existing.append(path)
+
+    for name in AUXILIARY_STATUS_FILES:
         path = output_dir / name
         if path.exists():
             existing.append(path)
@@ -51,6 +63,46 @@ def _archive_existing_outputs(output_dir: Path) -> Path | None:
         shutil.move(str(path), str(archive_dir / path.name))
 
     return archive_dir
+
+
+def _append_live_log(output_dir: Path, message: str) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now(UTC).isoformat()
+    line = f"{timestamp} {message}\n"
+    with (output_dir / "rerun-live.log").open("a", encoding="utf-8") as handle:
+        handle.write(line)
+
+
+def _write_status(output_dir: Path, *, status: str, detail: str) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now(UTC).isoformat()
+    (output_dir / "orchestrator-status.txt").write_text(
+        f"status={status}\ndetail={detail}\nupdated_at={timestamp}\n",
+        encoding="utf-8",
+    )
+    (output_dir / "run-progress.md").write_text(
+        "\n".join(
+            [
+                "# Benchmark Rerun Status",
+                "",
+                f"- status: {status}",
+                f"- detail: {detail}",
+                f"- updated_at: {timestamp}",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    _append_live_log(output_dir, f"status={status} detail={detail}")
+
+
+def _write_pid(output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / "rerun.pid").write_text(f"{os.getpid()}\n", encoding="utf-8")
+
+
+def _clear_pid(output_dir: Path) -> None:
+    (output_dir / "rerun.pid").unlink(missing_ok=True)
 
 
 def _pilot_suite(full_suite: BenchmarkSuite, pilot_targets: int) -> BenchmarkSuite:
@@ -103,43 +155,54 @@ def main() -> None:
     suite_path = Path(args.suite).resolve()
     output_dir = Path(args.output_dir).resolve()
 
-    full_suite = load_benchmark_suite(suite_path)
     archive_dir = _archive_existing_outputs(output_dir)
+    _write_pid(output_dir)
+    _write_status(output_dir, status="running", detail="starting rerun")
 
-    pilot_suite = _pilot_suite(full_suite=full_suite, pilot_targets=max(1, args.pilot_targets))
-    pilot_result = BenchmarkRunner().run(
-        suite=pilot_suite,
-        output_dir=output_dir,
-        configs=list(full_suite.configs),
-        agent=args.agent,
-    )
-    pilot_summary = pilot_result["benchmark_summary"]
+    try:
+        full_suite = load_benchmark_suite(suite_path)
+        pilot_suite = _pilot_suite(full_suite=full_suite, pilot_targets=max(1, args.pilot_targets))
+        pilot_result = BenchmarkRunner().run(
+            suite=pilot_suite,
+            output_dir=output_dir,
+            configs=list(full_suite.configs),
+            agent=args.agent,
+        )
+        pilot_summary = pilot_result["benchmark_summary"]
 
-    response: dict[str, object] = {
-        "archive_dir": str(archive_dir) if archive_dir else None,
-        "pilot_summary": pilot_summary,
-        "output_dir": str(output_dir),
-    }
+        response: dict[str, object] = {
+            "archive_dir": str(archive_dir) if archive_dir else None,
+            "pilot_summary": pilot_summary,
+            "output_dir": str(output_dir),
+        }
 
-    if not _pilot_gate_passed(pilot_summary):
-        response["status"] = "pilot_failed"
+        if not _pilot_gate_passed(pilot_summary):
+            response["status"] = "pilot_failed"
+            _write_status(output_dir, status="failed", detail="pilot_failed")
+            print(json.dumps(response, indent=2))
+            raise SystemExit(1)
+
+        if args.skip_full_run:
+            response["status"] = "pilot_passed_full_skipped"
+            _write_status(output_dir, status="completed", detail="pilot_passed_full_skipped")
+            print(json.dumps(response, indent=2))
+            raise SystemExit(0)
+
+        full_result = BenchmarkRunner().run(
+            suite=full_suite,
+            output_dir=output_dir,
+            configs=list(full_suite.configs),
+            agent=args.agent,
+        )
+        response["status"] = "full_completed"
+        response["full_summary"] = full_result["benchmark_summary"]
+        _write_status(output_dir, status="completed", detail="full_completed")
         print(json.dumps(response, indent=2))
-        raise SystemExit(1)
-
-    if args.skip_full_run:
-        response["status"] = "pilot_passed_full_skipped"
-        print(json.dumps(response, indent=2))
-        raise SystemExit(0)
-
-    full_result = BenchmarkRunner().run(
-        suite=full_suite,
-        output_dir=output_dir,
-        configs=list(full_suite.configs),
-        agent=args.agent,
-    )
-    response["status"] = "full_completed"
-    response["full_summary"] = full_result["benchmark_summary"]
-    print(json.dumps(response, indent=2))
+    except Exception:
+        _write_status(output_dir, status="failed", detail="unexpected_exception")
+        raise
+    finally:
+        _clear_pid(output_dir)
 
 
 if __name__ == "__main__":

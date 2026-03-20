@@ -35,7 +35,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "requests",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "requests-core-workflow",
@@ -53,7 +58,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "requests",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "requests-error-handling",
@@ -71,7 +81,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "requests",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "requests-edge-case",
@@ -89,7 +104,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "requests",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "requests-performance-check",
@@ -107,7 +127,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id requests --task-id requests-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "requests",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -131,7 +156,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "flask",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "flask-core-workflow",
@@ -149,7 +179,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "flask",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "flask-error-handling",
@@ -167,7 +202,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "flask",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "flask-edge-case",
@@ -185,7 +225,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "flask",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "flask-performance-check",
@@ -203,7 +248,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id flask --task-id flask-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "flask",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -227,7 +277,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "fastapi",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "fastapi-core-workflow",
@@ -245,7 +300,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "fastapi",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "fastapi-error-handling",
@@ -263,7 +323,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "fastapi",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "fastapi-edge-case",
@@ -281,7 +346,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "fastapi",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "fastapi-performance-check",
@@ -299,7 +369,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id fastapi --task-id fastapi-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "fastapi",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -323,7 +398,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pandas",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "pandas-core-workflow",
@@ -341,7 +421,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pandas",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "pandas-error-handling",
@@ -359,7 +444,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pandas",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "pandas-edge-case",
@@ -377,7 +467,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pandas",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "pandas-performance-check",
@@ -395,7 +490,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pandas --task-id pandas-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pandas",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -419,7 +519,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "numpy",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "numpy-core-workflow",
@@ -437,7 +542,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "numpy",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "numpy-error-handling",
@@ -455,7 +565,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "numpy",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "numpy-edge-case",
@@ -473,7 +588,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "numpy",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "numpy-performance-check",
@@ -491,7 +611,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id numpy --task-id numpy-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "numpy",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -515,7 +640,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pydantic",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "pydantic-core-workflow",
@@ -533,7 +663,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pydantic",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "pydantic-error-handling",
@@ -551,7 +686,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pydantic",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "pydantic-edge-case",
@@ -569,7 +709,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pydantic",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "pydantic-performance-check",
@@ -587,7 +732,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pydantic --task-id pydantic-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pydantic",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -611,7 +761,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "sqlalchemy",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "sqlalchemy-core-workflow",
@@ -629,7 +784,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "sqlalchemy",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "sqlalchemy-error-handling",
@@ -647,7 +807,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "sqlalchemy",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "sqlalchemy-edge-case",
@@ -665,7 +830,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "sqlalchemy",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "sqlalchemy-performance-check",
@@ -683,7 +853,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id sqlalchemy --task-id sqlalchemy-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "sqlalchemy",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -707,7 +882,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "celery",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "celery-core-workflow",
@@ -725,7 +905,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "celery",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "celery-error-handling",
@@ -743,7 +928,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "celery",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "celery-edge-case",
@@ -761,7 +951,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "celery",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "celery-performance-check",
@@ -779,7 +974,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id celery --task-id celery-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "celery",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -803,7 +1003,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "django",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "django-core-workflow",
@@ -821,7 +1026,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "django",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "django-error-handling",
@@ -839,7 +1049,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "django",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "django-edge-case",
@@ -857,7 +1072,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "django",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "django-performance-check",
@@ -875,7 +1095,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id django --task-id django-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "django",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -899,7 +1124,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "click",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "click-core-workflow",
@@ -917,7 +1147,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "click",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "click-error-handling",
@@ -935,7 +1170,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "click",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "click-edge-case",
@@ -953,7 +1193,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "click",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "click-performance-check",
@@ -971,7 +1216,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id click --task-id click-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "click",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -995,7 +1245,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "rich",
+            "setup",
+            "hello",
+            "minimal"
+          ]
         },
         {
           "id": "rich-core-workflow",
@@ -1013,7 +1269,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "rich",
+            "core",
+            "implement",
+            "common"
+          ]
         },
         {
           "id": "rich-error-handling",
@@ -1031,7 +1293,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "rich",
+            "error",
+            "handling",
+            "exercise"
+          ]
         },
         {
           "id": "rich-edge-case",
@@ -1049,7 +1317,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "rich",
+            "edge",
+            "case",
+            "least"
+          ]
         },
         {
           "id": "rich-performance-check",
@@ -1067,7 +1341,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id rich --task-id rich-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "rich",
+            "performance",
+            "check",
+            "measure"
+          ]
         }
       ]
     },
@@ -1091,7 +1371,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pytest",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "pytest-core-workflow",
@@ -1109,7 +1394,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pytest",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "pytest-error-handling",
@@ -1127,7 +1417,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pytest",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "pytest-edge-case",
@@ -1145,7 +1440,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pytest",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "pytest-performance-check",
@@ -1163,7 +1463,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pytest --task-id pytest-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pytest",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -1187,7 +1492,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "httpx",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "httpx-core-workflow",
@@ -1205,7 +1515,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "httpx",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "httpx-error-handling",
@@ -1223,7 +1538,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "httpx",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "httpx-edge-case",
@@ -1241,7 +1561,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "httpx",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "httpx-performance-check",
@@ -1259,7 +1584,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id httpx --task-id httpx-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "httpx",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -1283,7 +1613,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "boto3",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "boto3-core-workflow",
@@ -1301,7 +1636,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "boto3",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "boto3-error-handling",
@@ -1319,7 +1659,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "boto3",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "boto3-edge-case",
@@ -1337,7 +1682,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "boto3",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "boto3-performance-check",
@@ -1355,7 +1705,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id boto3 --task-id boto3-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "boto3",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -1379,7 +1734,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "jinja2",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "jinja2-core-workflow",
@@ -1397,7 +1757,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "jinja2",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "jinja2-error-handling",
@@ -1415,7 +1780,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "jinja2",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "jinja2-edge-case",
@@ -1433,7 +1803,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "jinja2",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "jinja2-performance-check",
@@ -1451,7 +1826,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id jinja2 --task-id jinja2-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "jinja2",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -1475,7 +1855,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "beautifulsoup4",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "beautifulsoup4-core-workflow",
@@ -1493,7 +1878,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "beautifulsoup4",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "beautifulsoup4-error-handling",
@@ -1511,7 +1901,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "beautifulsoup4",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "beautifulsoup4-edge-case",
@@ -1529,7 +1924,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "beautifulsoup4",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "beautifulsoup4-performance-check",
@@ -1547,7 +1947,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id beautifulsoup4 --task-id beautifulsoup4-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "beautifulsoup4",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -1571,7 +1976,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "matplotlib",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "matplotlib-core-workflow",
@@ -1589,7 +1999,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "matplotlib",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "matplotlib-error-handling",
@@ -1607,7 +2022,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "matplotlib",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "matplotlib-edge-case",
@@ -1625,7 +2045,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "matplotlib",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "matplotlib-performance-check",
@@ -1643,7 +2068,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id matplotlib --task-id matplotlib-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "matplotlib",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -1667,7 +2097,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "scikit-learn",
+            "setup",
+            "hello",
+            "scikit"
+          ]
         },
         {
           "id": "scikit-learn-core-workflow",
@@ -1685,7 +2121,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "scikit-learn",
+            "core",
+            "scikit",
+            "learn"
+          ]
         },
         {
           "id": "scikit-learn-error-handling",
@@ -1703,7 +2145,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "scikit-learn",
+            "error",
+            "handling",
+            "scikit"
+          ]
         },
         {
           "id": "scikit-learn-edge-case",
@@ -1721,7 +2169,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "scikit-learn",
+            "edge",
+            "case",
+            "scikit"
+          ]
         },
         {
           "id": "scikit-learn-performance-check",
@@ -1739,7 +2193,13 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id scikit-learn --task-id scikit-learn-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "scikit-learn",
+            "performance",
+            "check",
+            "scikit"
+          ]
         }
       ]
     },
@@ -1763,7 +2223,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pillow",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "pillow-core-workflow",
@@ -1781,7 +2246,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pillow",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "pillow-error-handling",
@@ -1799,7 +2269,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pillow",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "pillow-edge-case",
@@ -1817,7 +2292,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pillow",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "pillow-performance-check",
@@ -1835,7 +2315,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id pillow --task-id pillow-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "pillow",
+            "performance",
+            "check"
+          ]
         }
       ]
     },
@@ -1859,7 +2344,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-setup-and-hello --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "typer",
+            "setup",
+            "hello"
+          ]
         },
         {
           "id": "typer-core-workflow",
@@ -1877,7 +2367,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-core-workflow --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "typer",
+            "core",
+            "implement"
+          ]
         },
         {
           "id": "typer-error-handling",
@@ -1895,7 +2390,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-error-handling --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "typer",
+            "error",
+            "handling"
+          ]
         },
         {
           "id": "typer-edge-case",
@@ -1913,7 +2413,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-edge-case --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "typer",
+            "edge",
+            "case"
+          ]
         },
         {
           "id": "typer-performance-check",
@@ -1931,7 +2436,12 @@
             "agents-md-doc-index": "python3 benchmark/scripts/run_live_task.py --suite benchmark/comprehensive-codex-suite.json --target-id typer --task-id typer-performance-check --config agents-md-doc-index --workdir /Users/krishgarg/Documents/Projects/Use-Anything --output-dir benchmark/benchmark-1-run"
           },
           "verifier_command": "python3 benchmark/scripts/verify_live_task.py --suite benchmark/comprehensive-codex-suite.json --output-dir benchmark/benchmark-1-run",
-          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything"
+          "workdir": "/Users/krishgarg/Documents/Projects/Use-Anything",
+          "required_evidence": [
+            "typer",
+            "performance",
+            "check"
+          ]
         }
       ]
     }

@@ -102,11 +102,16 @@ def run_command(
         click.echo(json.dumps(payload, indent=2))
         return
 
+    analysis_workflow_count = len(result.analysis.workflows) if result.analysis else 0
+    emitted_workflow_count = _count_emitted_workflows(result.artifacts.skill_path if result.artifacts else None)
+    workflow_count = emitted_workflow_count or analysis_workflow_count
     summary = {
         "interface_used": result.rank_result.primary.type,
         "skill_path": str(result.artifacts.skill_path) if result.artifacts else "",
         "token_counts": result.artifacts.token_counts if result.artifacts else {},
-        "workflow_count": len(result.analysis.workflows) if result.analysis else 0,
+        "workflow_count": workflow_count,
+        "analysis_workflow_count": analysis_workflow_count,
+        "emitted_workflow_count": emitted_workflow_count,
         "analysis_sources": result.analysis.analysis_sources if result.analysis else [],
         "validation_passed": result.validation_report.passed if result.validation_report else False,
         "validation_errors": result.validation_report.errors if result.validation_report else [],
@@ -214,3 +219,9 @@ def benchmark_command(
 
 def main() -> None:
     cli()
+
+
+def _count_emitted_workflows(skill_path: Path | None) -> int:
+    if skill_path is None or not skill_path.exists():
+        return 0
+    return sum(1 for line in skill_path.read_text(encoding="utf-8").splitlines() if line.startswith("### "))

@@ -29,6 +29,7 @@ class BenchmarkTask:
     expected_output: str
     assertions: list[str] = field(default_factory=list)
     files: list[str] = field(default_factory=list)
+    required_evidence: list[str] = field(default_factory=list)
     commands: dict[str, str] = field(default_factory=dict)
     replay_results: dict[str, dict[str, Any]] = field(default_factory=dict)
     verifier_command: str | None = None
@@ -42,6 +43,11 @@ class BenchmarkTask:
 
         assertions = _list_of_strings(raw.get("assertions", []), field_name="assertions", context=f"task '{task_id}'")
         files = _list_of_strings(raw.get("files", []), field_name="files", context=f"task '{task_id}'")
+        required_evidence = _list_of_strings(
+            raw.get("required_evidence", []),
+            field_name="required_evidence",
+            context=f"task '{task_id}'",
+        )
         commands = _dict_of_strings(raw.get("commands", {}), field_name="commands", context=f"task '{task_id}'")
 
         replay_results_raw = raw.get("replay_results", {})
@@ -69,6 +75,7 @@ class BenchmarkTask:
             expected_output=expected_output,
             assertions=assertions,
             files=files,
+            required_evidence=required_evidence,
             commands=commands,
             replay_results=replay_results,
             verifier_command=verifier_command,
