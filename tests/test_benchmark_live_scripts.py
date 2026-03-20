@@ -6,7 +6,16 @@ import subprocess
 from pathlib import Path
 
 
-def _write_suite(path: Path) -> None:
+def _write_suite(path: Path, *, required_evidence: list[str] | None = None) -> None:
+    task_payload: dict[str, object] = {
+        "id": "task-1",
+        "prompt": "Run a basic request workflow",
+        "expected_output": "A successful workflow output",
+        "assertions": ["workflow", "output"],
+    }
+    if required_evidence is not None:
+        task_payload["required_evidence"] = required_evidence
+
     path.write_text(
         json.dumps(
             {
@@ -18,14 +27,7 @@ def _write_suite(path: Path) -> None:
                     {
                         "id": "requests",
                         "target": "requests",
-                        "tasks": [
-                            {
-                                "id": "task-1",
-                                "prompt": "Run a basic request workflow",
-                                "expected_output": "A successful workflow output",
-                                "assertions": ["workflow", "output"],
-                            }
-                        ],
+                        "tasks": [task_payload],
                     }
                 ],
             }
@@ -124,3 +126,77 @@ def test_verify_live_task_script_checks_artifact_and_env_context(tmp_path: Path)
     )
 
     assert completed.returncode == 0
+
+
+def test_verify_live_task_script_enforces_required_evidence(tmp_path: Path) -> None:
+    suite_path = tmp_path / "suite.json"
+    _write_suite(suite_path, required_evidence=["requests", "workflow"])
+
+    output_dir = tmp_path / "benchmark-1-run"
+    live_dir = output_dir / "live-runs"
+    live_dir.mkdir(parents=True, exist_ok=True)
+
+    artifact = live_dir / "test-run__requests__task-1__no-skill.json"
+    artifact.write_text(
+        json.dumps(
+            {
+                "target_id": "requests",
+                "task_id": "task-1",
+                "config": "no-skill",
+                "response": "workflow output with validation details",
+            }
+        )
+    )
+
+    script_path = Path(__file__).resolve().parents[1] / "benchmark" / "scripts" / "verify_live_task.py"
+    env = dict(os.environ)
+    env["USE_ANYTHING_BENCH_TARGET_ID"] = "requests"
+    env["USE_ANYTHING_BENCH_TASK_ID"] = "task-1"
+    env["USE_ANYTHING_BENCH_CONFIG"] = "no-skill"
+
+    completed = subprocess.run(
+        [
+            "python3",
+            str(script_path),
+            "--suite",
+            str(suite_path),
+            "--output-dir",
+            str(output_dir),
+            "--run-id",
+            "test-run",
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+        env=env,
+    )
+
+    assert completed.returncode == 1
+
+    artifact.write_text(
+        json.dumps(
+            {
+                "target_id": "requests",
+                "task_id": "task-1",
+                "config": "no-skill",
+                "response": "requests workflow output with validation details",
+            }
+        )
+    )
+    completed_ok = subprocess.run(
+        [
+            "python3",
+            str(script_path),
+            "--suite",
+            str(suite_path),
+            "--output-dir",
+            str(output_dir),
+            "--run-id",
+            "test-run",
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+        env=env,
+    )
+    assert completed_ok.returncode == 0
