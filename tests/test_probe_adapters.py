@@ -6,8 +6,8 @@ import httpx
 
 import use_anything.probe.adapters as adapters
 from use_anything.probe.adapters import (
-    _parse_github_owner_repo,
     _fetch_github_tree,
+    _parse_github_owner_repo,
     probe_binary,
     probe_docs_url,
     probe_github_repo,
