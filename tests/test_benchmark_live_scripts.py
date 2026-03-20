@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import os
 import subprocess
@@ -200,3 +201,24 @@ def test_verify_live_task_script_enforces_required_evidence(tmp_path: Path) -> N
         env=env,
     )
     assert completed_ok.returncode == 0
+
+
+def test_run_live_task_codex_timeout_maps_to_codex_exec_timeout(tmp_path: Path, monkeypatch) -> None:
+    script_path = Path(__file__).resolve().parents[1] / "benchmark" / "scripts" / "run_live_task.py"
+    spec = importlib.util.spec_from_file_location("run_live_task_module", script_path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    monkeypatch.setattr(module.shutil, "which", lambda _: "/usr/bin/codex")
+
+    def fake_run(*args, **kwargs):  # noqa: ANN002, ANN003
+        raise subprocess.TimeoutExpired(cmd=args[0], timeout=1)
+
+    monkeypatch.setattr(module.subprocess, "run", fake_run)
+
+    returncode, response, error_type = module._execute_codex("prompt", tmp_path, timeout_seconds=1)
+
+    assert returncode == 124
+    assert response == ""
+    assert error_type == "codex_exec_timeout"
