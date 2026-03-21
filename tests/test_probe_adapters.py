@@ -1,12 +1,15 @@
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 
 import httpx
+import pytest
 
 import use_anything.probe.adapters as adapters
 from use_anything.probe.adapters import (
     _fetch_github_tree,
+    _fetch_url,
     _parse_github_owner_repo,
     probe_binary,
     probe_docs_url,
@@ -21,6 +24,19 @@ def test_probe_binary_returns_cli_candidate() -> None:
     assert candidates
     assert candidates[0].type == "cli_tool"
     assert metadata["binary"] == "ffmpeg"
+
+
+@pytest.mark.fault_injection
+def test_probe_binary_handles_timeout_and_keeps_cli_fallback(monkeypatch) -> None:
+    def fake_run(*args, **kwargs):  # noqa: ANN002, ANN003
+        raise subprocess.TimeoutExpired(cmd="demo --help", timeout=2)
+
+    monkeypatch.setattr(adapters.subprocess, "run", fake_run)
+    candidates, metadata = probe_binary("demo")
+
+    assert any(candidate.type == "cli_tool" for candidate in candidates)
+    assert metadata["command_output"]["help"] == ""
+    assert metadata["command_output"]["version"] == ""
 
 
 def test_probe_local_directory_detects_python_sdk(tmp_path: Path) -> None:
@@ -84,6 +100,19 @@ def test_probe_docs_url_verifies_openapi_llms_and_existing_skill(monkeypatch) ->
     assert metadata["verified_interface_types"] == ["existing_skill", "llms_txt", "openapi_spec"]
 
 
+@pytest.mark.fault_injection
+def test_fetch_url_returns_empty_payload_on_http_timeout(monkeypatch) -> None:
+    def fake_get(url: str, timeout: float = 15.0):  # noqa: ARG001
+        raise httpx.TimeoutException("timeout")
+
+    monkeypatch.setattr(adapters.httpx, "get", fake_get)
+    status_code, content_type, payload = _fetch_url("https://docs.example.dev/openapi.json")
+
+    assert status_code == 0
+    assert content_type == ""
+    assert payload == ""
+
+
 def test_probe_github_repo_detects_existing_skill() -> None:
     payload = {
         "tree_paths": [
@@ -129,6 +158,40 @@ def test_fetch_github_tree_uses_default_branch_when_available(monkeypatch) -> No
     assert payload["default_branch"] == "stable"
     assert payload["resolved_ref"] == "stable"
     assert payload["tree_paths"] == ["pyproject.toml", "README.md"]
+
+
+@pytest.mark.fault_injection
+def test_fetch_github_tree_falls_back_when_primary_ref_is_rate_limited(monkeypatch) -> None:
+    class FakeResponse:
+        def __init__(self, status_code: int, payload: dict) -> None:
+            self.status_code = status_code
+            self._payload = payload
+
+        def raise_for_status(self) -> None:
+            if self.status_code >= 400:
+                request = httpx.Request("GET", "https://api.github.com")
+                response = httpx.Response(self.status_code, request=request)
+                raise httpx.HTTPStatusError("boom", request=request, response=response)
+
+        def json(self) -> dict:
+            return self._payload
+
+    def fake_get(url: str, timeout: float = 20.0):  # noqa: ARG001
+        if url == "https://api.github.com/repos/example/project":
+            return FakeResponse(200, {"default_branch": "main"})
+        if url == "https://api.github.com/repos/example/project/git/trees/main?recursive=1":
+            return FakeResponse(429, {})
+        if url == "https://api.github.com/repos/example/project/git/trees/master?recursive=1":
+            return FakeResponse(200, {"tree": [{"path": "README.md"}]})
+        return FakeResponse(404, {})
+
+    monkeypatch.setattr(adapters.httpx, "get", fake_get)
+
+    payload = _fetch_github_tree("https://github.com/example/project")
+
+    assert payload["default_branch"] == "main"
+    assert payload["resolved_ref"] == "master"
+    assert payload["tree_paths"] == ["README.md"]
 
 
 def test_parse_github_owner_repo_normalizes_tree_and_blob_paths() -> None:
