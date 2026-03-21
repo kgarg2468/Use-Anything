@@ -42,6 +42,13 @@ where = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 addopts = "-q"
+markers = [
+  "live_smoke: real provider/network smoke checks",
+  "slow: long-running validation or integration checks",
+  "fault_injection: timeout/error-path fault simulation coverage",
+  "security: security-focused hardening checks",
+  "benchmark: benchmark schema/runner regression coverage",
+]
 
 [tool.ruff]
 line-length = 120

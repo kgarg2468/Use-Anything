@@ -4,6 +4,8 @@ from pathlib import Path
 
 import pytest
 
+from use_anything.models import AnalyzerIR, GeneratedArtifacts
+
 
 @pytest.fixture()
 def sample_analysis_dict() -> dict:
@@ -94,3 +96,61 @@ def tmp_skill_dir(tmp_path: Path) -> Path:
     skill_dir = tmp_path / "use-anything-requests"
     skill_dir.mkdir(parents=True, exist_ok=True)
     return skill_dir
+
+
+@pytest.fixture()
+def deterministic_time(monkeypatch) -> list[float]:
+    """Provide deterministic time.perf_counter values for duration assertions."""
+
+    values = [1.0, 1.015, 1.03, 1.05, 1.08]
+    state = {"idx": -1}
+
+    def fake_perf_counter() -> float:
+        state["idx"] += 1
+        if state["idx"] >= len(values):
+            return values[-1]
+        return values[state["idx"]]
+
+    monkeypatch.setattr("time.perf_counter", fake_perf_counter)
+    return values
+
+
+@pytest.fixture()
+def minimal_analysis_ir() -> AnalyzerIR:
+    return AnalyzerIR.from_dict(
+        {
+            "software": "demo",
+            "interface": "python_sdk",
+            "version": "1.0.0",
+            "setup": {
+                "install": "pip install demo",
+                "auth": "Set DEMO_API_KEY",
+                "env_vars": ["DEMO_API_KEY"],
+                "prerequisites": ["Python 3.10+"],
+            },
+            "capability_groups": [],
+            "workflows": [
+                {
+                    "name": "Quickstart",
+                    "steps": ["python -c \"print('ok')\""],
+                    "common_errors": [],
+                }
+            ],
+            "gotchas": ["Set timeout defaults"],
+            "analysis_sources": ["python_sdk:pypi:demo"],
+        }
+    )
+
+
+@pytest.fixture()
+def generated_artifacts_with_verify_script(tmp_path: Path) -> GeneratedArtifacts:
+    script_path = tmp_path / "scripts" / "verify_setup.py"
+    script_path.parent.mkdir(parents=True, exist_ok=True)
+    script_path.write_text("print('verify')\n", encoding="utf-8")
+    return GeneratedArtifacts(
+        skill_path=tmp_path / "SKILL.md",
+        reference_paths={},
+        token_counts={},
+        line_counts={},
+        script_paths={"verify_setup": script_path},
+    )
