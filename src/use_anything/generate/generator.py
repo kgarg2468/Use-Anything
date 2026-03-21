@@ -30,33 +30,34 @@ class Generator:
     ) -> GeneratedArtifacts:
         target_dir = Path(output_dir)
         target_dir.mkdir(parents=True, exist_ok=True)
+        target_root = target_dir.resolve()
 
         skill_text = render_skill_markdown(analysis, source_interface=source_interface)
         if existing_skill and not force:
             skill_text = merge_skill_markdown(existing_skill=existing_skill, generated_skill=skill_text)
-        skill_path = target_dir / "SKILL.md"
-        skill_path.write_text(skill_text)
+        skill_path = _safe_path_within(target_root, "SKILL.md")
+        skill_path.write_text(skill_text, encoding="utf-8")
 
-        references_dir = target_dir / "references"
+        references_dir = _safe_path_within(target_root, "references")
         references_dir.mkdir(parents=True, exist_ok=True)
 
-        api_ref_path = references_dir / "API_REFERENCE.md"
-        workflows_ref_path = references_dir / "WORKFLOWS.md"
-        gotchas_ref_path = references_dir / "GOTCHAS.md"
+        api_ref_path = _safe_path_within(target_root, "references", "API_REFERENCE.md")
+        workflows_ref_path = _safe_path_within(target_root, "references", "WORKFLOWS.md")
+        gotchas_ref_path = _safe_path_within(target_root, "references", "GOTCHAS.md")
 
         api_ref_text = build_api_reference(analysis)
         workflows_ref_text = build_workflows_reference(analysis)
         gotchas_ref_text = build_gotchas_reference(analysis)
 
-        api_ref_path.write_text(api_ref_text)
-        workflows_ref_path.write_text(workflows_ref_text)
-        gotchas_ref_path.write_text(gotchas_ref_text)
+        api_ref_path.write_text(api_ref_text, encoding="utf-8")
+        workflows_ref_path.write_text(workflows_ref_text, encoding="utf-8")
+        gotchas_ref_path.write_text(gotchas_ref_text, encoding="utf-8")
 
-        scripts_dir = target_dir / "scripts"
+        scripts_dir = _safe_path_within(target_root, "scripts")
         scripts_dir.mkdir(parents=True, exist_ok=True)
-        verify_setup_path = scripts_dir / "verify_setup.py"
+        verify_setup_path = _safe_path_within(target_root, "scripts", "verify_setup.py")
         verify_setup_text = build_verify_setup_script(analysis)
-        verify_setup_path.write_text(verify_setup_text)
+        verify_setup_path.write_text(verify_setup_text, encoding="utf-8")
 
         token_counts = {
             "SKILL.md": count_tokens(skill_text),
@@ -85,3 +86,12 @@ class Generator:
             line_counts=line_counts,
             script_paths={"verify_setup": verify_setup_path},
         )
+
+
+def _safe_path_within(root: Path, *parts: str) -> Path:
+    """Resolve a child path and ensure it stays inside the generated output root."""
+
+    candidate = (root / Path(*parts)).resolve()
+    if candidate != root and root not in candidate.parents:
+        raise ValueError(f"Refusing to write file outside output directory: {candidate}")
+    return candidate
