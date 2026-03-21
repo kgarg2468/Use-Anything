@@ -1,0 +1,121 @@
+name: Nightly Quality
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"
+
+concurrency:
+  group: nightly-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-nightly-deep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run deep deterministic suite
+        run: uv run pytest -m "not live_smoke" -q
+
+      - name: Upload nightly deterministic artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nightly-test-report
+          path: .pytest_cache
+          if-no-files-found: ignore
+
+  benchmark-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run benchmark regression tests
+        run: uv run pytest tests/test_benchmark.py tests/test_benchmark_regression.py -q
+
+  test-live-smoke-nightly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      USE_ANYTHING_RUN_LIVE_SMOKE: "1"
+      USE_ANYTHING_RUN_LIVE_SMOKE_LLM: ${{ secrets.OPENAI_API_KEY != '' && '1' || '0' }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run live provider smoke checks
+        run: uv run pytest -m live_smoke -q
+
+  coverage-gate-nightly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run nightly coverage gate
+        run: |
+          mkdir -p artifacts/audit
+          uv run pytest --cov=src/use_anything --cov-report=json:artifacts/audit/coverage.json -q
+          uv run python scripts/audit/check_coverage.py \
+            --coverage-json artifacts/audit/coverage.json \
+            --summary-output artifacts/audit/coverage_gate.json
+
+      - name: Upload nightly audit artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nightly-audit-artifacts
+          path: artifacts/audit
+          if-no-files-found: error
