@@ -11,6 +11,7 @@ from use_anything.generate.reference_writer import (
 )
 from use_anything.generate.skill_merge import merge_skill_markdown
 from use_anything.generate.skill_writer import render_skill_markdown
+from use_anything.generate.verify_setup import build_verify_setup_script
 from use_anything.models import AnalyzerIR, GeneratedArtifacts
 from use_anything.utils.tokens import count_tokens
 
@@ -51,11 +52,18 @@ class Generator:
         workflows_ref_path.write_text(workflows_ref_text)
         gotchas_ref_path.write_text(gotchas_ref_text)
 
+        scripts_dir = target_dir / "scripts"
+        scripts_dir.mkdir(parents=True, exist_ok=True)
+        verify_setup_path = scripts_dir / "verify_setup.py"
+        verify_setup_text = build_verify_setup_script(analysis)
+        verify_setup_path.write_text(verify_setup_text)
+
         token_counts = {
             "SKILL.md": count_tokens(skill_text),
             "references/API_REFERENCE.md": count_tokens(api_ref_text),
             "references/WORKFLOWS.md": count_tokens(workflows_ref_text),
             "references/GOTCHAS.md": count_tokens(gotchas_ref_text),
+            "scripts/verify_setup.py": count_tokens(verify_setup_text),
         }
 
         line_counts = {
@@ -63,6 +71,7 @@ class Generator:
             "references/API_REFERENCE.md": len(api_ref_text.splitlines()),
             "references/WORKFLOWS.md": len(workflows_ref_text.splitlines()),
             "references/GOTCHAS.md": len(gotchas_ref_text.splitlines()),
+            "scripts/verify_setup.py": len(verify_setup_text.splitlines()),
         }
 
         return GeneratedArtifacts(
@@ -74,4 +83,5 @@ class Generator:
             },
             token_counts=token_counts,
             line_counts=line_counts,
+            script_paths={"verify_setup": verify_setup_path},
         )
