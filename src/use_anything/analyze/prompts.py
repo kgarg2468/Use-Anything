@@ -66,7 +66,8 @@ def build_analysis_prompt(
         "Workflows must be procedural and include concrete steps and common errors. "
         "Do not invent commands/functions/endpoints that are absent from the provided context. "
         "Tie workflows and gotchas to provided evidence and prioritize reliable, executable steps. "
-        "Include analysis_sources as a list of provenance strings."
+        "Include analysis_sources as a list of provenance strings. "
+        "Also include gotcha_provenance as a list of objects with gotcha, source, evidence, and url."
     )
 
 
