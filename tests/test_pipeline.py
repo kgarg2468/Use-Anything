@@ -111,6 +111,7 @@ def test_pipeline_end_to_end_with_fakes(tmp_path: Path) -> None:
 
     assert result.validation_report.passed
     assert (output_dir / "SKILL.md").exists()
+    assert result.functional_validation is None
 
 
 def test_pipeline_rejects_unknown_forced_interface() -> None:
@@ -306,3 +307,59 @@ def test_default_output_slug_sanitizes_local_directory_targets(tmp_path: Path) -
     assert ":" not in slug
     assert "/" not in slug
     assert "my-sample-project" in slug
+
+
+def test_pipeline_runs_functional_validation_when_enabled(tmp_path: Path) -> None:
+    class RecordingFunctionalValidator:
+        def __init__(self) -> None:
+            self.called = False
+            self.timeout = None
+
+        def run(self, analysis, artifacts, timeout_seconds):  # noqa: ANN001
+            self.called = True
+            self.timeout = timeout_seconds
+            from use_anything.models import FunctionalCheckStepReport, FunctionalValidationReport
+
+            return FunctionalValidationReport(
+                enabled=True,
+                passed=True,
+                steps=[
+                    FunctionalCheckStepReport(
+                        name="setup_install",
+                        command="pip install requests",
+                        status="passed",
+                        failure_category=None,
+                        duration_ms=10,
+                        stdout_excerpt="ok",
+                        stderr_excerpt="",
+                    )
+                ],
+                warnings=[],
+            )
+
+    recording = RecordingFunctionalValidator()
+
+    pipeline = UseAnythingPipeline(
+        prober=FakeProber(),
+        ranker=FakeRanker(),
+        analyzer=FakeAnalyzer(),
+    )
+
+    from use_anything import pipeline as pipeline_module
+
+    original_runner = pipeline_module.run_functional_validation
+    pipeline_module.run_functional_validation = recording.run
+    try:
+        result = pipeline.run(
+            target="requests",
+            output_dir=tmp_path / "generated",
+            functional_checks=True,
+            functional_timeout_seconds=44,
+        )
+    finally:
+        pipeline_module.run_functional_validation = original_runner
+
+    assert recording.called is True
+    assert recording.timeout == 44
+    assert result.functional_validation is not None
+    assert result.functional_validation.enabled is True
