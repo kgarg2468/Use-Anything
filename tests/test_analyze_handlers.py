@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import use_anything.analyze.interface_handlers as interface_handlers
+from use_anything.analyze.evidence import GotchaEvidenceEntry, GotchaEvidenceResult
 from use_anything.analyze.interface_handlers import build_interface_context
 from use_anything.models import InterfaceCandidate, ProbeResult
 
@@ -161,3 +162,75 @@ def test_build_interface_context_adds_bounded_source_excerpts() -> None:
     assert "Source excerpts" in context.summary
     assert "metadata.summary" in context.summary
     assert "[truncated]" in context.summary
+
+
+def test_build_interface_context_includes_github_issue_evidence(monkeypatch) -> None:
+    monkeypatch.setattr(
+        interface_handlers,
+        "mine_gotcha_evidence",
+        lambda probe_result: GotchaEvidenceResult(  # noqa: ARG005
+            entries=[
+                GotchaEvidenceEntry(
+                    source_type="github_issue",
+                    source_label="github:org/repo#12",
+                    url="https://github.com/org/repo/issues/12",
+                    title="Auth token expires unexpectedly",
+                    excerpt="401 errors happen after 60 minutes unless token refresh is enabled.",
+                    category="auth",
+                    relevance_score=0.92,
+                )
+            ],
+            warnings=[],
+        ),
+    )
+
+    probe_result = ProbeResult(
+        target="requests",
+        target_type="pypi_package",
+        interfaces_found=[
+            InterfaceCandidate(
+                type="python_sdk",
+                location="pypi:requests",
+                quality_score=0.95,
+                coverage="full",
+                notes="sdk",
+            )
+        ],
+        source_metadata={"summary": "HTTP helpers"},
+    )
+
+    context = build_interface_context(probe_result=probe_result, interface_type="python_sdk")
+
+    assert "Gotcha evidence" in context.summary
+    assert "Auth token expires unexpectedly" in context.summary
+    assert "github_issue:https://github.com/org/repo/issues/12" in context.sources
+
+
+def test_build_interface_context_surfaces_evidence_warnings(monkeypatch) -> None:
+    monkeypatch.setattr(
+        interface_handlers,
+        "mine_gotcha_evidence",
+        lambda probe_result: GotchaEvidenceResult(  # noqa: ARG005
+            entries=[],
+            warnings=["GitHub issue evidence unavailable: API rate limited"],
+        ),
+    )
+
+    probe_result = ProbeResult(
+        target="requests",
+        target_type="pypi_package",
+        interfaces_found=[
+            InterfaceCandidate(
+                type="python_sdk",
+                location="pypi:requests",
+                quality_score=0.95,
+                coverage="full",
+                notes="sdk",
+            )
+        ],
+        source_metadata={"summary": "HTTP helpers"},
+    )
+
+    context = build_interface_context(probe_result=probe_result, interface_type="python_sdk")
+
+    assert context.warnings == ["GitHub issue evidence unavailable: API rate limited"]
