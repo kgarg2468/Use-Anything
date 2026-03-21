@@ -64,6 +64,16 @@ def cli(ctx: click.Context) -> None:
     type=click.IntRange(min=0),
     help="Retry count for analysis model calls. For codex-cli defaults to 1 when omitted.",
 )
+@click.option(
+    "--functional-checks",
+    is_flag=True,
+    help="Run optional setup/auth/workflow functional checks after generation.",
+)
+@click.option(
+    "--functional-timeout-seconds",
+    type=click.IntRange(min=1),
+    help="Timeout for each functional validation step.",
+)
 def run_command(
     target: str | None,
     binary_name: str | None,
@@ -74,6 +84,8 @@ def run_command(
     force: bool,
     analysis_timeout_seconds: int | None,
     analysis_max_retries: int | None,
+    functional_checks: bool,
+    functional_timeout_seconds: int | None,
 ) -> None:
     """Run full or probe-only generation path for a single target."""
 
@@ -89,6 +101,8 @@ def run_command(
             force=force,
             analysis_timeout_seconds=analysis_timeout_seconds,
             analysis_max_retries=analysis_max_retries,
+            functional_checks=functional_checks,
+            functional_timeout_seconds=functional_timeout_seconds,
         )
     except (UnsupportedTargetError, ProbeError, AnalyzeError) as exc:
         raise click.ClickException(str(exc)) from exc
@@ -115,6 +129,8 @@ def run_command(
         "analysis_sources": result.analysis.analysis_sources if result.analysis else [],
         "validation_passed": result.validation_report.passed if result.validation_report else False,
         "validation_errors": result.validation_report.errors if result.validation_report else [],
+        "functional_checks_enabled": functional_checks,
+        "functional_validation": result.functional_validation.to_dict() if result.functional_validation else None,
     }
     click.echo(json.dumps(summary, indent=2))
 
