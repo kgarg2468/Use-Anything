@@ -360,6 +360,156 @@ def test_cli_passes_analysis_limit_options_to_pipeline(monkeypatch) -> None:
     assert calls["analysis_max_retries"] == 3
 
 
+def test_cli_passes_functional_options_to_pipeline(monkeypatch) -> None:
+    runner = CliRunner()
+    calls: dict[str, object] = {}
+
+    class FakePipeline:
+        def run(self, **kwargs):  # noqa: ANN003
+            calls.update(kwargs)
+            from use_anything.models import InterfaceCandidate, PipelineResult, ProbeResult, RankedInterface, RankResult
+
+            probe_result = ProbeResult(
+                target="requests",
+                target_type="pypi_package",
+                interfaces_found=[
+                    InterfaceCandidate(
+                        type="python_sdk",
+                        location="pypi:requests",
+                        quality_score=0.95,
+                        coverage="full",
+                        notes="sdk",
+                    )
+                ],
+            )
+            rank_result = RankResult(
+                primary=RankedInterface(type="python_sdk", score=0.95, reasoning="best"),
+                secondary=None,
+                rejected=[],
+            )
+            return PipelineResult(
+                probe_result=probe_result,
+                rank_result=rank_result,
+                probe_only=True,
+            )
+
+    monkeypatch.setattr("use_anything.cli.UseAnythingPipeline", FakePipeline)
+
+    result = runner.invoke(
+        cli,
+        [
+            "requests",
+            "--probe-only",
+            "--functional-checks",
+            "--functional-timeout-seconds",
+            "88",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert calls["functional_checks"] is True
+    assert calls["functional_timeout_seconds"] == 88
+
+
+def test_cli_summary_includes_functional_validation(monkeypatch, tmp_path: Path) -> None:
+    runner = CliRunner()
+
+    class FakePipeline:
+        def run(self, **kwargs):  # noqa: ANN003
+            from use_anything.models import (
+                AnalyzerIR,
+                FunctionalCheckStepReport,
+                FunctionalValidationReport,
+                GeneratedArtifacts,
+                InterfaceCandidate,
+                PipelineResult,
+                ProbeResult,
+                RankedInterface,
+                RankResult,
+                ValidationReport,
+            )
+
+            probe_result = ProbeResult(
+                target="requests",
+                target_type="pypi_package",
+                interfaces_found=[
+                    InterfaceCandidate(
+                        type="python_sdk",
+                        location="pypi:requests",
+                        quality_score=0.95,
+                        coverage="full",
+                        notes="sdk",
+                    )
+                ],
+            )
+            rank_result = RankResult(
+                primary=RankedInterface(type="python_sdk", score=0.95, reasoning="best"),
+                secondary=None,
+                rejected=[],
+            )
+            analysis = AnalyzerIR.from_dict(
+                {
+                    "software": "requests",
+                    "interface": "python_sdk",
+                    "version": "2.32.3",
+                    "setup": {
+                        "install": "pip install requests",
+                        "auth": "none",
+                        "env_vars": [],
+                        "prerequisites": [],
+                    },
+                    "capability_groups": [],
+                    "workflows": [],
+                    "gotchas": [],
+                    "analysis_sources": ["python_sdk:pypi:requests"],
+                    "gotcha_provenance": [],
+                }
+            )
+
+            skill_path = tmp_path / "SKILL.md"
+            skill_path.write_text("# requests\n")
+
+            return PipelineResult(
+                probe_result=probe_result,
+                rank_result=rank_result,
+                analysis=analysis,
+                artifacts=GeneratedArtifacts(
+                    skill_path=skill_path,
+                    reference_paths={},
+                    token_counts={},
+                    line_counts={},
+                ),
+                validation_report=ValidationReport(passed=True, errors=[], warnings=[], metrics={}),
+                functional_validation=FunctionalValidationReport(
+                    enabled=True,
+                    passed=True,
+                    steps=[
+                        FunctionalCheckStepReport(
+                            name="setup_install",
+                            command="pip install requests",
+                            status="passed",
+                            failure_category=None,
+                            duration_ms=11,
+                            stdout_excerpt="ok",
+                            stderr_excerpt="",
+                        )
+                    ],
+                    warnings=[],
+                ),
+                probe_only=False,
+            )
+
+    monkeypatch.setattr("use_anything.cli.UseAnythingPipeline", FakePipeline)
+
+    result = runner.invoke(cli, ["requests", "--functional-checks"])
+
+    assert result.exit_code == 0
+    payload = json.loads(result.output)
+    assert payload["functional_checks_enabled"] is True
+    assert payload["functional_validation"]["enabled"] is True
+    assert payload["functional_validation"]["steps"][0]["name"] == "setup_install"
+
+
 def test_cli_benchmark_command_uses_default_output_and_configs(monkeypatch, tmp_path: Path) -> None:
     runner = CliRunner()
     calls: dict[str, object] = {}
