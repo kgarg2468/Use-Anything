@@ -112,6 +112,24 @@ jobs:
             --coverage-json artifacts/audit/coverage.json \
             --summary-output artifacts/audit/coverage_gate.json
 
+      - name: Write nightly audit summary contract
+        if: always()
+        shell: bash
+        run: |
+          STATUS="passed"
+          CATEGORY=""
+          if [[ "${{ job.status }}" != "success" ]]; then
+            STATUS="failed"
+            CATEGORY="regression"
+          fi
+
+          uv run python scripts/audit/write_summary.py \
+            --gate coverage-gate-nightly \
+            --status "${STATUS}" \
+            --failure-category "${CATEGORY}" \
+            --module-coverage-json artifacts/audit/coverage_gate.json \
+            --output artifacts/audit/summary.json
+
       - name: Upload nightly audit artifacts
         uses: actions/upload-artifact@v4
         if: always()
