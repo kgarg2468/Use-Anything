@@ -14,6 +14,7 @@ from use_anything.generate.generator import Generator
 from use_anything.models import InterfaceCandidate, PipelineResult, RankedInterface
 from use_anything.probe.prober import Prober
 from use_anything.rank.ranker import Ranker
+from use_anything.validate.functional import run_functional_validation
 from use_anything.validate.validator import Validator
 
 SUPPORTED_INTERFACE_TYPES = {
@@ -32,6 +33,7 @@ SUPPORTED_INTERFACE_TYPES = {
 CODEX_CLI_MODEL = "codex-cli"
 DEFAULT_CODEX_ANALYSIS_TIMEOUT_SECONDS = 600
 DEFAULT_CODEX_ANALYSIS_MAX_RETRIES = 1
+DEFAULT_FUNCTIONAL_TIMEOUT_SECONDS = 30
 
 
 class UseAnythingPipeline:
@@ -64,6 +66,8 @@ class UseAnythingPipeline:
         force: bool = False,
         analysis_timeout_seconds: int | None = None,
         analysis_max_retries: int | None = None,
+        functional_checks: bool = False,
+        functional_timeout_seconds: int | None = None,
     ) -> PipelineResult:
         probe_result = self.prober.probe_target(target, binary_name=binary_name)
         rank_result = self.ranker.rank(probe_result)
@@ -120,6 +124,13 @@ class UseAnythingPipeline:
             existing_skill=existing_skill,
             force=force,
         )
+        functional_validation = None
+        if functional_checks:
+            functional_validation = run_functional_validation(
+                analysis=analysis,
+                artifacts=artifacts,
+                timeout_seconds=functional_timeout_seconds or DEFAULT_FUNCTIONAL_TIMEOUT_SECONDS,
+            )
         validation_report = self.validator.validate_directory(target_output)
 
         return PipelineResult(
@@ -128,6 +139,7 @@ class UseAnythingPipeline:
             analysis=analysis,
             artifacts=artifacts,
             validation_report=validation_report,
+            functional_validation=functional_validation,
             probe_only=False,
         )
 
