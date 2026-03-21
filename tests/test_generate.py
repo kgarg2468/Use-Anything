@@ -25,3 +25,20 @@ def test_generator_writes_skill_and_references(sample_analysis_dict, tmp_skill_d
     assert (tmp_skill_dir / "references" / "API_REFERENCE.md").exists()
     assert (tmp_skill_dir / "references" / "WORKFLOWS.md").exists()
     assert (tmp_skill_dir / "references" / "GOTCHAS.md").exists()
+    assert (tmp_skill_dir / "scripts" / "verify_setup.py").exists()
+    assert "DEMO" not in (tmp_skill_dir / "scripts" / "verify_setup.py").read_text()
+
+
+def test_generator_verify_setup_script_contains_env_vars(sample_analysis_dict, tmp_skill_dir: Path) -> None:
+    sample_analysis_dict["setup"]["env_vars"] = ["STRIPE_API_KEY", "STRIPE_ACCOUNT_ID"]
+    ir = AnalyzerIR.from_dict(sample_analysis_dict)
+
+    Generator().generate(
+        analysis=ir,
+        output_dir=tmp_skill_dir,
+        source_interface="python_sdk",
+    )
+
+    script = (tmp_skill_dir / "scripts" / "verify_setup.py").read_text()
+    assert "STRIPE_API_KEY" in script
+    assert "STRIPE_ACCOUNT_ID" in script
