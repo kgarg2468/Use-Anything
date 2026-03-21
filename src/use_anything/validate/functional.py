@@ -29,6 +29,16 @@ MISSING_COMMAND_PATTERNS = (
     "not recognized as an internal or external command",
     "no such file or directory",
 )
+DANGEROUS_COMMAND_FRAGMENTS = (
+    "&&",
+    "||",
+    ";",
+    "|",
+    "$(",
+    "`",
+    "\n",
+    "\r",
+)
 
 def run_functional_validation(
     *,
@@ -124,7 +134,7 @@ def _execute_step(
             failure_category="command_failed",
             duration_ms=elapsed_ms,
             stdout_excerpt="",
-            stderr_excerpt=_truncate(str(exc)),
+            stderr_excerpt=_truncate(_redact_sensitive(str(exc))),
         )
 
     elapsed_ms = int((time.perf_counter() - start) * 1000)
@@ -138,8 +148,8 @@ def _execute_step(
         status=status,
         failure_category=failure_category,
         duration_ms=elapsed_ms,
-        stdout_excerpt=_truncate(stdout),
-        stderr_excerpt=_truncate(stderr),
+        stdout_excerpt=_truncate(_redact_sensitive(stdout)),
+        stderr_excerpt=_truncate(_redact_sensitive(stderr)),
     )
 
 
@@ -153,11 +163,13 @@ def _extract_first_workflow_command(analysis: AnalyzerIR) -> str:
     step = _strip_numbering(first_workflow.steps[0])
     code_match = re.search(r"`([^`]+)`", step)
     if code_match:
-        return code_match.group(1).strip()
+        command = code_match.group(1).strip()
+        return command if _is_safe_command(command) else ""
 
     lowered = step.lower().strip()
     if lowered.startswith(COMMAND_PREFIXES):
-        return step.strip()
+        command = step.strip()
+        return command if _is_safe_command(command) else ""
     return ""
 
 
@@ -191,3 +203,26 @@ def _classify_failed_command(*, return_code: int, stderr: str) -> str:
     if any(pattern in stderr_lower for pattern in MISSING_COMMAND_PATTERNS):
         return "missing_prereq"
     return "command_failed"
+
+
+def _is_safe_command(command: str) -> bool:
+    stripped = command.strip()
+    if not stripped:
+        return False
+    return not any(fragment in stripped for fragment in DANGEROUS_COMMAND_FRAGMENTS)
+
+
+def _redact_sensitive(value: str) -> str:
+    if not value:
+        return ""
+
+    redacted = value
+    redacted = re.sub(
+        r"([A-Z0-9_]*(?:TOKEN|KEY|SECRET|PASSWORD)[A-Z0-9_]*\s*=\s*)([^\s\"']+)",
+        r"\1[REDACTED]",
+        redacted,
+        flags=re.IGNORECASE,
+    )
+    redacted = re.sub(r"Bearer\s+[A-Za-z0-9._-]+", "Bearer [REDACTED]", redacted, flags=re.IGNORECASE)
+    redacted = re.sub(r"\bsk-[A-Za-z0-9]{10,}\b", "sk-[REDACTED]", redacted)
+    return redacted

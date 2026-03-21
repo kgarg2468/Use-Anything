@@ -3,6 +3,8 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path
 
+import pytest
+
 from use_anything.models import AnalyzerIR, GeneratedArtifacts
 from use_anything.validate.functional import run_functional_validation
 
@@ -211,3 +213,77 @@ def test_functional_validation_truncates_long_output_excerpts(tmp_path: Path) ->
     assert first_step.stdout_excerpt.endswith("...")
     assert len(first_step.stderr_excerpt) < 800
     assert first_step.stderr_excerpt.endswith("...")
+
+
+@pytest.mark.security
+def test_functional_validation_skips_unsafe_workflow_command(tmp_path: Path) -> None:
+    analysis = AnalyzerIR.from_dict(
+        {
+            "software": "demo",
+            "interface": "python_sdk",
+            "version": "1.0",
+            "setup": {
+                "install": "",
+                "auth": "none",
+                "env_vars": [],
+                "prerequisites": [],
+            },
+            "capability_groups": [],
+            "workflows": [
+                {
+                    "name": "Unsafe",
+                    "steps": ["`python -c \"print(1)\"; rm -rf /`"],
+                    "common_errors": [],
+                }
+            ],
+            "gotchas": [],
+            "analysis_sources": ["python_sdk:pypi:demo"],
+        }
+    )
+    artifacts = GeneratedArtifacts(
+        skill_path=tmp_path / "SKILL.md",
+        reference_paths={},
+        token_counts={},
+        line_counts={},
+        script_paths={},
+    )
+
+    report = run_functional_validation(
+        analysis=analysis,
+        artifacts=artifacts,
+        timeout_seconds=5,
+    )
+
+    workflow_step = next(step for step in report.steps if step.name == "workflow_first_step")
+    assert workflow_step.status == "skipped"
+    assert workflow_step.failure_category == "missing_prereq"
+
+
+@pytest.mark.security
+def test_functional_validation_redacts_secret_like_values(tmp_path: Path) -> None:
+    def fake_runner(command: str, *, timeout_seconds: int):  # noqa: ARG001
+        return (
+            1,
+            "Authorization: Bearer abcdefghijklmnop",
+            "OPENAI_API_KEY=sk-12345678901234567890",
+        )
+
+    artifacts = GeneratedArtifacts(
+        skill_path=tmp_path / "SKILL.md",
+        reference_paths={},
+        token_counts={},
+        line_counts={},
+        script_paths={},
+    )
+
+    report = run_functional_validation(
+        analysis=_analysis(),
+        artifacts=artifacts,
+        timeout_seconds=5,
+        command_runner=fake_runner,
+    )
+
+    first_step = report.steps[0]
+    assert "Bearer [REDACTED]" in first_step.stdout_excerpt
+    assert "OPENAI_API_KEY=[REDACTED]" in first_step.stderr_excerpt
+    assert "1234567890" not in first_step.stderr_excerpt
