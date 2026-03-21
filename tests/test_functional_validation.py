@@ -1,0 +1,141 @@
+from __future__ import annotations
+
+import subprocess
+from pathlib import Path
+
+from use_anything.models import AnalyzerIR, GeneratedArtifacts
+from use_anything.validate.functional import run_functional_validation
+
+
+def _analysis() -> AnalyzerIR:
+    return AnalyzerIR.from_dict(
+        {
+            "software": "demo",
+            "interface": "python_sdk",
+            "version": "1.0",
+            "setup": {
+                "install": "pip install demo",
+                "auth": "Set DEMO_API_KEY",
+                "env_vars": ["DEMO_API_KEY"],
+                "prerequisites": [],
+            },
+            "capability_groups": [],
+            "workflows": [
+                {
+                    "name": "Run smoke",
+                    "steps": ["python -c \"print('ok')\""],
+                    "common_errors": [],
+                }
+            ],
+            "gotchas": ["x", "y", "z", "a", "b"],
+            "analysis_sources": ["python_sdk:pypi:demo"],
+        }
+    )
+
+
+def test_functional_validation_runs_checks_in_order(tmp_path: Path) -> None:
+    calls: list[str] = []
+
+    def fake_runner(command: str, *, timeout_seconds: int):
+        calls.append(command)
+        return 0, "ok", ""
+
+    script_path = tmp_path / "scripts" / "verify_setup.py"
+    script_path.parent.mkdir(parents=True, exist_ok=True)
+    script_path.write_text("print('ok')\n")
+    artifacts = GeneratedArtifacts(
+        skill_path=tmp_path / "SKILL.md",
+        reference_paths={},
+        token_counts={},
+        line_counts={},
+        script_paths={"verify_setup": script_path},
+    )
+
+    report = run_functional_validation(
+        analysis=_analysis(),
+        artifacts=artifacts,
+        timeout_seconds=12,
+        command_runner=fake_runner,
+    )
+
+    assert report.enabled is True
+    assert report.passed is True
+    assert [step.name for step in report.steps] == [
+        "setup_install",
+        "verify_setup_script",
+        "workflow_first_step",
+    ]
+    assert calls[0] == "pip install demo"
+    assert "verify_setup.py" in calls[1]
+    assert calls[2] == "python -c \"print('ok')\""
+
+
+def test_functional_validation_records_timeout_failure(tmp_path: Path) -> None:
+    def fake_runner(command: str, *, timeout_seconds: int):  # noqa: ARG001
+        raise subprocess.TimeoutExpired(command, timeout=timeout_seconds)
+
+    artifacts = GeneratedArtifacts(
+        skill_path=tmp_path / "SKILL.md",
+        reference_paths={},
+        token_counts={},
+        line_counts={},
+        script_paths={},
+    )
+
+    report = run_functional_validation(
+        analysis=_analysis(),
+        artifacts=artifacts,
+        timeout_seconds=5,
+        command_runner=fake_runner,
+    )
+
+    assert report.passed is False
+    assert report.steps[0].status == "failed"
+    assert report.steps[0].failure_category == "timeout"
+
+
+def test_functional_validation_marks_missing_prereq_for_non_command_step(tmp_path: Path) -> None:
+    analysis = AnalyzerIR.from_dict(
+        {
+            "software": "demo",
+            "interface": "python_sdk",
+            "version": "1.0",
+            "setup": {
+                "install": "",
+                "auth": "No auth",
+                "env_vars": [],
+                "prerequisites": [],
+            },
+            "capability_groups": [],
+            "workflows": [
+                {
+                    "name": "Run smoke",
+                    "steps": ["Initialize SDK client and verify state"],
+                    "common_errors": [],
+                }
+            ],
+            "gotchas": ["x", "y", "z", "a", "b"],
+            "analysis_sources": ["python_sdk:pypi:demo"],
+        }
+    )
+    artifacts = GeneratedArtifacts(
+        skill_path=tmp_path / "SKILL.md",
+        reference_paths={},
+        token_counts={},
+        line_counts={},
+        script_paths={},
+    )
+
+    report = run_functional_validation(
+        analysis=analysis,
+        artifacts=artifacts,
+        timeout_seconds=5,
+    )
+
+    names = [step.name for step in report.steps]
+    assert names == ["setup_install", "verify_setup_script", "workflow_first_step"]
+    assert report.steps[0].status == "skipped"
+    assert report.steps[0].failure_category == "missing_prereq"
+    assert report.steps[2].status == "skipped"
+    assert report.steps[2].failure_category == "missing_prereq"
+
