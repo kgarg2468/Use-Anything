@@ -139,3 +139,75 @@ def test_functional_validation_marks_missing_prereq_for_non_command_step(tmp_pat
     assert report.steps[2].status == "skipped"
     assert report.steps[2].failure_category == "missing_prereq"
 
+
+def test_functional_validation_marks_unsupported_command_as_missing_prereq(tmp_path: Path) -> None:
+    def fake_runner(command: str, *, timeout_seconds: int):  # noqa: ARG001
+        return 127, "", "/bin/sh: madeup-command: command not found"
+
+    artifacts = GeneratedArtifacts(
+        skill_path=tmp_path / "SKILL.md",
+        reference_paths={},
+        token_counts={},
+        line_counts={},
+        script_paths={},
+    )
+
+    analysis = AnalyzerIR.from_dict(
+        {
+            "software": "demo",
+            "interface": "python_sdk",
+            "version": "1.0",
+            "setup": {
+                "install": "madeup-command install demo",
+                "auth": "none",
+                "env_vars": [],
+                "prerequisites": [],
+            },
+            "capability_groups": [],
+            "workflows": [],
+            "gotchas": [],
+            "analysis_sources": ["python_sdk:pypi:demo"],
+        }
+    )
+
+    report = run_functional_validation(
+        analysis=analysis,
+        artifacts=artifacts,
+        timeout_seconds=5,
+        command_runner=fake_runner,
+    )
+
+    assert report.passed is False
+    assert report.steps[0].status == "failed"
+    assert report.steps[0].failure_category == "missing_prereq"
+
+
+def test_functional_validation_truncates_long_output_excerpts(tmp_path: Path) -> None:
+    long_stdout = "x" * 2000
+    long_stderr = "y" * 2000
+
+    def fake_runner(command: str, *, timeout_seconds: int):  # noqa: ARG001
+        return 1, long_stdout, long_stderr
+
+    artifacts = GeneratedArtifacts(
+        skill_path=tmp_path / "SKILL.md",
+        reference_paths={},
+        token_counts={},
+        line_counts={},
+        script_paths={},
+    )
+
+    report = run_functional_validation(
+        analysis=_analysis(),
+        artifacts=artifacts,
+        timeout_seconds=5,
+        command_runner=fake_runner,
+    )
+
+    first_step = report.steps[0]
+    assert first_step.status == "failed"
+    assert first_step.failure_category == "command_failed"
+    assert len(first_step.stdout_excerpt) < 800
+    assert first_step.stdout_excerpt.endswith("...")
+    assert len(first_step.stderr_excerpt) < 800
+    assert first_step.stderr_excerpt.endswith("...")

@@ -97,3 +97,18 @@ def test_validator_rejects_skill_without_reference_links(sample_analysis_dict, t
 
     assert report.passed is False
     assert any("SKILL.md must reference references/API_REFERENCE.md" in error for error in report.errors)
+
+
+def test_validator_reports_directory_token_metrics(sample_analysis_dict, tmp_skill_dir: Path) -> None:
+    ir = AnalyzerIR.from_dict(sample_analysis_dict)
+    Generator().generate(ir, tmp_skill_dir, source_interface="python_sdk")
+
+    report = Validator().validate_directory(tmp_skill_dir)
+
+    assert report.passed is True
+    assert "skill_tokens" in report.metrics
+    assert "references_tokens" in report.metrics
+    assert "skill_directory_tokens" in report.metrics
+    assert report.metrics["skill_directory_tokens"] == (
+        report.metrics["skill_tokens"] + report.metrics["references_tokens"]
+    )

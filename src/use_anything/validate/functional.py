@@ -24,6 +24,11 @@ COMMAND_PREFIXES = (
     "git ",
 )
 MAX_OUTPUT_EXCERPT_CHARS = 700
+MISSING_COMMAND_PATTERNS = (
+    "command not found",
+    "not recognized as an internal or external command",
+    "no such file or directory",
+)
 
 def run_functional_validation(
     *,
@@ -124,7 +129,9 @@ def _execute_step(
 
     elapsed_ms = int((time.perf_counter() - start) * 1000)
     status = "passed" if return_code == 0 else "failed"
-    failure_category = None if return_code == 0 else "command_failed"
+    failure_category = None
+    if return_code != 0:
+        failure_category = _classify_failed_command(return_code=return_code, stderr=stderr)
     return FunctionalCheckStepReport(
         name=name,
         command=command_text,
@@ -175,3 +182,12 @@ def _run_command(command: str, timeout_seconds: int) -> tuple[int, str, str]:
         timeout=timeout_seconds,
     )
     return completed.returncode, completed.stdout or "", completed.stderr or ""
+
+
+def _classify_failed_command(*, return_code: int, stderr: str) -> str:
+    stderr_lower = (stderr or "").lower()
+    if return_code == 127:
+        return "missing_prereq"
+    if any(pattern in stderr_lower for pattern in MISSING_COMMAND_PATTERNS):
+        return "missing_prereq"
+    return "command_failed"
