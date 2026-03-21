@@ -363,3 +363,65 @@ def test_pipeline_runs_functional_validation_when_enabled(tmp_path: Path) -> Non
     assert recording.timeout == 44
     assert result.functional_validation is not None
     assert result.functional_validation.enabled is True
+
+
+def test_pipeline_uses_default_functional_timeout_when_omitted(tmp_path: Path) -> None:
+    captured: dict[str, int] = {}
+
+    def fake_runner(*, analysis, artifacts, timeout_seconds):  # noqa: ANN001
+        captured["timeout_seconds"] = timeout_seconds
+        from use_anything.models import FunctionalValidationReport
+
+        return FunctionalValidationReport(enabled=True, passed=True, steps=[], warnings=[])
+
+    from use_anything import pipeline as pipeline_module
+
+    original_runner = pipeline_module.run_functional_validation
+    pipeline_module.run_functional_validation = fake_runner
+    try:
+        result = UseAnythingPipeline(
+            prober=FakeProber(),
+            ranker=FakeRanker(),
+            analyzer=FakeAnalyzer(),
+        ).run(
+            target="requests",
+            output_dir=tmp_path / "generated",
+            functional_checks=True,
+            functional_timeout_seconds=None,
+        )
+    finally:
+        pipeline_module.run_functional_validation = original_runner
+
+    assert captured["timeout_seconds"] == 30
+    assert result.functional_validation is not None
+    assert result.functional_validation.passed is True
+
+
+def test_pipeline_records_functional_runner_crash_as_failed_report(tmp_path: Path) -> None:
+    def fake_runner(*, analysis, artifacts, timeout_seconds):  # noqa: ANN001, ARG001
+        raise RuntimeError("runner crashed")
+
+    from use_anything import pipeline as pipeline_module
+
+    original_runner = pipeline_module.run_functional_validation
+    pipeline_module.run_functional_validation = fake_runner
+    try:
+        result = UseAnythingPipeline(
+            prober=FakeProber(),
+            ranker=FakeRanker(),
+            analyzer=FakeAnalyzer(),
+        ).run(
+            target="requests",
+            output_dir=tmp_path / "generated",
+            functional_checks=True,
+        )
+    finally:
+        pipeline_module.run_functional_validation = original_runner
+
+    assert result.functional_validation is not None
+    assert result.functional_validation.enabled is True
+    assert result.functional_validation.passed is False
+    assert result.functional_validation.steps[0].name == "functional_validation"
+    assert result.functional_validation.steps[0].status == "failed"
+    assert result.functional_validation.steps[0].failure_category == "command_failed"
+    assert "runner crashed" in result.functional_validation.steps[0].stderr_excerpt

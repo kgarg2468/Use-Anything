@@ -11,7 +11,13 @@ import httpx
 from use_anything.analyze.analyzer import Analyzer
 from use_anything.exceptions import UnsupportedTargetError
 from use_anything.generate.generator import Generator
-from use_anything.models import InterfaceCandidate, PipelineResult, RankedInterface
+from use_anything.models import (
+    FunctionalCheckStepReport,
+    FunctionalValidationReport,
+    InterfaceCandidate,
+    PipelineResult,
+    RankedInterface,
+)
 from use_anything.probe.prober import Prober
 from use_anything.rank.ranker import Ranker
 from use_anything.validate.functional import run_functional_validation
@@ -126,11 +132,14 @@ class UseAnythingPipeline:
         )
         functional_validation = None
         if functional_checks:
-            functional_validation = run_functional_validation(
-                analysis=analysis,
-                artifacts=artifacts,
-                timeout_seconds=functional_timeout_seconds or DEFAULT_FUNCTIONAL_TIMEOUT_SECONDS,
-            )
+            try:
+                functional_validation = run_functional_validation(
+                    analysis=analysis,
+                    artifacts=artifacts,
+                    timeout_seconds=functional_timeout_seconds or DEFAULT_FUNCTIONAL_TIMEOUT_SECONDS,
+                )
+            except Exception as exc:  # noqa: BLE001
+                functional_validation = _functional_validation_runner_failure(exc)
         validation_report = self.validator.validate_directory(target_output)
 
         return PipelineResult(
@@ -173,3 +182,23 @@ def _default_output_slug(target: str) -> str:
     value = re.sub(r"[^a-z0-9._-]+", "-", value)
     value = re.sub(r"-{2,}", "-", value).strip("-._")
     return value or "target"
+
+
+def _functional_validation_runner_failure(exc: Exception) -> FunctionalValidationReport:
+    message = f"functional validation runner crashed: {exc}"
+    return FunctionalValidationReport(
+        enabled=True,
+        passed=False,
+        steps=[
+            FunctionalCheckStepReport(
+                name="functional_validation",
+                command="",
+                status="failed",
+                failure_category="command_failed",
+                duration_ms=0,
+                stdout_excerpt="",
+                stderr_excerpt=message[:700],
+            )
+        ],
+        warnings=["Functional validation crashed; pipeline continued with failed functional report."],
+    )
