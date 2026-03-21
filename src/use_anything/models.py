@@ -170,6 +170,31 @@ class Workflow:
 
 
 @dataclass
+class GotchaProvenanceEntry:
+    gotcha: str
+    source: str
+    evidence: str
+    url: str
+
+    @classmethod
+    def from_dict(cls, raw: dict[str, Any]) -> GotchaProvenanceEntry:
+        return cls(
+            gotcha=str(raw.get("gotcha", "")),
+            source=str(raw.get("source", "")),
+            evidence=str(raw.get("evidence", "")),
+            url=str(raw.get("url", "")),
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "gotcha": self.gotcha,
+            "source": self.source,
+            "evidence": self.evidence,
+            "url": self.url,
+        }
+
+
+@dataclass
 class AnalyzerIR:
     software: str
     interface: str
@@ -179,6 +204,7 @@ class AnalyzerIR:
     workflows: list[Workflow]
     gotchas: list[str]
     analysis_sources: list[str] = field(default_factory=list)
+    gotcha_provenance: list[GotchaProvenanceEntry] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, raw: dict[str, Any]) -> AnalyzerIR:
@@ -191,6 +217,7 @@ class AnalyzerIR:
             workflows=[Workflow.from_dict(item) for item in raw.get("workflows", [])],
             gotchas=[str(item) for item in raw.get("gotchas", [])],
             analysis_sources=[str(item) for item in raw.get("analysis_sources", [])],
+            gotcha_provenance=[GotchaProvenanceEntry.from_dict(item) for item in raw.get("gotcha_provenance", [])],
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -203,6 +230,7 @@ class AnalyzerIR:
             "workflows": [item.to_dict() for item in self.workflows],
             "gotchas": self.gotchas,
             "analysis_sources": self.analysis_sources,
+            "gotcha_provenance": [item.to_dict() for item in self.gotcha_provenance],
         }
 
 
@@ -212,6 +240,7 @@ class GeneratedArtifacts:
     reference_paths: dict[str, Path]
     token_counts: dict[str, int]
     line_counts: dict[str, int]
+    script_paths: dict[str, Path] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -219,6 +248,7 @@ class GeneratedArtifacts:
             "reference_paths": {name: str(path) for name, path in self.reference_paths.items()},
             "token_counts": self.token_counts,
             "line_counts": self.line_counts,
+            "script_paths": {name: str(path) for name, path in self.script_paths.items()},
         }
 
 
@@ -239,12 +269,51 @@ class ValidationReport:
 
 
 @dataclass
+class FunctionalCheckStepReport:
+    name: str
+    command: str
+    status: str
+    failure_category: str | None
+    duration_ms: int
+    stdout_excerpt: str
+    stderr_excerpt: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "name": self.name,
+            "command": self.command,
+            "status": self.status,
+            "failure_category": self.failure_category,
+            "duration_ms": self.duration_ms,
+            "stdout_excerpt": self.stdout_excerpt,
+            "stderr_excerpt": self.stderr_excerpt,
+        }
+
+
+@dataclass
+class FunctionalValidationReport:
+    enabled: bool
+    passed: bool
+    steps: list[FunctionalCheckStepReport]
+    warnings: list[str]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "enabled": self.enabled,
+            "passed": self.passed,
+            "steps": [step.to_dict() for step in self.steps],
+            "warnings": self.warnings,
+        }
+
+
+@dataclass
 class PipelineResult:
     probe_result: ProbeResult
     rank_result: RankResult
     analysis: AnalyzerIR | None = None
     artifacts: GeneratedArtifacts | None = None
     validation_report: ValidationReport | None = None
+    functional_validation: FunctionalValidationReport | None = None
     probe_only: bool = False
 
     def to_dict(self) -> dict[str, Any]:
@@ -254,5 +323,6 @@ class PipelineResult:
             "analysis": self.analysis.to_dict() if self.analysis else None,
             "artifacts": self.artifacts.to_dict() if self.artifacts else None,
             "validation_report": self.validation_report.to_dict() if self.validation_report else None,
+            "functional_validation": self.functional_validation.to_dict() if self.functional_validation else None,
             "probe_only": self.probe_only,
         }
