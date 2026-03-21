@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 import httpx
 import yaml
 
+from use_anything.analyze.evidence import GotchaEvidenceEntry, mine_gotcha_evidence
 from use_anything.models import InterfaceCandidate, ProbeResult
 
 MAX_SOURCE_EXCERPT_CHARS = 600
@@ -20,6 +21,8 @@ MAX_DESCRIPTION_CHARS = 1200
 class InterfaceContext:
     summary: str
     sources: list[str]
+    gotcha_evidence: list[GotchaEvidenceEntry] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
 
 
 def build_interface_context(*, probe_result: ProbeResult, interface_type: str) -> InterfaceContext:
@@ -29,6 +32,7 @@ def build_interface_context(*, probe_result: ProbeResult, interface_type: str) -
     if candidate is None:
         return InterfaceContext(summary="No interface-specific context available.", sources=[])
 
+    evidence_result = mine_gotcha_evidence(probe_result)
     prioritized_sources = _prioritized_support_sources(probe_result.interfaces_found)
     if interface_type == "openapi_spec":
         context = _build_openapi_context(candidate)
@@ -47,8 +51,19 @@ def build_interface_context(*, probe_result: ProbeResult, interface_type: str) -
     if source_excerpts:
         summary = summary + "\nSource excerpts:\n" + "\n".join(f"- {excerpt}" for excerpt in source_excerpts)
 
-    merged_sources = _dedupe_sources([*prioritized_sources, *context.sources])
-    return InterfaceContext(summary=summary, sources=merged_sources)
+    if evidence_result.entries:
+        summary = summary + "\nGotcha evidence (GitHub issues):\n" + "\n".join(
+            _render_gotcha_evidence_line(entry) for entry in evidence_result.entries
+        )
+
+    evidence_sources = [entry.source_ref() for entry in evidence_result.entries]
+    merged_sources = _dedupe_sources([*prioritized_sources, *context.sources, *evidence_sources])
+    return InterfaceContext(
+        summary=summary,
+        sources=merged_sources,
+        gotcha_evidence=evidence_result.entries,
+        warnings=evidence_result.warnings,
+    )
 
 
 def _prioritized_support_sources(candidates: list[InterfaceCandidate]) -> list[str]:
@@ -234,3 +249,10 @@ def _extract_openapi_operations(document: dict[str, Any]) -> list[str]:
             if upper in {"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"}:
                 operations.append(f"{upper} {path}")
     return operations
+
+
+def _render_gotcha_evidence_line(entry: GotchaEvidenceEntry) -> str:
+    return (
+        f"- [{entry.category}] {entry.title} "
+        f"(source={entry.source_label}; score={entry.relevance_score}; url={entry.url})"
+    )
