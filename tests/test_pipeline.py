@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import httpx
 import pytest
 
 from use_anything.exceptions import UnsupportedTargetError
@@ -425,3 +426,74 @@ def test_pipeline_records_functional_runner_crash_as_failed_report(tmp_path: Pat
     assert result.functional_validation.steps[0].status == "failed"
     assert result.functional_validation.steps[0].failure_category == "command_failed"
     assert "runner crashed" in result.functional_validation.steps[0].stderr_excerpt
+
+
+def test_pipeline_loads_existing_skill_content_from_local_file(tmp_path: Path) -> None:
+    skill_path = tmp_path / "existing.md"
+    skill_path.write_text("# existing\n", encoding="utf-8")
+
+    from use_anything.models import InterfaceCandidate
+
+    content = UseAnythingPipeline()._load_existing_skill_content(
+        [
+            InterfaceCandidate(
+                type="existing_skill",
+                location=str(skill_path),
+                quality_score=0.8,
+                coverage="partial",
+                notes="local",
+            )
+        ]
+    )
+
+    assert content == "# existing\n"
+
+
+def test_pipeline_loads_existing_skill_content_from_url(monkeypatch) -> None:
+    class FakeResponse:
+        text = "# remote\n"
+
+        def raise_for_status(self) -> None:
+            return None
+
+    monkeypatch.setattr("use_anything.pipeline.httpx.get", lambda url, timeout=15.0: FakeResponse())  # noqa: ARG005
+
+    from use_anything.models import InterfaceCandidate
+
+    content = UseAnythingPipeline()._load_existing_skill_content(
+        [
+            InterfaceCandidate(
+                type="existing_skill",
+                location="https://example.com/skill.md",
+                quality_score=0.8,
+                coverage="partial",
+                notes="remote",
+            )
+        ]
+    )
+
+    assert content == "# remote\n"
+
+
+def test_pipeline_existing_skill_url_http_error_returns_none(monkeypatch) -> None:
+    def fake_get(url: str, timeout: float = 15.0):  # noqa: ARG001
+        request = httpx.Request("GET", url)
+        response = httpx.Response(500, request=request)
+        raise httpx.HTTPStatusError("error", request=request, response=response)
+
+    monkeypatch.setattr("use_anything.pipeline.httpx.get", fake_get)
+    from use_anything.models import InterfaceCandidate
+
+    content = UseAnythingPipeline()._load_existing_skill_content(
+        [
+            InterfaceCandidate(
+                type="existing_skill",
+                location="https://example.com/skill.md",
+                quality_score=0.8,
+                coverage="partial",
+                notes="remote",
+            )
+        ]
+    )
+
+    assert content is None

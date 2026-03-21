@@ -112,3 +112,92 @@ def test_validator_reports_directory_token_metrics(sample_analysis_dict, tmp_ski
     assert report.metrics["skill_directory_tokens"] == (
         report.metrics["skill_tokens"] + report.metrics["references_tokens"]
     )
+
+
+def test_validator_rejects_placeholder_text_and_bad_frontmatter(tmp_skill_dir: Path) -> None:
+    skill_path = tmp_skill_dir / "SKILL.md"
+    skill_path.write_text(
+        """---
+name: Bad Name
+description: short
+---
+
+# Demo
+
+## Setup
+
+TODO add setup
+""",
+        encoding="utf-8",
+    )
+
+    report = Validator().validate_directory(tmp_skill_dir)
+
+    assert report.passed is False
+    assert any("Frontmatter 'name'" in error for error in report.errors)
+    assert any("trigger phrases" in error for error in report.errors)
+    assert any("placeholder text" in error.lower() for error in report.errors)
+
+
+def test_validator_rejects_missing_references_directory(tmp_skill_dir: Path) -> None:
+    skill_path = tmp_skill_dir / "SKILL.md"
+    skill_path.write_text(
+        """---
+name: demo
+description: Use this skill when asked to run API workflow task automation.
+---
+
+# demo
+
+## Setup
+
+pip install demo
+
+## Core workflows
+
+### one
+
+1. run one
+
+### two
+
+1. run two
+
+### three
+
+1. run three
+
+## Important constraints
+
+- a
+- b
+- c
+- d
+- e
+
+## Quick reference
+
+| Operation | Command or Function |
+|---|---|
+| op1 | `a` |
+| op2 | `b` |
+| op3 | `c` |
+| op4 | `d` |
+| op5 | `e` |
+| op6 | `f` |
+| op7 | `g` |
+| op8 | `h` |
+| op9 | `i` |
+| op10 | `j` |
+
+## When to use references
+
+See references/API_REFERENCE.md and references/WORKFLOWS.md and references/GOTCHAS.md.
+""",
+        encoding="utf-8",
+    )
+
+    report = Validator().validate_directory(tmp_skill_dir)
+
+    assert report.passed is False
+    assert any("references/ directory is missing" in error for error in report.errors)

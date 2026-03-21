@@ -38,7 +38,10 @@ def test_classify_failure_category_from_exception_types() -> None:
         classify_failure_category(exc=httpx.HTTPStatusError("unauthorized", request=request, response=response_401))
         == "auth"
     )
-    assert classify_failure_category(exc=httpx.HTTPStatusError("limited", request=request, response=response_429)) == "rate_limit"
+    assert (
+        classify_failure_category(exc=httpx.HTTPStatusError("limited", request=request, response=response_429))
+        == "rate_limit"
+    )
     assert classify_failure_category(exc=PermissionError("denied")) == "permission"
     assert classify_failure_category(exc=ValidationError("bad schema")) == "schema"
 

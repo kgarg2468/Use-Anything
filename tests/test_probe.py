@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import httpx
 import pytest
 
 from use_anything.exceptions import ProbeError, UnsupportedTargetError
+from use_anything.models import InterfaceCandidate
 from use_anything.probe.prober import Prober
 from use_anything.probe.pypi import fetch_pypi_metadata, infer_interfaces_from_metadata
 
@@ -114,3 +117,74 @@ def test_prober_docs_target_defaults_recommended_interface_when_no_candidates(mo
     assert result.target_type == "docs_url"
     assert result.recommended_interface == "rest_api_docs"
     assert result.interfaces_found == []
+
+
+def test_prober_supports_binary_target(monkeypatch) -> None:
+    monkeypatch.setattr(
+        "use_anything.probe.prober.probe_binary",
+        lambda binary_name: (
+            [
+                InterfaceCandidate(
+                    type="cli_tool",
+                    location=f"binary:{binary_name}",
+                    quality_score=0.7,
+                    coverage="partial",
+                    notes="binary",
+                )
+            ],
+            {"binary": binary_name},
+        ),
+    )
+
+    result = Prober().probe_target(None, binary_name="ffmpeg")
+
+    assert result.target_type == "binary"
+    assert result.recommended_interface == "cli_tool"
+
+
+def test_prober_supports_local_directory_target(tmp_path: Path, monkeypatch) -> None:
+    directory = tmp_path / "demo"
+    directory.mkdir()
+    monkeypatch.setattr(
+        "use_anything.probe.prober.probe_local_directory",
+        lambda path: (
+            [
+                InterfaceCandidate(
+                    type="python_sdk",
+                    location=str(path),
+                    quality_score=0.8,
+                    coverage="partial",
+                    notes="local",
+                )
+            ],
+            {"path": str(path)},
+        ),
+    )
+
+    result = Prober().probe_target(str(directory))
+
+    assert result.target_type == "local_directory"
+    assert result.recommended_interface == "python_sdk"
+
+
+def test_prober_supports_github_repo_target(monkeypatch) -> None:
+    monkeypatch.setattr(
+        "use_anything.probe.prober.probe_github_repo",
+        lambda url: (
+            [
+                InterfaceCandidate(
+                    type="python_sdk",
+                    location=url,
+                    quality_score=0.8,
+                    coverage="partial",
+                    notes="repo",
+                )
+            ],
+            {"repo_url": url},
+        ),
+    )
+
+    result = Prober().probe_target("https://github.com/pallets/flask")
+
+    assert result.target_type == "github_repo"
+    assert result.interfaces_found[0].type == "python_sdk"
