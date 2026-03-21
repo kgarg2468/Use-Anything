@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import httpx
 import pytest
 
-from use_anything.exceptions import UnsupportedTargetError
+from use_anything.exceptions import ProbeError, UnsupportedTargetError
 from use_anything.probe.prober import Prober
-from use_anything.probe.pypi import infer_interfaces_from_metadata
+from use_anything.probe.pypi import fetch_pypi_metadata, infer_interfaces_from_metadata
 
 
 def test_infer_interfaces_prefers_python_sdk() -> None:
@@ -60,3 +61,56 @@ def test_prober_rejects_non_docs_non_github_url() -> None:
 
     with pytest.raises(UnsupportedTargetError, match="docs URL or GitHub repository URL"):
         prober.probe_target("https://example.com")
+
+
+def test_fetch_pypi_metadata_raises_probe_error_on_http_failure(monkeypatch) -> None:
+    def fake_get(url: str, timeout: float = 15.0):  # noqa: ARG001
+        request = httpx.Request("GET", url)
+        response = httpx.Response(404, request=request)
+        raise httpx.HTTPStatusError("missing", request=request, response=response)
+
+    monkeypatch.setattr("use_anything.probe.pypi.httpx.get", fake_get)
+
+    with pytest.raises(ProbeError, match="Failed to fetch package"):
+        fetch_pypi_metadata("not-real-package")
+
+
+def test_infer_interfaces_detects_rest_cli_and_existing_skill_signals() -> None:
+    metadata = {
+        "info": {
+            "name": "demo",
+            "summary": "CLI package with REST API endpoints and swagger docs",
+            "description": "Command line utility with --help and OpenAPI support",
+            "project_urls": {"Documentation": "https://docs.example.com/.well-known/skills/default/skill.md"},
+            "home_page": "https://docs.example.com",
+        }
+    }
+
+    candidates = infer_interfaces_from_metadata("demo", metadata)
+    candidate_types = {candidate.type for candidate in candidates}
+
+    assert "python_sdk" in candidate_types
+    assert "rest_api_docs" in candidate_types
+    assert "cli_tool" in candidate_types
+    assert "existing_skill" in candidate_types
+
+
+def test_prober_pypi_raises_when_no_candidates(monkeypatch) -> None:
+    monkeypatch.setattr(
+        "use_anything.probe.prober.fetch_pypi_metadata",
+        lambda package_name: {"info": {"name": package_name}},
+    )
+    monkeypatch.setattr("use_anything.probe.prober.infer_interfaces_from_metadata", lambda package_name, metadata: [])
+
+    with pytest.raises(ProbeError, match="No interfaces discovered"):
+        Prober().probe_target("requests")
+
+
+def test_prober_docs_target_defaults_recommended_interface_when_no_candidates(monkeypatch) -> None:
+    monkeypatch.setattr("use_anything.probe.prober.probe_docs_url", lambda url: ([], {"url": url}))
+
+    result = Prober().probe_target("https://docs.example.com/reference")
+
+    assert result.target_type == "docs_url"
+    assert result.recommended_interface == "rest_api_docs"
+    assert result.interfaces_found == []
