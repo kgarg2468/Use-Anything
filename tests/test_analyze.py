@@ -69,3 +69,22 @@ def test_analyzer_backfills_analysis_sources_when_missing(sample_analysis_dict) 
     ir = analyzer.analyze(probe_result=probe, rank_result=rank)
 
     assert "python_sdk:pypi:requests" in ir.analysis_sources
+
+
+def test_analyzer_accepts_optional_gotcha_provenance(sample_analysis_dict) -> None:
+    probe, rank = _probe_and_rank()
+    payload = dict(sample_analysis_dict)
+    payload["gotcha_provenance"] = [
+        {
+            "gotcha": "Always pass timeout to avoid hanging requests.",
+            "source": "github_issue:https://github.com/psf/requests/issues/1",
+            "evidence": "Timeout-less requests can hang under packet loss.",
+            "url": "https://github.com/psf/requests/issues/1",
+        }
+    ]
+    analyzer = Analyzer(llm_client=FakeLLMClient(payload))
+
+    ir = analyzer.analyze(probe_result=probe, rank_result=rank)
+
+    assert len(ir.gotcha_provenance) == 1
+    assert ir.gotcha_provenance[0].source.startswith("github_issue")

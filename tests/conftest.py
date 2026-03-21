@@ -78,6 +78,14 @@ def sample_analysis_dict() -> dict:
             "python_sdk:pypi:requests",
             "docs:https://requests.readthedocs.io/en/latest/",
         ],
+        "gotcha_provenance": [
+            {
+                "gotcha": "Always pass timeout to avoid hanging requests.",
+                "source": "docs:https://requests.readthedocs.io/en/latest/user/quickstart/",
+                "evidence": "Requests can block indefinitely without explicit timeout.",
+                "url": "https://requests.readthedocs.io/en/latest/user/quickstart/",
+            }
+        ],
     }
 
 

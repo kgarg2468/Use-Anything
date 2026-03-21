@@ -34,6 +34,7 @@ def test_analysis_prompt_requires_grounded_outputs() -> None:
 
     assert "Do not invent commands/functions/endpoints" in prompt
     assert "Tie workflows and gotchas to provided evidence" in prompt
+    assert "gotcha_provenance" in prompt
     assert "analysis_sources" in prompt
 
 
