@@ -66,5 +66,18 @@ ANALYZER_IR_SCHEMA: dict = {
         },
         "gotchas": {"type": "array", "items": {"type": "string"}},
         "analysis_sources": {"type": "array", "items": {"type": "string"}},
+        "gotcha_provenance": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["gotcha", "source", "evidence", "url"],
+                "properties": {
+                    "gotcha": {"type": "string"},
+                    "source": {"type": "string"},
+                    "evidence": {"type": "string"},
+                    "url": {"type": "string"},
+                },
+            },
+        },
     },
 }
