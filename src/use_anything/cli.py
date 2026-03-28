@@ -7,8 +7,6 @@ from pathlib import Path
 
 import click
 
-from use_anything.benchmark.models import DEFAULT_BENCHMARK_CONFIGS, load_benchmark_suite
-from use_anything.benchmark.runner import BenchmarkRunner
 from use_anything.exceptions import AnalyzeError, ProbeError, UnsupportedTargetError
 from use_anything.pipeline import UseAnythingPipeline
 from use_anything.probe.prober import Prober
@@ -164,86 +162,6 @@ def validate_command(skill_dir: Path) -> None:
     report = Validator().validate_directory(skill_dir)
     click.echo(json.dumps(report.to_dict(), indent=2))
     if not report.passed:
-        raise SystemExit(1)
-
-
-@cli.command("benchmark")
-@click.option("--suite", "suite_path", type=click.Path(path_type=Path, exists=True, dir_okay=False), required=True)
-@click.option("--agent", default="codex", show_default=True, help="Agent label for benchmark metadata")
-@click.option(
-    "--out",
-    "output_dir",
-    type=click.Path(path_type=Path),
-    help="Output directory for benchmark artifacts (default: ./benchmark/benchmark-1-run)",
-)
-@click.option(
-    "--configs",
-    help=(
-        "Comma-separated config list (default: "
-        "no-skill,generated-skill-default,generated-skill-explicit,agents-md-doc-index)"
-    ),
-)
-@click.option(
-    "--task-timeout-seconds",
-    type=click.IntRange(min=1),
-    help="Timeout for each benchmark task command subprocess.",
-)
-@click.option(
-    "--verifier-timeout-seconds",
-    type=click.IntRange(min=1),
-    help="Timeout for each benchmark verifier subprocess.",
-)
-@click.option(
-    "--min-completion-rate",
-    type=click.FloatRange(min=0.0, max=1.0),
-    default=1.0,
-    show_default=True,
-    help="Fail benchmark command if completion_rate is below this threshold.",
-)
-def benchmark_command(
-    suite_path: Path,
-    agent: str,
-    output_dir: Path | None,
-    configs: str | None,
-    task_timeout_seconds: int | None,
-    verifier_timeout_seconds: int | None,
-    min_completion_rate: float,
-) -> None:
-    """Run a benchmark suite and write benchmark artifacts."""
-
-    selected_configs = (
-        [item.strip() for item in configs.split(",") if item.strip()] if configs else list(DEFAULT_BENCHMARK_CONFIGS)
-    )
-    suite = load_benchmark_suite(suite_path)
-    destination = output_dir or (Path.cwd() / "benchmark" / "benchmark-1-run")
-
-    summary = BenchmarkRunner().run(
-        suite=suite,
-        output_dir=destination,
-        configs=selected_configs,
-        agent=agent,
-        task_timeout_seconds=task_timeout_seconds,
-        verifier_timeout_seconds=verifier_timeout_seconds,
-    )
-    click.echo(json.dumps(summary, indent=2))
-
-    benchmark_summary = summary.get("benchmark_summary", {})
-    preflight = benchmark_summary.get("preflight", {})
-    if not preflight.get("passed", True):
-        click.echo(
-            "Benchmark failed: preflight validation did not pass. "
-            f"Missing entries: {len(preflight.get('missing_matrix', []))}.",
-            err=True,
-        )
-        raise SystemExit(1)
-
-    completion_rate = float(benchmark_summary.get("completion_rate", 0.0))
-    if completion_rate < min_completion_rate:
-        click.echo(
-            "Benchmark failed: completion_rate below threshold. "
-            f"Observed={completion_rate:.4f}, required={min_completion_rate:.4f}.",
-            err=True,
-        )
         raise SystemExit(1)
 
 

@@ -39,27 +39,6 @@ jobs:
           path: .pytest_cache
           if-no-files-found: ignore
 
-  benchmark-regression:
-    runs-on: ubuntu-latest
-    timeout-minutes: 35
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: uv sync --all-extras --dev
-
-      - name: Run benchmark regression tests
-        run: uv run pytest tests/test_benchmark.py tests/test_benchmark_regression.py -q
-
   test-live-smoke-nightly:
     runs-on: ubuntu-latest
     timeout-minutes: 25

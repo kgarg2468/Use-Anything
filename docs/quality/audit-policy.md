@@ -22,5 +22,5 @@ Merge blocking is enforced by failure severity:
 
 ## CI Expectations
 - PR required gates: `lint`, `test-fast`, `coverage-gate`, `test-live-smoke`.
-- Nightly gates: deep deterministic tests, benchmark regression tests, live smoke checks, and coverage gate.
+- Nightly gates: deep deterministic tests, live smoke checks, and coverage gate.
 - Coverage gate target: overall `>=92%`, module floor `>=85%`, and `__main__` floor `>=70%`.

@@ -95,7 +95,8 @@ uv run use-anything probe requests
 
 # Validate generated output
 uv run use-anything validate ./use-anything-requests
-```
+
+
 
 ## Enhancement behavior
 
