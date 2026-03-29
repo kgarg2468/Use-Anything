@@ -5,4 +5,4 @@ Command:
 
 Accepted targets include package names, repo URLs, docs URLs, local paths, or binary names with `--binary`.
 If command packs are not installed, run:
-`bash ./scripts/install_command_packs.sh`
+`bash /path/to/Use-Anything/scripts/install_use_anything.sh`

@@ -9,4 +9,4 @@ Run the local wrapper command with all provided arguments:
 
 If the wrapper is not installed yet, run:
 
-`bash ./scripts/install_command_packs.sh`
+`bash /path/to/Use-Anything/scripts/install_use_anything.sh`
