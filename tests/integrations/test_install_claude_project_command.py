@@ -17,6 +17,9 @@ def test_claude_installer_script_exists_and_is_executable() -> None:
 def test_installs_project_local_claude_commands(tmp_path: Path) -> None:
     project_dir = tmp_path / "optX"
     project_dir.mkdir()
+    legacy_alias = project_dir / ".claude" / "commands" / "useantyhig.md"
+    legacy_alias.parent.mkdir(parents=True, exist_ok=True)
+    legacy_alias.write_text("legacy alias", encoding="utf-8")
 
     result = subprocess.run(
         [str(INSTALLER_PATH)],
@@ -29,15 +32,13 @@ def test_installs_project_local_claude_commands(tmp_path: Path) -> None:
 
     assert result.returncode == 0
     use_anything = project_dir / ".claude" / "commands" / "use-anything.md"
-    useantyhig = project_dir / ".claude" / "commands" / "useantyhig.md"
     assert use_anything.exists()
-    assert useantyhig.exists()
+    assert not legacy_alias.exists()
 
     content = use_anything.read_text(encoding="utf-8")
-    alias_content = useantyhig.read_text(encoding="utf-8")
     assert "use-anything $ARGUMENTS" in content
-    assert content == alias_content
     assert "Installed Claude project commands:" in result.stdout
+    assert "/use-anything <target>" in result.stdout
 
 
 def test_unknown_flag_exits_non_zero(tmp_path: Path) -> None:
