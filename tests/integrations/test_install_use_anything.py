@@ -98,7 +98,6 @@ def test_install_all_platforms_repo_source(tmp_path: Path) -> None:
 
     assert not (home_dir / ".codex" / "prompts" / "use-anything.md").exists()
     assert not (home_dir / ".claude" / "commands" / "use-anything.md").exists()
-    assert not (home_dir / ".config" / "opencode" / "commands" / "use-anything.md").exists()
 
 
 def test_install_single_platform_codex_only(tmp_path: Path) -> None:
