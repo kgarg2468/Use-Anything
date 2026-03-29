@@ -14,6 +14,8 @@ def test_cli_help() -> None:
 
     assert result.exit_code == 0
     assert "use-anything" in result.output
+    assert "run" in result.output
+    assert "use-anything run requests" in result.output
 
 
 def test_cli_requires_target_when_no_subcommand() -> None:
@@ -22,6 +24,7 @@ def test_cli_requires_target_when_no_subcommand() -> None:
 
     assert result.exit_code != 0
     assert "TARGET is required" in result.output
+    assert "use-anything run requests" in result.output
 
 
 def test_cli_routes_unknown_first_token_to_default_run(monkeypatch) -> None:
@@ -60,6 +63,47 @@ def test_cli_routes_unknown_first_token_to_default_run(monkeypatch) -> None:
     monkeypatch.setattr("use_anything.cli.UseAnythingPipeline", FakePipeline)
 
     result = runner.invoke(cli, ["requests", "--probe-only"])
+
+    assert result.exit_code == 0
+    assert calls["target"] == "requests"
+
+
+def test_cli_run_subcommand_uses_pipeline(monkeypatch) -> None:
+    runner = CliRunner()
+    calls: dict[str, object] = {}
+
+    class FakePipeline:
+        def run(self, **kwargs):  # noqa: ANN003
+            calls.update(kwargs)
+            from use_anything.models import InterfaceCandidate, PipelineResult, ProbeResult, RankedInterface, RankResult
+
+            probe_result = ProbeResult(
+                target=kwargs["target"],
+                target_type="pypi_package",
+                interfaces_found=[
+                    InterfaceCandidate(
+                        type="python_sdk",
+                        location=f"pypi:{kwargs['target']}",
+                        quality_score=0.9,
+                        coverage="full",
+                        notes="sdk",
+                    )
+                ],
+            )
+            rank_result = RankResult(
+                primary=RankedInterface(type="python_sdk", score=0.9, reasoning="best"),
+                secondary=None,
+                rejected=[],
+            )
+            return PipelineResult(
+                probe_result=probe_result,
+                rank_result=rank_result,
+                probe_only=True,
+            )
+
+    monkeypatch.setattr("use_anything.cli.UseAnythingPipeline", FakePipeline)
+
+    result = runner.invoke(cli, ["run", "requests", "--probe-only"])
 
     assert result.exit_code == 0
     assert calls["target"] == "requests"
@@ -632,4 +676,3 @@ def test_cli_summary_reports_null_functional_validation_when_disabled(monkeypatc
     payload = json.loads(result.output)
     assert payload["functional_checks_enabled"] is False
     assert payload["functional_validation"] is None
-
