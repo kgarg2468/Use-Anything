@@ -20,10 +20,26 @@ Supported commands:
 - `use-anything probe --binary <name>`
 - `use-anything validate <skill_dir>`
 
-## Setup
+## Global Install (Any Project)
+
+Install the CLI globally so it works from any directory:
 
 ```bash
-uv sync --extra dev
+# from this repository root
+uv tool install --from . use-anything
+```
+
+Fallback with `pipx`:
+
+```bash
+# from this repository root
+pipx install .
+```
+
+Verify:
+
+```bash
+use-anything --help
 ```
 
 Set at least one API key for analysis/generation:
@@ -40,40 +56,70 @@ Or use local Codex CLI authentication (no API key env vars required by Use-Anyth
 codex login
 ```
 
+## Provider Command Packs
+
+Install the provider command packs (Claude Code, Codex, OpenCode):
+
+```bash
+bash ./scripts/install_command_packs.sh
+```
+
+Provider quick links:
+
+- [Claude Code](docs/platform-integrations.md#claude-code)
+- [Codex](docs/platform-integrations.md#codex)
+- [OpenCode](docs/platform-integrations.md#opencode)
+
 ## Usage
 
 ```bash
 # Full pipeline
-uv run use-anything requests
+use-anything requests
 
 # Full pipeline from docs URL
-uv run use-anything https://docs.python-requests.org/en/latest/
+use-anything https://docs.python-requests.org/en/latest/
 
 # Full pipeline from GitHub repository
-uv run use-anything https://github.com/pallets/flask
+use-anything https://github.com/pallets/flask
 
 # Full pipeline from local directory
-uv run use-anything ./my-project
+use-anything ./my-project
 
 # Full pipeline from binary
-uv run use-anything --binary ffmpeg
+use-anything --binary ffmpeg
 
 # Force full regeneration (skip merge from discovered existing skill)
-uv run use-anything requests --force
+use-anything requests --force
 
 # Full pipeline via Codex CLI backend
-uv run use-anything requests --model codex-cli
+use-anything requests --model codex-cli
 
 # Probe only
-uv run use-anything requests --probe-only
+use-anything requests --probe-only
 
 # Explicit probe command
-uv run use-anything probe requests
+use-anything probe requests
 
 # Validate generated output
-uv run use-anything validate ./use-anything-requests
+use-anything validate ./use-anything-requests
+```
 
+## Updating
 
+If you installed globally from this repository clone:
+
+```bash
+git pull
+uv tool install --force --from . use-anything
+bash ./scripts/install_command_packs.sh
+```
+
+If you installed from a released package name:
+
+```bash
+uv tool upgrade use-anything
+bash ./scripts/install_command_packs.sh
+```
 
 ## Enhancement behavior
 
@@ -85,19 +131,11 @@ When probing discovers an upstream `SKILL.md`, Use-Anything enhances output by:
 
 Use `--force` to bypass this merge behavior and fully regenerate canonical output.
 
-## Claude Code usage
-
-After generation, copy or move output into Claude Code skills path, for example:
-
-```bash
-uv run use-anything requests -o ~/.claude/skills/requests
-```
-
-Then invoke by trigger phrase or slash command (if supported by skill naming).
-
 ## Development
 
 ```bash
+make clean-workspace
+make check-hygiene
 uv run pytest -q
 uv run ruff check .
 ```
