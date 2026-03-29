@@ -2,17 +2,16 @@
 set -euo pipefail
 
 usage() {
-  cat >&2 <<'USAGE'
+  cat <<'USAGE'
 usage: install_claude_project_command.sh [project-dir]
 
-Install project-local Claude command files for Use-Anything:
+Install project-local Claude command file for Use-Anything:
 - /use-anything
-- /useantyhig (alias)
 USAGE
 }
 
 if [[ $# -gt 1 ]]; then
-  usage
+  usage >&2
   exit 2
 fi
 
@@ -22,7 +21,7 @@ if [[ $# -eq 1 && ( "$1" == "-h" || "$1" == "--help" ) ]]; then
 fi
 
 if [[ $# -eq 1 && "$1" == -* ]]; then
-  usage
+  usage >&2
   exit 2
 fi
 
@@ -33,26 +32,19 @@ if [[ ! -d "${PROJECT_DIR}" ]]; then
 fi
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SOURCE_CMD="${REPO_ROOT}/integrations/claude-code/.claude/commands/use-anything.md"
+ORCHESTRATOR="${REPO_ROOT}/scripts/install_use_anything.sh"
 
-if [[ ! -f "${SOURCE_CMD}" ]]; then
-  echo "install_claude_project_command: missing template: ${SOURCE_CMD}" >&2
+if [[ ! -x "${ORCHESTRATOR}" ]]; then
+  echo "install_claude_project_command: missing installer: ${ORCHESTRATOR}" >&2
   exit 1
 fi
 
-TARGET_DIR="${PROJECT_DIR}/.claude/commands"
-mkdir -p "${TARGET_DIR}"
-cp "${SOURCE_CMD}" "${TARGET_DIR}/use-anything.md"
-cp "${SOURCE_CMD}" "${TARGET_DIR}/useantyhig.md"
+"${ORCHESTRATOR}" --platform claude --source repo --project-dir "${PROJECT_DIR}"
 
 cat <<MSG
 Installed Claude project commands:
-- ${TARGET_DIR}/use-anything.md
-- ${TARGET_DIR}/useantyhig.md
+- ${PROJECT_DIR}/.claude/commands/use-anything.md
 
 Use in Claude Code:
 - /use-anything <target>
-- /useantyhig <target>
-
-Restart Claude Code in this project if commands were already open.
 MSG
