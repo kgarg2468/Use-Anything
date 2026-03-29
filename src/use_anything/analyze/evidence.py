@@ -12,8 +12,11 @@ import httpx
 from use_anything.models import ProbeResult
 
 MAX_ISSUES_TO_FETCH = 30
+MAX_STACKOVERFLOW_TO_FETCH = 30
 MAX_EVIDENCE_ENTRIES = 5
 MAX_EXCERPT_CHARS = 260
+STACKEXCHANGE_SEARCH_URL = "https://api.stackexchange.com/2.3/search/advanced"
+STACKEXCHANGE_SITE = "stackoverflow"
 
 _CATEGORY_KEYWORDS: dict[str, tuple[str, ...]] = {
     "auth": ("auth", "token", "401", "unauthorized", "credential", "permission"),
@@ -45,14 +48,24 @@ class GotchaEvidenceResult:
 
 
 def mine_gotcha_evidence(probe_result: ProbeResult) -> GotchaEvidenceResult:
-    """Collect bounded gotcha evidence from GitHub issues when a repo is known."""
+    """Collect bounded gotcha evidence from GitHub issues and Stack Overflow."""
 
+    github_entries, github_warnings = _mine_github_issue_evidence(probe_result)
+    stackoverflow_entries, stackoverflow_warnings = _mine_stackoverflow_evidence(probe_result)
+
+    combined_entries = _dedupe_entries([*github_entries, *stackoverflow_entries])
+    combined_entries.sort(key=lambda item: item.relevance_score, reverse=True)
+    warnings = [*github_warnings, *stackoverflow_warnings]
+    if not combined_entries and not warnings:
+        warnings = ["No external gotcha evidence sources found; using docs-only evidence"]
+
+    return GotchaEvidenceResult(entries=combined_entries[:MAX_EVIDENCE_ENTRIES], warnings=warnings)
+
+
+def _mine_github_issue_evidence(probe_result: ProbeResult) -> tuple[list[GotchaEvidenceEntry], list[str]]:
     repo = _resolve_github_repo(probe_result)
     if not repo:
-        return GotchaEvidenceResult(
-            entries=[],
-            warnings=["GitHub repository source not found; using docs-only evidence"],
-        )
+        return [], ["GitHub repository source not found; skipping GitHub issue evidence"]
 
     headers = {"Accept": "application/vnd.github+json"}
     token = os.getenv("GITHUB_TOKEN", "").strip()
@@ -69,17 +82,11 @@ def mine_gotcha_evidence(probe_result: ProbeResult) -> GotchaEvidenceResult:
         )
         response.raise_for_status()
     except httpx.HTTPError as exc:
-        return GotchaEvidenceResult(
-            entries=[],
-            warnings=[f"GitHub issue evidence unavailable: {exc}; using docs-only evidence"],
-        )
+        return [], [f"GitHub issue evidence unavailable: {exc}; continuing without GitHub evidence"]
 
     payload = response.json()
     if not isinstance(payload, list):
-        return GotchaEvidenceResult(
-            entries=[],
-            warnings=["GitHub issue evidence unavailable: unexpected response shape; using docs-only evidence"],
-        )
+        return [], ["GitHub issue evidence unavailable: unexpected response shape; continuing without GitHub evidence"]
 
     entries: list[GotchaEvidenceEntry] = []
     for raw in payload:
@@ -112,8 +119,74 @@ def mine_gotcha_evidence(probe_result: ProbeResult) -> GotchaEvidenceResult:
             )
         )
 
-    entries.sort(key=lambda item: item.relevance_score, reverse=True)
-    return GotchaEvidenceResult(entries=entries[:MAX_EVIDENCE_ENTRIES], warnings=[])
+    return entries, []
+
+
+def _mine_stackoverflow_evidence(probe_result: ProbeResult) -> tuple[list[GotchaEvidenceEntry], list[str]]:
+    query = _resolve_stackoverflow_query(probe_result)
+    if not query:
+        return [], ["Stack Overflow query could not be derived; skipping Stack Overflow evidence"]
+
+    params = {
+        "order": "desc",
+        "sort": "votes",
+        "accepted": "True",
+        "site": STACKEXCHANGE_SITE,
+        "pagesize": str(MAX_STACKOVERFLOW_TO_FETCH),
+        "q": query,
+        "filter": "withbody",
+    }
+
+    try:
+        response = httpx.get(STACKEXCHANGE_SEARCH_URL, timeout=10.0, params=params)
+        response.raise_for_status()
+    except httpx.HTTPError as exc:
+        return [], [f"Stack Overflow evidence unavailable: {exc}; continuing without Stack Overflow evidence"]
+
+    payload = response.json()
+    items = payload.get("items") if isinstance(payload, dict) else None
+    if not isinstance(items, list):
+        return [], ["Stack Overflow evidence unavailable: unexpected response shape; continuing without Stack Overflow evidence"]
+
+    entries: list[GotchaEvidenceEntry] = []
+    for raw in items:
+        if not isinstance(raw, dict):
+            continue
+        if not raw.get("is_answered"):
+            continue
+        if not raw.get("accepted_answer_id"):
+            continue
+
+        title = str(raw.get("title") or "").strip()
+        body = str(raw.get("body") or "").strip()
+        question_url = str(raw.get("link") or "").strip()
+        question_id = raw.get("question_id")
+        score_value = int(raw.get("score") or 0)
+        tags = raw.get("tags") if isinstance(raw.get("tags"), list) else []
+        tags_text = " ".join(str(tag) for tag in tags)
+        if not title or not question_url:
+            continue
+
+        category, relevance = _score_issue(title=title, body=f"{body}\n{tags_text}")
+        if relevance <= 0:
+            continue
+
+        # Accepted-answer and community score are a weak confidence signal.
+        confidence_boost = min(max(score_value, 0), 20) * 0.01
+        excerpt = _truncate_text(body or title, MAX_EXCERPT_CHARS)
+        entries.append(
+            GotchaEvidenceEntry(
+                source_type="stackoverflow",
+                source_label=f"stackoverflow:{question_id}",
+                url=question_url,
+                title=title,
+                excerpt=excerpt,
+                category=category,
+                relevance_score=round(relevance + confidence_boost, 4),
+            )
+        )
+
+    return entries, []
 
 
 def _resolve_github_repo(probe_result: ProbeResult) -> str:
@@ -176,3 +249,49 @@ def _truncate_text(value: str, limit: int) -> str:
     if len(normalized) <= limit:
         return normalized
     return f"{normalized[:limit]} [truncated]"
+
+
+def _normalize_title(value: str) -> str:
+    lowered = value.lower()
+    lowered = re.sub(r"[^a-z0-9]+", " ", lowered)
+    return " ".join(lowered.split())
+
+
+def _dedupe_entries(entries: list[GotchaEvidenceEntry]) -> list[GotchaEvidenceEntry]:
+    deduped: list[GotchaEvidenceEntry] = []
+    seen_keys: set[str] = set()
+    for entry in entries:
+        key = _normalize_title(entry.title)
+        if not key:
+            key = f"{entry.source_type}:{entry.url}"
+        if key in seen_keys:
+            continue
+        seen_keys.add(key)
+        deduped.append(entry)
+    return deduped
+
+
+def _resolve_stackoverflow_query(probe_result: ProbeResult) -> str:
+    repo = _resolve_github_repo(probe_result)
+    if repo:
+        return repo.split("/", maxsplit=1)[-1]
+
+    target = (probe_result.target or "").strip()
+    if probe_result.target_type == "pypi_package" and target:
+        return target
+
+    if target:
+        parsed = urlparse(target)
+        if parsed.netloc:
+            segments = [segment for segment in parsed.path.split("/") if segment]
+            if segments:
+                return segments[-1]
+            return parsed.netloc.replace("www.", "")
+        return target
+
+    metadata = probe_result.source_metadata if isinstance(probe_result.source_metadata, dict) else {}
+    summary = str(metadata.get("summary", "")).strip()
+    if summary:
+        first = summary.split(maxsplit=1)[0].strip(".,:;()[]{}")
+        return first
+    return ""

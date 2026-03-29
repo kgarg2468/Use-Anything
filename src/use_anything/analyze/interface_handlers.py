@@ -52,7 +52,7 @@ def build_interface_context(*, probe_result: ProbeResult, interface_type: str) -
         summary = summary + "\nSource excerpts:\n" + "\n".join(f"- {excerpt}" for excerpt in source_excerpts)
 
     if evidence_result.entries:
-        summary = summary + "\nGotcha evidence (GitHub issues):\n" + "\n".join(
+        summary = summary + "\nGotcha evidence (external sources):\n" + "\n".join(
             _render_gotcha_evidence_line(entry) for entry in evidence_result.entries
         )
 

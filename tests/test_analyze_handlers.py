@@ -6,7 +6,12 @@ from use_anything.analyze.interface_handlers import build_interface_context
 from use_anything.models import InterfaceCandidate, ProbeResult
 
 
-def test_build_interface_context_for_openapi_candidate() -> None:
+def test_build_interface_context_for_openapi_candidate(monkeypatch) -> None:
+    monkeypatch.setattr(
+        interface_handlers,
+        "mine_gotcha_evidence",
+        lambda probe_result: GotchaEvidenceResult(entries=[], warnings=[]),  # noqa: ARG005
+    )
     probe_result = ProbeResult(
         target="demo",
         target_type="docs_url",
@@ -39,7 +44,12 @@ def test_build_interface_context_for_openapi_candidate() -> None:
     assert context.sources == ["openapi:https://docs.example.dev/openapi.json"]
 
 
-def test_build_interface_context_for_cli_candidate() -> None:
+def test_build_interface_context_for_cli_candidate(monkeypatch) -> None:
+    monkeypatch.setattr(
+        interface_handlers,
+        "mine_gotcha_evidence",
+        lambda probe_result: GotchaEvidenceResult(entries=[], warnings=[]),  # noqa: ARG005
+    )
     probe_result = ProbeResult(
         target="ffmpeg",
         target_type="binary",
@@ -115,6 +125,11 @@ def test_build_interface_context_loads_remote_openapi_document(monkeypatch) -> N
             return None
 
     monkeypatch.setattr(interface_handlers.httpx, "get", lambda url, timeout=15.0: FakeResponse())  # noqa: ARG005
+    monkeypatch.setattr(
+        interface_handlers,
+        "mine_gotcha_evidence",
+        lambda probe_result: GotchaEvidenceResult(entries=[], warnings=[]),  # noqa: ARG005
+    )
 
     probe_result = ProbeResult(
         target="demo",
@@ -204,6 +219,47 @@ def test_build_interface_context_includes_github_issue_evidence(monkeypatch) -> 
     assert "Gotcha evidence" in context.summary
     assert "Auth token expires unexpectedly" in context.summary
     assert "github_issue:https://github.com/org/repo/issues/12" in context.sources
+
+
+def test_build_interface_context_includes_stackoverflow_evidence(monkeypatch) -> None:
+    monkeypatch.setattr(
+        interface_handlers,
+        "mine_gotcha_evidence",
+        lambda probe_result: GotchaEvidenceResult(  # noqa: ARG005
+            entries=[
+                GotchaEvidenceEntry(
+                    source_type="stackoverflow",
+                    source_label="stackoverflow:12345",
+                    url="https://stackoverflow.com/questions/12345/example",
+                    title="Rate limit retries cause duplicate requests",
+                    excerpt="Use exponential backoff and idempotency keys.",
+                    category="rate_limit",
+                    relevance_score=0.88,
+                )
+            ],
+            warnings=[],
+        ),
+    )
+
+    probe_result = ProbeResult(
+        target="requests",
+        target_type="pypi_package",
+        interfaces_found=[
+            InterfaceCandidate(
+                type="python_sdk",
+                location="pypi:requests",
+                quality_score=0.95,
+                coverage="full",
+                notes="sdk",
+            )
+        ],
+        source_metadata={"summary": "HTTP helpers"},
+    )
+
+    context = build_interface_context(probe_result=probe_result, interface_type="python_sdk")
+
+    assert "Rate limit retries cause duplicate requests" in context.summary
+    assert "stackoverflow:https://stackoverflow.com/questions/12345/example" in context.sources
 
 
 def test_build_interface_context_surfaces_evidence_warnings(monkeypatch) -> None:
