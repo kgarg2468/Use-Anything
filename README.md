@@ -58,10 +58,15 @@ codex login
 
 ## Provider Command Packs
 
-Install the provider command packs (Claude Code, Codex, OpenCode):
+Install the provider command packs (Claude Code, Codex, OpenCode).
+Default installs into the current project directory. Use `-global` to install into home:
 
 ```bash
-bash ./scripts/install_command_packs.sh
+# from a project directory
+bash /path/to/Use-Anything/scripts/install_use_anything.sh
+
+# global install (~/.claude, ~/.codex, ~/.local/bin)
+bash /path/to/Use-Anything/scripts/install_use_anything.sh -global
 ```
 
 Provider quick links:
@@ -111,14 +116,14 @@ If you installed globally from this repository clone:
 ```bash
 git pull
 uv tool install --force --from . use-anything
-bash ./scripts/install_command_packs.sh
+bash ./scripts/install_use_anything.sh -global
 ```
 
 If you installed from a released package name:
 
 ```bash
 uv tool upgrade use-anything
-bash ./scripts/install_command_packs.sh
+bash ./scripts/install_use_anything.sh -global
 ```
 
 ## Enhancement behavior
