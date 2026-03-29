@@ -50,36 +50,7 @@ def cli(ctx: click.Context) -> None:
         raise click.UsageError("TARGET is required when no subcommand is provided\n\n" + HELP_EPILOG)
 
 
-@cli.command("run")
-@cli.command(name="_run", hidden=True)
-@click.argument("target", required=False)
-@click.option("--binary", "binary_name", help="Probe a binary available on PATH")
-@click.option("--model", help="LLM model override for analysis and generation")
-@click.option("--interface", "forced_interface", help="Force a specific interface type")
-@click.option("-o", "--output-dir", type=click.Path(path_type=Path), help="Output directory")
-@click.option("--probe-only", is_flag=True, help="Run only probe and rank phases")
-@click.option("--force", is_flag=True, help="Bypass enhancement merge and regenerate canonical output")
-@click.option(
-    "--analysis-timeout-seconds",
-    type=click.IntRange(min=1),
-    help="Timeout for analysis model calls. For codex-cli defaults to 600 when omitted.",
-)
-@click.option(
-    "--analysis-max-retries",
-    type=click.IntRange(min=0),
-    help="Retry count for analysis model calls. For codex-cli defaults to 1 when omitted.",
-)
-@click.option(
-    "--functional-checks",
-    is_flag=True,
-    help="Run optional setup/auth/workflow functional checks after generation.",
-)
-@click.option(
-    "--functional-timeout-seconds",
-    type=click.IntRange(min=1),
-    help="Timeout for each functional validation step.",
-)
-def run_command(
+def _run_impl(
     target: str | None,
     binary_name: str | None,
     model: str | None,
@@ -138,6 +109,118 @@ def run_command(
         "functional_validation": result.functional_validation.to_dict() if result.functional_validation else None,
     }
     click.echo(json.dumps(summary, indent=2))
+
+
+@cli.command("run")
+@click.argument("target", required=False)
+@click.option("--binary", "binary_name", help="Probe a binary available on PATH")
+@click.option("--model", help="LLM model override for analysis and generation")
+@click.option("--interface", "forced_interface", help="Force a specific interface type")
+@click.option("-o", "--output-dir", type=click.Path(path_type=Path), help="Output directory")
+@click.option("--probe-only", is_flag=True, help="Run only probe and rank phases")
+@click.option("--force", is_flag=True, help="Bypass enhancement merge and regenerate canonical output")
+@click.option(
+    "--analysis-timeout-seconds",
+    type=click.IntRange(min=1),
+    help="Timeout for analysis model calls. For codex-cli defaults to 600 when omitted.",
+)
+@click.option(
+    "--analysis-max-retries",
+    type=click.IntRange(min=0),
+    help="Retry count for analysis model calls. For codex-cli defaults to 1 when omitted.",
+)
+@click.option(
+    "--functional-checks",
+    is_flag=True,
+    help="Run optional setup/auth/workflow functional checks after generation.",
+)
+@click.option(
+    "--functional-timeout-seconds",
+    type=click.IntRange(min=1),
+    help="Timeout for each functional validation step.",
+)
+def run_command(
+    target: str | None,
+    binary_name: str | None,
+    model: str | None,
+    forced_interface: str | None,
+    output_dir: Path | None,
+    probe_only: bool,
+    force: bool,
+    analysis_timeout_seconds: int | None,
+    analysis_max_retries: int | None,
+    functional_checks: bool,
+    functional_timeout_seconds: int | None,
+) -> None:
+    _run_impl(
+        target=target,
+        binary_name=binary_name,
+        model=model,
+        forced_interface=forced_interface,
+        output_dir=output_dir,
+        probe_only=probe_only,
+        force=force,
+        analysis_timeout_seconds=analysis_timeout_seconds,
+        analysis_max_retries=analysis_max_retries,
+        functional_checks=functional_checks,
+        functional_timeout_seconds=functional_timeout_seconds,
+    )
+
+
+@cli.command(name="_run", hidden=True)
+@click.argument("target", required=False)
+@click.option("--binary", "binary_name", help="Probe a binary available on PATH")
+@click.option("--model", help="LLM model override for analysis and generation")
+@click.option("--interface", "forced_interface", help="Force a specific interface type")
+@click.option("-o", "--output-dir", type=click.Path(path_type=Path), help="Output directory")
+@click.option("--probe-only", is_flag=True, help="Run only probe and rank phases")
+@click.option("--force", is_flag=True, help="Bypass enhancement merge and regenerate canonical output")
+@click.option(
+    "--analysis-timeout-seconds",
+    type=click.IntRange(min=1),
+    help="Timeout for analysis model calls. For codex-cli defaults to 600 when omitted.",
+)
+@click.option(
+    "--analysis-max-retries",
+    type=click.IntRange(min=0),
+    help="Retry count for analysis model calls. For codex-cli defaults to 1 when omitted.",
+)
+@click.option(
+    "--functional-checks",
+    is_flag=True,
+    help="Run optional setup/auth/workflow functional checks after generation.",
+)
+@click.option(
+    "--functional-timeout-seconds",
+    type=click.IntRange(min=1),
+    help="Timeout for each functional validation step.",
+)
+def run_command_hidden(
+    target: str | None,
+    binary_name: str | None,
+    model: str | None,
+    forced_interface: str | None,
+    output_dir: Path | None,
+    probe_only: bool,
+    force: bool,
+    analysis_timeout_seconds: int | None,
+    analysis_max_retries: int | None,
+    functional_checks: bool,
+    functional_timeout_seconds: int | None,
+) -> None:
+    _run_impl(
+        target=target,
+        binary_name=binary_name,
+        model=model,
+        forced_interface=forced_interface,
+        output_dir=output_dir,
+        probe_only=probe_only,
+        force=force,
+        analysis_timeout_seconds=analysis_timeout_seconds,
+        analysis_max_retries=analysis_max_retries,
+        functional_checks=functional_checks,
+        functional_timeout_seconds=functional_timeout_seconds,
+    )
 
 
 @cli.command("probe")
