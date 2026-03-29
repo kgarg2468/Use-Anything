@@ -21,6 +21,11 @@ if [[ $# -eq 1 && ( "$1" == "-h" || "$1" == "--help" ) ]]; then
   exit 0
 fi
 
+if [[ $# -eq 1 && "$1" == -* ]]; then
+  usage
+  exit 2
+fi
+
 PROJECT_DIR="${1:-$PWD}"
 if [[ ! -d "${PROJECT_DIR}" ]]; then
   echo "install_claude_project_command: project directory not found: ${PROJECT_DIR}" >&2
