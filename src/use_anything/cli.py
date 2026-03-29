@@ -17,6 +17,11 @@ from use_anything.validate.validator import Validator
 CONTEXT_SETTINGS = {
     "help_option_names": ["-h", "--help"],
 }
+HELP_EPILOG = """Examples:
+  use-anything run requests
+  use-anything requests --probe-only
+  use-anything probe requests
+"""
 
 
 class TargetAwareGroup(click.Group):
@@ -26,7 +31,7 @@ class TargetAwareGroup(click.Group):
         if args and args[0] not in self.commands:
             if args[0] in CONTEXT_SETTINGS["help_option_names"]:
                 return super().parse_args(ctx, args)
-            args = ["_run", *args]
+            args = ["run", *args]
         return super().parse_args(ctx, args)
 
 
@@ -35,15 +40,17 @@ class TargetAwareGroup(click.Group):
     cls=TargetAwareGroup,
     context_settings=CONTEXT_SETTINGS,
     invoke_without_command=True,
+    epilog=HELP_EPILOG,
 )
 @click.pass_context
 def cli(ctx: click.Context) -> None:
     """Generate agent skills from software interfaces."""
 
     if ctx.invoked_subcommand is None:
-        raise click.UsageError("TARGET is required when no subcommand is provided")
+        raise click.UsageError("TARGET is required when no subcommand is provided\n\n" + HELP_EPILOG)
 
 
+@cli.command("run")
 @cli.command(name="_run", hidden=True)
 @click.argument("target", required=False)
 @click.option("--binary", "binary_name", help="Probe a binary available on PATH")
