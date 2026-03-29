@@ -1,0 +1,29 @@
+name: Command Pack Contract
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  contract-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Validate command packs and wrapper contract
+        run: uv run pytest -q tests/integrations/test_command_packs.py
