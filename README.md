@@ -4,8 +4,7 @@ Use-Anything generates agent-optimized `SKILL.md` directories from existing soft
 
 ## Current scope
 
-This phase supports multiple input target types:
-
+Supported input targets:
 - PyPI package names (for example `requests`)
 - GitHub repository URLs (for example `https://github.com/pallets/flask`)
 - Documentation URLs (for example `https://docs.stripe.com`)
@@ -13,152 +12,173 @@ This phase supports multiple input target types:
 - Binaries via `--binary` (for example `--binary ffmpeg`)
 
 Supported commands:
-
-- `use-anything <target>`
+- `use-anything run <target>`
+- `use-anything <target>` (implicit run)
 - `use-anything --binary <name>`
 - `use-anything probe <target>`
 - `use-anything probe --binary <name>`
 - `use-anything validate <skill_dir>`
 
-## Global Install (Any Project)
+## Platform Support Matrix
 
-Install the CLI globally so it works from any directory:
+| Platform | Install via orchestrator | Invoke after install | Status |
+|---|---|---|---|
+| Codex | `--platform codex` | `$use-anything` | First-class |
+| Claude Code | `--platform claude --project-dir <dir>` | `/use-anything <target>` | First-class |
+| OpenCode | `--platform opencode` | `/use-anything <target>` | First-class |
+| OpenClaw | `--platform openclaw` | `@use-anything` or native skill invocation | First-class |
+| Qoder | `--platform qoder` | `/use-anything <target>` | First-class |
+| Copilot CLI | `--platform copilot` | `/use-anything <target>` | First-class |
 
+## Install Channels (Hybrid)
+
+Both channels are supported:
+
+1. Package channel:
 ```bash
-# from this repository root
-uv tool install --from . use-anything
+uv tool install use-anything
 ```
 
-Fallback with `pipx`:
-
+2. Repo channel:
 ```bash
-# from this repository root
-pipx install .
+git clone https://github.com/kgarg2468/Use-Anything.git
+cd Use-Anything
 ```
 
-Verify:
+Install adapters with the orchestrator:
+```bash
+bash ./scripts/install_use_anything.sh --platform all --source repo --project-dir "$PWD"
+```
+
+The installer supports:
+- `--platform codex|claude|opencode|openclaw|qoder|copilot|all`
+- `--source repo|package`
+- `--project-dir <path>`
+- `--dry-run`
+- `--check`
+
+## 60-second quick start: Codex
 
 ```bash
+# from repository root
+bash ./scripts/install_use_anything.sh --platform codex --source repo
 use-anything --help
 ```
 
-Set at least one API key for analysis/generation:
-
-```bash
-export ANTHROPIC_API_KEY=...
-# or
-export OPENAI_API_KEY=...
-```
-
-Or use local Codex CLI authentication (no API key env vars required by Use-Anything):
-
-```bash
-codex login
-```
-
-## Codex Skill Install
-
-Use-Anything is distributed as a Codex skill (`$use-anything`), not a slash prompt command.
-
-Install method 1 (Codex-native, via skill installer):
-
+Then in Codex:
 ```text
-$skill-installer install https://github.com/kgarg2468/Use-Anything/tree/main/skills/use-anything
+$use-anything
 ```
 
-Install method 2 (shell script):
+## 60-second quick start: Claude Code
 
 ```bash
-bash /path/to/Use-Anything/scripts/install_use_anything.sh
+# from repository root, target your Claude project directory
+bash ./scripts/install_use_anything.sh --platform claude --source repo --project-dir /absolute/path/to/project
 ```
 
-Both methods install to `$CODEX_HOME/skills/use-anything` (defaults to `~/.codex/skills/use-anything`).
+Then in Claude Code inside that project:
+```text
+/use-anything requests
+```
 
-After install, restart Codex so `$use-anything` is discovered.
-
-Integration details:
-
-- [Codex Skill Integration](docs/platform-integrations.md#codex-skill)
-
-## Claude Code (Single Project)
-
-Install project-local Claude commands from your target project directory:
+## 60-second quick start: OpenCode
 
 ```bash
-bash /path/to/Use-Anything/scripts/install_claude_project_command.sh
+bash ./scripts/install_use_anything.sh --platform opencode --source repo
 ```
 
-This writes:
-- `.claude/commands/use-anything.md`
-- `.claude/commands/useantyhig.md` (alias)
+Then in OpenCode:
+```text
+/use-anything requests
+```
 
-Then restart Claude Code in that project and use:
-- `/use-anything <target>`
-- `/useantyhig <target>`
+## 60-second quick start: OpenClaw
+
+```bash
+bash ./scripts/install_use_anything.sh --platform openclaw --source repo
+```
+
+Then in OpenClaw:
+```text
+@use-anything requests
+```
+
+## 60-second quick start: Qoder
+
+```bash
+bash ./scripts/install_use_anything.sh --platform qoder --source repo
+```
+
+Then in Qoder:
+```text
+/use-anything requests
+```
+
+## 60-second quick start: Copilot CLI
+
+```bash
+bash ./scripts/install_use_anything.sh --platform copilot --source repo
+```
+
+Then in Copilot CLI:
+```text
+/use-anything requests
+```
 
 ## Usage
 
 ```bash
-# Use from Codex skill context:
-$use-anything
+# Explicit run command
+use-anything run requests
 
-# Full pipeline
+# Implicit run command
 use-anything requests
 
-# Full pipeline from docs URL
-use-anything https://docs.python-requests.org/en/latest/
+# Probe-only path
+use-anything run requests --probe-only
 
-# Full pipeline from GitHub repository
-use-anything https://github.com/pallets/flask
+# Full pipeline from docs URL
+use-anything run https://docs.python-requests.org/en/latest/
+
+# Full pipeline from repository URL
+use-anything run https://github.com/pallets/flask
 
 # Full pipeline from local directory
-use-anything ./my-project
+use-anything run ./my-project
 
-# Full pipeline from binary
-use-anything --binary ffmpeg
+# Binary target
+use-anything run --binary ffmpeg
 
-# Force full regeneration (skip merge from discovered existing skill)
-use-anything requests --force
+# Regenerate canonical sections
+use-anything run requests --force
 
-# Full pipeline via Codex CLI backend
-use-anything requests --model codex-cli
-
-# Probe only
-use-anything requests --probe-only
-
-# Explicit probe command
+# Probe command
 use-anything probe requests
 
 # Validate generated output
 use-anything validate ./use-anything-requests
 ```
 
-## Updating
-
-If you installed globally from this repository clone:
+## Verify install
 
 ```bash
-git pull
-uv tool install --force --from . use-anything
-bash ./scripts/install_use_anything.sh
+use-anything --help
+use-anything run requests --probe-only
+bash ./scripts/install_use_anything.sh --platform all --check
 ```
 
-If you installed from a released package name:
+## Troubleshooting
 
-```bash
-uv tool upgrade use-anything
-bash ./scripts/install_use_anything.sh
-```
+- Use `--dry-run` to inspect planned actions:
+  - `bash ./scripts/install_use_anything.sh --platform all --dry-run --project-dir "$PWD"`
+- Use `--check` to validate source adapters exist before install.
+- For Claude, confirm `--project-dir` points to the project where `.claude/commands/` should be created.
+- Restart your agent host after installing adapters if commands/skills were already loaded.
 
-## Enhancement behavior
+## Integration details
 
-When probing discovers an upstream `SKILL.md`, Use-Anything enhances output by:
-
-- Regenerating canonical sections (`Setup`, `Key concepts`, workflows, constraints, quick reference).
-- Preserving non-canonical custom sections from the upstream skill.
-- Preserving unknown metadata keys in frontmatter.
-
-Use `--force` to bypass this merge behavior and fully regenerate canonical output.
+- [Platform integrations](docs/platform-integrations.md)
 
 ## Development
 
