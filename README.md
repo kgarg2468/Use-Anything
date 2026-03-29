@@ -80,6 +80,22 @@ Integration details:
 
 - [Codex Skill Integration](docs/platform-integrations.md#codex-skill)
 
+## Claude Code (Single Project)
+
+Install project-local Claude commands from your target project directory:
+
+```bash
+bash /path/to/Use-Anything/scripts/install_claude_project_command.sh
+```
+
+This writes:
+- `.claude/commands/use-anything.md`
+- `.claude/commands/useantyhig.md` (alias)
+
+Then restart Claude Code in that project and use:
+- `/use-anything <target>`
+- `/useantyhig <target>`
+
 ## Usage
 
 ```bash
