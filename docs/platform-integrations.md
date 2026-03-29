@@ -1,11 +1,10 @@
-# Platform Command Packs
+# Platform Integrations
 
-Use-Anything ships repo-native command packs for Claude Code, Codex, and OpenCode.
-All three delegate to one shared wrapper: `use-anything-command`.
+Use-Anything now integrates with Codex as a native skill (`$use-anything`), not a slash prompt command.
 
 ## Prerequisite: Global CLI Install
 
-Install `use-anything` globally first so commands work from any project directory.
+Install `use-anything` globally first so commands work from any directory.
 
 ```bash
 # from this repository root
@@ -18,86 +17,37 @@ Verify:
 use-anything --help
 ```
 
-## Install / Refresh Command Packs
+## Codex Skill
 
-Project-local install (default):
+Install option 1 (Codex-native via skill installer):
+
+```text
+$skill-installer install https://github.com/kgarg2468/Use-Anything/tree/main/skills/use-anything
+```
+
+Install option 2 (shell):
 
 ```bash
-# from the target project directory
 bash /path/to/Use-Anything/scripts/install_use_anything.sh
 ```
 
-Global install:
+Both install to `$CODEX_HOME/skills/use-anything` (defaults to `~/.codex/skills/use-anything`).
 
-```bash
-bash /path/to/Use-Anything/scripts/install_use_anything.sh -global
+Invoke in Codex with:
+
+```text
+$use-anything
 ```
 
-Default local install writes:
+Restart Codex after install so new skills are discovered.
 
-- `.claude/commands/use-anything.md`
-- `.codex/prompts/use-anything.md`
-- `.config/opencode/commands/use-anything.md`
-- `.local/bin/use-anything-command`
+## Legacy Prompt Cleanup
 
-Default local install also mirrors:
-- `~/.claude/commands/use-anything.md`
+`install_use_anything.sh` removes legacy prompt-command files for Use-Anything:
+
 - `~/.codex/prompts/use-anything.md`
-
-Mirror rationale: some Codex/Claude CLI versions (including Codex CLI `v0.116.0`) discover slash commands from home-level directories, not project-local prompt directories.
-
-Global install writes the same paths under `~`.
-
-## Wrapper Behavior
-
-`use-anything-command` runs:
-
-1. `uv run use-anything <args>` when `uv` is available
-2. `use-anything <args>` when `uv` is unavailable but the binary exists
-3. exits `127` when neither runner is installed
-
-With a global install, the wrapper fallback (`use-anything`) works in any cwd.
-
-Dry-run mode for verification:
-
-```bash
-USE_ANYTHING_WRAPPER_DRY_RUN=1 use-anything-command requests --probe-only
-```
-
-## Claude Code
-
-- Command file location: `<project>/.claude/commands/use-anything.md` (or `~/.claude/commands/use-anything.md` with `-global`)
-- Install/refresh: `bash /path/to/Use-Anything/scripts/install_use_anything.sh` (append `-global` for home install)
-- Example invocation in Claude Code: `/use-anything requests`
-- If command was open before install: restart session to reload slash commands.
-- Verification:
-
-```bash
-USE_ANYTHING_WRAPPER_DRY_RUN=1 use-anything-command requests --probe-only
-```
-
-## Codex
-
-- Command file location: `<project>/.codex/prompts/use-anything.md` (or `~/.codex/prompts/use-anything.md` with `-global`)
-- Install/refresh: `bash /path/to/Use-Anything/scripts/install_use_anything.sh` (append `-global` for home install)
-- Example invocation in Codex prompt/command flow: `/use-anything requests`
-- If command was open before install: restart session to reload slash commands.
-- Verification:
-
-```bash
-USE_ANYTHING_WRAPPER_DRY_RUN=1 use-anything-command requests --probe-only
-```
-
-## OpenCode
-
-- Command file location: `<project>/.config/opencode/commands/use-anything.md` (or `~/.config/opencode/commands/use-anything.md` with `-global`)
-- Install/refresh: `bash /path/to/Use-Anything/scripts/install_use_anything.sh` (append `-global` for home install)
-- Example invocation in OpenCode: `/use-anything requests`
-- Verification:
-
-```bash
-USE_ANYTHING_WRAPPER_DRY_RUN=1 use-anything-command requests --probe-only
-```
+- `~/.claude/commands/use-anything.md`
+- `~/.config/opencode/commands/use-anything.md`
 
 ## Update Flow
 
@@ -106,18 +56,18 @@ Repo-based install:
 ```bash
 git pull
 uv tool install --force --from . use-anything
-bash ./scripts/install_use_anything.sh -global
+bash ./scripts/install_use_anything.sh
 ```
 
 Release-based install:
 
 ```bash
 uv tool upgrade use-anything
-bash ./scripts/install_use_anything.sh -global
+bash ./scripts/install_use_anything.sh
 ```
 
-## Deterministic Contract Test
+## Integration Tests
 
 ```bash
-uv run pytest -q tests/integrations/test_command_packs.py
+uv run pytest -q tests/integrations/test_install_use_anything.py tests/integrations/test_skill_package.py
 ```

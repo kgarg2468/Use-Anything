@@ -4,23 +4,14 @@ import os
 import subprocess
 from pathlib import Path
 
-import pytest
-
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 WRAPPER_PATH = PROJECT_ROOT / "scripts" / "use_anything_command.sh"
 
 
-@pytest.mark.parametrize(
-    "path",
-    [
-        PROJECT_ROOT / "integrations" / "claude-code" / ".claude" / "commands" / "use-anything.md",
-        PROJECT_ROOT / "integrations" / "codex" / ".codex" / "prompts" / "use-anything.md",
-        PROJECT_ROOT / "integrations" / "opencode" / "commands" / "use-anything.md",
-    ],
-)
-def test_command_pack_file_exists(path: Path) -> None:
-    assert path.exists(), f"missing command pack file: {path}"
+def test_legacy_prompt_assets_removed() -> None:
+    assert not (PROJECT_ROOT / "integrations" / "claude-code" / ".claude" / "commands" / "use-anything.md").exists()
+    assert not (PROJECT_ROOT / "integrations" / "codex" / ".codex" / "prompts" / "use-anything.md").exists()
+    assert not (PROJECT_ROOT / "integrations" / "opencode" / "commands" / "use-anything.md").exists()
 
 
 def test_wrapper_is_executable() -> None:

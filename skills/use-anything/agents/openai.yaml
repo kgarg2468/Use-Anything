@@ -1,0 +1,7 @@
+interface:
+  display_name: "Use Anything"
+  short_description: "Generate skills from software interfaces"
+  default_prompt: "Use $use-anything to generate or validate a skill from a target interface."
+
+policy:
+  allow_implicit_invocation: true

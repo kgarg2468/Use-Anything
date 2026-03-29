@@ -19,6 +19,15 @@ def test_local_install_by_default(tmp_path: Path) -> None:
     project_dir.mkdir()
     home_dir = tmp_path / "home"
     home_dir.mkdir()
+    codex_home = tmp_path / "codex-home"
+    codex_home.mkdir()
+
+    (home_dir / ".codex" / "prompts").mkdir(parents=True, exist_ok=True)
+    (home_dir / ".claude" / "commands").mkdir(parents=True, exist_ok=True)
+    (home_dir / ".config" / "opencode" / "commands").mkdir(parents=True, exist_ok=True)
+    (home_dir / ".codex" / "prompts" / "use-anything.md").write_text("legacy", encoding="utf-8")
+    (home_dir / ".claude" / "commands" / "use-anything.md").write_text("legacy", encoding="utf-8")
+    (home_dir / ".config" / "opencode" / "commands" / "use-anything.md").write_text("legacy", encoding="utf-8")
 
     result = subprocess.run(
         [str(INSTALLER_PATH)],
@@ -28,28 +37,19 @@ def test_local_install_by_default(tmp_path: Path) -> None:
         check=False,
         env={
             "HOME": str(home_dir),
+            "CODEX_HOME": str(codex_home),
             "PATH": "/usr/bin:/bin",
         },
     )
 
     assert result.returncode == 0
-    assert (project_dir / ".claude" / "commands" / "use-anything.md").exists()
-    assert (project_dir / ".codex" / "prompts" / "use-anything.md").exists()
-    assert (project_dir / ".local" / "bin" / "use-anything-command").exists()
-    assert (home_dir / ".claude" / "commands" / "use-anything.md").exists()
-    assert (home_dir / ".codex" / "prompts" / "use-anything.md").exists()
-    claude_cmd = (project_dir / ".claude" / "commands" / "use-anything.md").read_text(encoding="utf-8")
-    codex_cmd = (project_dir / ".codex" / "prompts" / "use-anything.md").read_text(encoding="utf-8")
-    mirrored_claude_cmd = (home_dir / ".claude" / "commands" / "use-anything.md").read_text(encoding="utf-8")
-    mirrored_codex_cmd = (home_dir / ".codex" / "prompts" / "use-anything.md").read_text(encoding="utf-8")
-    expected_wrapper = str(project_dir / ".local" / "bin" / "use-anything-command")
-    assert expected_wrapper in claude_cmd
-    assert expected_wrapper in codex_cmd
-    assert expected_wrapper in mirrored_claude_cmd
-    assert expected_wrapper in mirrored_codex_cmd
-    assert "mode: local" in result.stdout
-    assert "mirrored_home_command_files:" in result.stdout
-    assert str(home_dir) in result.stdout
+    assert (codex_home / "skills" / "use-anything" / "SKILL.md").exists()
+    assert (codex_home / "skills" / "use-anything" / "agents" / "openai.yaml").exists()
+    assert not (home_dir / ".codex" / "prompts" / "use-anything.md").exists()
+    assert not (home_dir / ".claude" / "commands" / "use-anything.md").exists()
+    assert not (home_dir / ".config" / "opencode" / "commands" / "use-anything.md").exists()
+    assert "Installed skill:" in result.stdout
+    assert "Invoke with: $use-anything" in result.stdout
 
 
 def test_global_install_with_flag(tmp_path: Path) -> None:
@@ -57,6 +57,7 @@ def test_global_install_with_flag(tmp_path: Path) -> None:
     project_dir.mkdir()
     home_dir = tmp_path / "home"
     home_dir.mkdir()
+    codex_home = home_dir / ".codex"
 
     result = subprocess.run(
         [str(INSTALLER_PATH), "-global"],
@@ -71,18 +72,10 @@ def test_global_install_with_flag(tmp_path: Path) -> None:
     )
 
     assert result.returncode == 0
-    assert not (project_dir / ".claude").exists()
-    assert not (project_dir / ".codex").exists()
-    assert not (project_dir / ".local").exists()
-    assert (home_dir / ".claude" / "commands" / "use-anything.md").exists()
-    assert (home_dir / ".codex" / "prompts" / "use-anything.md").exists()
-    assert (home_dir / ".local" / "bin" / "use-anything-command").exists()
-    claude_cmd = (home_dir / ".claude" / "commands" / "use-anything.md").read_text(encoding="utf-8")
-    codex_cmd = (home_dir / ".codex" / "prompts" / "use-anything.md").read_text(encoding="utf-8")
-    expected_wrapper = str(home_dir / ".local" / "bin" / "use-anything-command")
-    assert expected_wrapper in claude_cmd
-    assert expected_wrapper in codex_cmd
-    assert "mode: global" in result.stdout
+    assert (codex_home / "skills" / "use-anything" / "SKILL.md").exists()
+    assert (codex_home / "skills" / "use-anything" / "references" / "commands.md").exists()
+    assert "Installed skill:" in result.stdout
+    assert str(codex_home / "skills" / "use-anything") in result.stdout
 
 
 def test_unknown_flag_exits_non_zero(tmp_path: Path) -> None:

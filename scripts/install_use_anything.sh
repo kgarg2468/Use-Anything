@@ -5,14 +5,10 @@ usage() {
   cat >&2 <<'USAGE'
 usage: install_use_anything.sh [-global]
 
-Installs Use-Anything command packs and wrapper.
-Default mode installs into the current project directory.
-Pass -global to install into your home directory.
+Install the `use-anything` Codex skill into $CODEX_HOME/skills (defaults to ~/.codex/skills).
+The optional -global flag is accepted for compatibility and installs to the same destination.
 USAGE
 }
-
-MODE="local"
-TARGET_ROOT="$PWD"
 
 if [[ $# -gt 1 ]]; then
   usage
@@ -22,8 +18,6 @@ fi
 if [[ $# -eq 1 ]]; then
   case "$1" in
     -global)
-      MODE="global"
-      TARGET_ROOT="${HOME}"
       ;;
     -h|--help)
       usage
@@ -36,59 +30,40 @@ if [[ $# -eq 1 ]]; then
   esac
 fi
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-"${SCRIPT_DIR}/install_command_packs.sh" "${TARGET_ROOT}"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SOURCE_SKILL_DIR="${REPO_ROOT}/skills/use-anything"
 
-WRAPPER_PATH="${TARGET_ROOT}/.local/bin/use-anything-command"
-WRAPPER_PATH_ESCAPED="${WRAPPER_PATH//&/\\&}"
-INSTALLER_HINT="bash /path/to/Use-Anything/scripts/install_use_anything.sh"
-INSTALLER_HINT_ESCAPED="${INSTALLER_HINT//&/\\&}"
-
-rewrite_command_pack() {
-  local file="$1"
-  local tmp_file
-  tmp_file="$(mktemp)"
-  sed \
-    -e "s|use-anything-command|${WRAPPER_PATH_ESCAPED}|g" \
-    -e "s|bash ./scripts/install_command_packs.sh|${INSTALLER_HINT_ESCAPED}|g" \
-    "${file}" >"${tmp_file}"
-  mv "${tmp_file}" "${file}"
-}
-
-rewrite_command_pack "${TARGET_ROOT}/.claude/commands/use-anything.md"
-rewrite_command_pack "${TARGET_ROOT}/.codex/prompts/use-anything.md"
-rewrite_command_pack "${TARGET_ROOT}/.config/opencode/commands/use-anything.md"
-
-MIRRORED_HOME_PATHS=""
-if [[ "${MODE}" == "local" ]]; then
-  HOME_CLAUDE_CMD="${HOME}/.claude/commands/use-anything.md"
-  HOME_CODEX_CMD="${HOME}/.codex/prompts/use-anything.md"
-  mkdir -p "$(dirname "${HOME_CLAUDE_CMD}")" "$(dirname "${HOME_CODEX_CMD}")"
-  cp "${TARGET_ROOT}/.claude/commands/use-anything.md" "${HOME_CLAUDE_CMD}"
-  cp "${TARGET_ROOT}/.codex/prompts/use-anything.md" "${HOME_CODEX_CMD}"
-  MIRRORED_HOME_PATHS="${HOME_CLAUDE_CMD}, ${HOME_CODEX_CMD}"
+if [[ ! -f "${SOURCE_SKILL_DIR}/SKILL.md" ]]; then
+  echo "install_use_anything: missing source skill at ${SOURCE_SKILL_DIR}" >&2
+  exit 1
 fi
 
-cat <<MSG
+CODEX_HOME_DIR="${CODEX_HOME:-${HOME}/.codex}"
+DEST_SKILLS_DIR="${CODEX_HOME_DIR}/skills"
+DEST_SKILL_DIR="${DEST_SKILLS_DIR}/use-anything"
 
-install_use_anything complete
-mode: ${MODE}
-install_root: ${TARGET_ROOT}
+mkdir -p "${DEST_SKILLS_DIR}"
+rm -rf "${DEST_SKILL_DIR}"
+cp -R "${SOURCE_SKILL_DIR}" "${DEST_SKILL_DIR}"
+
+# Remove legacy prompt-command integration files for this project.
+rm -f "${HOME}/.codex/prompts/use-anything.md"
+rm -f "${HOME}/.claude/commands/use-anything.md"
+rm -f "${HOME}/.config/opencode/commands/use-anything.md"
+
+cat <<MSG
+Installed skill:
+- Name: use-anything
+- Path: ${DEST_SKILL_DIR}
+
+Use in Codex:
+- Invoke with: \$use-anything
 
 Use in terminal:
 - use-anything <target>
-- ${WRAPPER_PATH} <target>
 
-Use in Claude/Codex:
-- /use-anything <target>
+Install via skill-installer (alternative):
+- \$skill-installer install https://github.com/kgarg2468/Use-Anything/tree/main/skills/use-anything
+
+Restart Codex to pick up new skills.
 MSG
-
-if [[ "${MODE}" == "local" ]]; then
-  cat <<MSG
-
-Codex/Claude compatibility:
-- mirrored_home_command_files: ${MIRRORED_HOME_PATHS}
-- reason: some CLI versions discover slash commands from home-level directories only.
-- note: restart Codex/Claude sessions after install if /use-anything was already open.
-MSG
-fi

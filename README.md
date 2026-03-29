@@ -56,35 +56,36 @@ Or use local Codex CLI authentication (no API key env vars required by Use-Anyth
 codex login
 ```
 
-## Provider Command Packs
+## Codex Skill Install
 
-Install the provider command packs (Claude Code, Codex, OpenCode).
-Default installs into the current project directory. Use `-global` to install into home:
+Use-Anything is distributed as a Codex skill (`$use-anything`), not a slash prompt command.
 
-```bash
-# from a project directory
-bash /path/to/Use-Anything/scripts/install_use_anything.sh
+Install method 1 (Codex-native, via skill installer):
 
-# global install (~/.claude, ~/.codex, ~/.local/bin)
-bash /path/to/Use-Anything/scripts/install_use_anything.sh -global
+```text
+$skill-installer install https://github.com/kgarg2468/Use-Anything/tree/main/skills/use-anything
 ```
 
-Local mode behavior:
-- writes command packs/wrapper into the current project (`.claude`, `.codex`, `.config/opencode`, `.local/bin`)
-- mirrors Claude/Codex command files to `~/.claude/commands` and `~/.codex/prompts` for CLI versions that only discover home-level slash commands
-- keeps the command execution path project-scoped by embedding the project wrapper path in mirrored command files
+Install method 2 (shell script):
 
-After install, restart any open Codex/Claude session so `/use-anything` reloads.
+```bash
+bash /path/to/Use-Anything/scripts/install_use_anything.sh
+```
 
-Provider quick links:
+Both methods install to `$CODEX_HOME/skills/use-anything` (defaults to `~/.codex/skills/use-anything`).
 
-- [Claude Code](docs/platform-integrations.md#claude-code)
-- [Codex](docs/platform-integrations.md#codex)
-- [OpenCode](docs/platform-integrations.md#opencode)
+After install, restart Codex so `$use-anything` is discovered.
+
+Integration details:
+
+- [Codex Skill Integration](docs/platform-integrations.md#codex-skill)
 
 ## Usage
 
 ```bash
+# Use from Codex skill context:
+$use-anything
+
 # Full pipeline
 use-anything requests
 
@@ -123,14 +124,14 @@ If you installed globally from this repository clone:
 ```bash
 git pull
 uv tool install --force --from . use-anything
-bash ./scripts/install_use_anything.sh -global
+bash ./scripts/install_use_anything.sh
 ```
 
 If you installed from a released package name:
 
 ```bash
 uv tool upgrade use-anything
-bash ./scripts/install_use_anything.sh -global
+bash ./scripts/install_use_anything.sh
 ```
 
 ## Enhancement behavior
