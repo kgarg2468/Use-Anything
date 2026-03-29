@@ -8,10 +8,13 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 WRAPPER_PATH = PROJECT_ROOT / "scripts" / "use_anything_command.sh"
 
 
-def test_only_claude_project_command_template_exists() -> None:
+def test_platform_adapter_assets_exist() -> None:
     assert (PROJECT_ROOT / "integrations" / "claude-code" / ".claude" / "commands" / "use-anything.md").exists()
+    assert (PROJECT_ROOT / "integrations" / "opencode" / "commands" / "use-anything.md").exists()
+    assert (PROJECT_ROOT / "integrations" / "openclaw" / "skills" / "use-anything" / "SKILL.md").exists()
+    assert (PROJECT_ROOT / "integrations" / "qoder" / "commands" / "use-anything.md").exists()
+    assert (PROJECT_ROOT / "integrations" / "copilot" / "commands" / "use-anything.md").exists()
     assert not (PROJECT_ROOT / "integrations" / "codex" / ".codex" / "prompts" / "use-anything.md").exists()
-    assert not (PROJECT_ROOT / "integrations" / "opencode" / "commands" / "use-anything.md").exists()
 
 
 def test_wrapper_is_executable() -> None:
