@@ -8,8 +8,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 WRAPPER_PATH = PROJECT_ROOT / "scripts" / "use_anything_command.sh"
 
 
-def test_legacy_prompt_assets_removed() -> None:
-    assert not (PROJECT_ROOT / "integrations" / "claude-code" / ".claude" / "commands" / "use-anything.md").exists()
+def test_only_claude_project_command_template_exists() -> None:
+    assert (PROJECT_ROOT / "integrations" / "claude-code" / ".claude" / "commands" / "use-anything.md").exists()
     assert not (PROJECT_ROOT / "integrations" / "codex" / ".codex" / "prompts" / "use-anything.md").exists()
     assert not (PROJECT_ROOT / "integrations" / "opencode" / "commands" / "use-anything.md").exists()
 

@@ -41,6 +41,24 @@ $use-anything
 
 Restart Codex after install so new skills are discovered.
 
+## Claude Code Project Command
+
+Install project-local command files in your current project:
+
+```bash
+bash /path/to/Use-Anything/scripts/install_claude_project_command.sh
+```
+
+Installed command files:
+- `.claude/commands/use-anything.md`
+- `.claude/commands/useantyhig.md` (alias)
+
+Invoke in Claude Code with:
+- `/use-anything <target>`
+- `/useantyhig <target>`
+
+Restart Claude Code in that project after install.
+
 ## Legacy Prompt Cleanup
 
 `install_use_anything.sh` removes legacy prompt-command files for Use-Anything:
