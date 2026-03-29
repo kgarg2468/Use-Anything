@@ -69,6 +69,13 @@ bash /path/to/Use-Anything/scripts/install_use_anything.sh
 bash /path/to/Use-Anything/scripts/install_use_anything.sh -global
 ```
 
+Local mode behavior:
+- writes command packs/wrapper into the current project (`.claude`, `.codex`, `.config/opencode`, `.local/bin`)
+- mirrors Claude/Codex command files to `~/.claude/commands` and `~/.codex/prompts` for CLI versions that only discover home-level slash commands
+- keeps the command execution path project-scoped by embedding the project wrapper path in mirrored command files
+
+After install, restart any open Codex/Claude session so `/use-anything` reloads.
+
 Provider quick links:
 
 - [Claude Code](docs/platform-integrations.md#claude-code)

@@ -59,6 +59,16 @@ rewrite_command_pack "${TARGET_ROOT}/.claude/commands/use-anything.md"
 rewrite_command_pack "${TARGET_ROOT}/.codex/prompts/use-anything.md"
 rewrite_command_pack "${TARGET_ROOT}/.config/opencode/commands/use-anything.md"
 
+MIRRORED_HOME_PATHS=""
+if [[ "${MODE}" == "local" ]]; then
+  HOME_CLAUDE_CMD="${HOME}/.claude/commands/use-anything.md"
+  HOME_CODEX_CMD="${HOME}/.codex/prompts/use-anything.md"
+  mkdir -p "$(dirname "${HOME_CLAUDE_CMD}")" "$(dirname "${HOME_CODEX_CMD}")"
+  cp "${TARGET_ROOT}/.claude/commands/use-anything.md" "${HOME_CLAUDE_CMD}"
+  cp "${TARGET_ROOT}/.codex/prompts/use-anything.md" "${HOME_CODEX_CMD}"
+  MIRRORED_HOME_PATHS="${HOME_CLAUDE_CMD}, ${HOME_CODEX_CMD}"
+fi
+
 cat <<MSG
 
 install_use_anything complete
@@ -72,3 +82,13 @@ Use in terminal:
 Use in Claude/Codex:
 - /use-anything <target>
 MSG
+
+if [[ "${MODE}" == "local" ]]; then
+  cat <<MSG
+
+Codex/Claude compatibility:
+- mirrored_home_command_files: ${MIRRORED_HOME_PATHS}
+- reason: some CLI versions discover slash commands from home-level directories only.
+- note: restart Codex/Claude sessions after install if /use-anything was already open.
+MSG
+fi

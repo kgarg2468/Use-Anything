@@ -17,6 +17,8 @@ def test_installer_script_exists_and_is_executable() -> None:
 def test_local_install_by_default(tmp_path: Path) -> None:
     project_dir = tmp_path / "optX"
     project_dir.mkdir()
+    home_dir = tmp_path / "home"
+    home_dir.mkdir()
 
     result = subprocess.run(
         [str(INSTALLER_PATH)],
@@ -25,7 +27,7 @@ def test_local_install_by_default(tmp_path: Path) -> None:
         text=True,
         check=False,
         env={
-            "HOME": str(tmp_path / "home"),
+            "HOME": str(home_dir),
             "PATH": "/usr/bin:/bin",
         },
     )
@@ -34,12 +36,20 @@ def test_local_install_by_default(tmp_path: Path) -> None:
     assert (project_dir / ".claude" / "commands" / "use-anything.md").exists()
     assert (project_dir / ".codex" / "prompts" / "use-anything.md").exists()
     assert (project_dir / ".local" / "bin" / "use-anything-command").exists()
+    assert (home_dir / ".claude" / "commands" / "use-anything.md").exists()
+    assert (home_dir / ".codex" / "prompts" / "use-anything.md").exists()
     claude_cmd = (project_dir / ".claude" / "commands" / "use-anything.md").read_text(encoding="utf-8")
     codex_cmd = (project_dir / ".codex" / "prompts" / "use-anything.md").read_text(encoding="utf-8")
+    mirrored_claude_cmd = (home_dir / ".claude" / "commands" / "use-anything.md").read_text(encoding="utf-8")
+    mirrored_codex_cmd = (home_dir / ".codex" / "prompts" / "use-anything.md").read_text(encoding="utf-8")
     expected_wrapper = str(project_dir / ".local" / "bin" / "use-anything-command")
     assert expected_wrapper in claude_cmd
     assert expected_wrapper in codex_cmd
+    assert expected_wrapper in mirrored_claude_cmd
+    assert expected_wrapper in mirrored_codex_cmd
     assert "mode: local" in result.stdout
+    assert "mirrored_home_command_files:" in result.stdout
+    assert str(home_dir) in result.stdout
 
 
 def test_global_install_with_flag(tmp_path: Path) -> None:
@@ -61,6 +71,9 @@ def test_global_install_with_flag(tmp_path: Path) -> None:
     )
 
     assert result.returncode == 0
+    assert not (project_dir / ".claude").exists()
+    assert not (project_dir / ".codex").exists()
+    assert not (project_dir / ".local").exists()
     assert (home_dir / ".claude" / "commands" / "use-anything.md").exists()
     assert (home_dir / ".codex" / "prompts" / "use-anything.md").exists()
     assert (home_dir / ".local" / "bin" / "use-anything-command").exists()

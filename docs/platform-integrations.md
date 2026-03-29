@@ -40,6 +40,12 @@ Default local install writes:
 - `.config/opencode/commands/use-anything.md`
 - `.local/bin/use-anything-command`
 
+Default local install also mirrors:
+- `~/.claude/commands/use-anything.md`
+- `~/.codex/prompts/use-anything.md`
+
+Mirror rationale: some Codex/Claude CLI versions (including Codex CLI `v0.116.0`) discover slash commands from home-level directories, not project-local prompt directories.
+
 Global install writes the same paths under `~`.
 
 ## Wrapper Behavior
@@ -63,6 +69,7 @@ USE_ANYTHING_WRAPPER_DRY_RUN=1 use-anything-command requests --probe-only
 - Command file location: `<project>/.claude/commands/use-anything.md` (or `~/.claude/commands/use-anything.md` with `-global`)
 - Install/refresh: `bash /path/to/Use-Anything/scripts/install_use_anything.sh` (append `-global` for home install)
 - Example invocation in Claude Code: `/use-anything requests`
+- If command was open before install: restart session to reload slash commands.
 - Verification:
 
 ```bash
@@ -74,6 +81,7 @@ USE_ANYTHING_WRAPPER_DRY_RUN=1 use-anything-command requests --probe-only
 - Command file location: `<project>/.codex/prompts/use-anything.md` (or `~/.codex/prompts/use-anything.md` with `-global`)
 - Install/refresh: `bash /path/to/Use-Anything/scripts/install_use_anything.sh` (append `-global` for home install)
 - Example invocation in Codex prompt/command flow: `/use-anything requests`
+- If command was open before install: restart session to reload slash commands.
 - Verification:
 
 ```bash
