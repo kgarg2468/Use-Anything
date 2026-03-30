@@ -57,3 +57,10 @@ class ContextDecision:
 class ContextDocParseResult:
     doc: ContextDoc
     warnings: list[str]
+
+
+@dataclass(frozen=True)
+class ContextDocFreshness:
+    stale: bool
+    age_days: int | None
+    warning: str | None = None
