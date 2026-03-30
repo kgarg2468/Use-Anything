@@ -87,3 +87,14 @@ class ContextDecisionResult:
     dropped_claims: list[ContextClaim]
     warnings: list[str]
     conflicts: list[ContextClaimConflict]
+
+
+@dataclass(frozen=True)
+class ContextIngestionResult:
+    docs: list[str]
+    accepted_claims: list[ContextClaim]
+    warnings: list[str]
+    conflicts: list[ContextClaimConflict]
+    claims_used: int
+    claims_dropped: int
+    used_tokens: int

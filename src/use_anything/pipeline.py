@@ -9,9 +9,12 @@ from urllib.parse import urlparse
 import httpx
 
 from use_anything.analyze.analyzer import Analyzer
+from use_anything.context.budget import DEFAULT_CONTEXT_DOC_MAX_TOKENS
+from use_anything.context.ingest import ingest_context_docs
 from use_anything.exceptions import UnsupportedTargetError
 from use_anything.generate.generator import Generator
 from use_anything.models import (
+    ContextDocReport,
     FunctionalCheckStepReport,
     FunctionalValidationReport,
     InterfaceCandidate,
@@ -74,9 +77,48 @@ class UseAnythingPipeline:
         analysis_max_retries: int | None = None,
         functional_checks: bool = False,
         functional_timeout_seconds: int | None = None,
+        context_doc_paths: list[Path | str] | None = None,
+        context_doc_max_tokens: int = DEFAULT_CONTEXT_DOC_MAX_TOKENS,
     ) -> PipelineResult:
         probe_result = self.prober.probe_target(target, binary_name=binary_name)
         rank_result = self.ranker.rank(probe_result)
+        context_doc_report = None
+
+        if context_doc_paths:
+            project_dir = probe_result.target if probe_result.target_type == "local_directory" else None
+            context_result = ingest_context_docs(
+                doc_paths=context_doc_paths,
+                project_dir=project_dir,
+                per_doc_max_tokens=context_doc_max_tokens,
+            )
+            probe_result.source_metadata["context_doc_claims"] = [
+                {
+                    "text": claim.text,
+                    "source_path": claim.source_path,
+                    "source_section": claim.source_section,
+                }
+                for claim in context_result.accepted_claims
+            ]
+            probe_result.source_metadata["context_doc_warnings"] = context_result.warnings
+            probe_result.source_metadata["context_doc_conflicts"] = [
+                {
+                    "claim": item.claim.text,
+                    "signal_kind": item.signal.kind,
+                    "signal_path": item.signal.path,
+                    "reason": item.reason,
+                }
+                for item in context_result.conflicts
+            ]
+            context_doc_report = ContextDocReport(
+                docs=context_result.docs,
+                warnings=context_result.warnings,
+                claims_used=context_result.claims_used,
+                claims_dropped=context_result.claims_dropped,
+                conflicts=[
+                    f"{item.claim.text} -> {item.signal.kind}:{item.signal.path}"
+                    for item in context_result.conflicts
+                ],
+            )
 
         if forced_interface:
             if forced_interface not in SUPPORTED_INTERFACE_TYPES:
@@ -100,6 +142,7 @@ class UseAnythingPipeline:
             return PipelineResult(
                 probe_result=probe_result,
                 rank_result=rank_result,
+                context_doc_report=context_doc_report,
                 probe_only=True,
             )
 
@@ -149,6 +192,7 @@ class UseAnythingPipeline:
             artifacts=artifacts,
             validation_report=validation_report,
             functional_validation=functional_validation,
+            context_doc_report=context_doc_report,
             probe_only=False,
         )
 
