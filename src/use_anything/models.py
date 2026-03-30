@@ -307,6 +307,24 @@ class FunctionalValidationReport:
 
 
 @dataclass
+class ContextDocReport:
+    docs: list[str]
+    warnings: list[str]
+    claims_used: int = 0
+    claims_dropped: int = 0
+    conflicts: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "docs": self.docs,
+            "warnings": self.warnings,
+            "claims_used": self.claims_used,
+            "claims_dropped": self.claims_dropped,
+            "conflicts": self.conflicts,
+        }
+
+
+@dataclass
 class PipelineResult:
     probe_result: ProbeResult
     rank_result: RankResult
@@ -314,6 +332,7 @@ class PipelineResult:
     artifacts: GeneratedArtifacts | None = None
     validation_report: ValidationReport | None = None
     functional_validation: FunctionalValidationReport | None = None
+    context_doc_report: ContextDocReport | None = None
     probe_only: bool = False
 
     def to_dict(self) -> dict[str, Any]:
@@ -324,5 +343,6 @@ class PipelineResult:
             "artifacts": self.artifacts.to_dict() if self.artifacts else None,
             "validation_report": self.validation_report.to_dict() if self.validation_report else None,
             "functional_validation": self.functional_validation.to_dict() if self.functional_validation else None,
+            "context_doc_report": self.context_doc_report.to_dict() if self.context_doc_report else None,
             "probe_only": self.probe_only,
         }
