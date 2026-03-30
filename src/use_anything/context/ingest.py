@@ -72,6 +72,7 @@ def ingest_context_docs(
     return ContextIngestionResult(
         docs=docs,
         accepted_claims=budget.claims,
+        code_signals=code_signals,
         warnings=_dedupe_preserve_order(warnings),
         conflicts=conflicts,
         claims_used=len(budget.claims),

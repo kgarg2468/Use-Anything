@@ -93,6 +93,7 @@ class ContextDecisionResult:
 class ContextIngestionResult:
     docs: list[str]
     accepted_claims: list[ContextClaim]
+    code_signals: list[ContextCodeSignal]
     warnings: list[str]
     conflicts: list[ContextClaimConflict]
     claims_used: int

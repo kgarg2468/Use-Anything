@@ -100,6 +100,14 @@ class UseAnythingPipeline:
                 for claim in context_result.accepted_claims
             ]
             probe_result.source_metadata["context_doc_warnings"] = context_result.warnings
+            probe_result.source_metadata["context_code_signals"] = [
+                {
+                    "kind": signal.kind,
+                    "value": signal.value,
+                    "path": signal.path,
+                }
+                for signal in context_result.code_signals
+            ]
             probe_result.source_metadata["context_doc_conflicts"] = [
                 {
                     "claim": item.claim.text,

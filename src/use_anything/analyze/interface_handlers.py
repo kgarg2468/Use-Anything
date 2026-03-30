@@ -41,20 +41,33 @@ def build_interface_context(*, probe_result: ProbeResult, interface_type: str) -
     else:
         context = _build_generic_context(candidate, probe_result.source_metadata)
 
-    summary = context.summary
+    summary_parts: list[str] = []
+    code_signal_lines = _render_context_code_signals(probe_result.source_metadata)
+    if code_signal_lines:
+        summary_parts.append("Local code signals (highest precedence):")
+        summary_parts.extend(code_signal_lines)
+
+    summary_parts.append(context.summary)
+
     if prioritized_sources:
-        summary = context.summary + "\nSupplemental prioritized sources:\n" + "\n".join(
-            f"- {source}" for source in prioritized_sources
-        )
+        summary_parts.append("Supplemental prioritized sources:")
+        summary_parts.extend(f"- {source}" for source in prioritized_sources)
 
     source_excerpts = _collect_source_excerpts(candidate, probe_result.source_metadata)
     if source_excerpts:
-        summary = summary + "\nSource excerpts:\n" + "\n".join(f"- {excerpt}" for excerpt in source_excerpts)
+        summary_parts.append("Source excerpts:")
+        summary_parts.extend(f"- {excerpt}" for excerpt in source_excerpts)
 
     if evidence_result.entries:
-        summary = summary + "\nGotcha evidence (external sources):\n" + "\n".join(
-            _render_gotcha_evidence_line(entry) for entry in evidence_result.entries
-        )
+        summary_parts.append("Gotcha evidence (external sources):")
+        summary_parts.extend(_render_gotcha_evidence_line(entry) for entry in evidence_result.entries)
+
+    context_claim_lines = _render_context_doc_claims(probe_result.source_metadata)
+    if context_claim_lines:
+        summary_parts.append("Context doc claims (lowest precedence; use only when code agrees):")
+        summary_parts.extend(context_claim_lines)
+
+    summary = "\n".join(summary_parts)
 
     evidence_sources = [entry.source_ref() for entry in evidence_result.entries]
     merged_sources = _dedupe_sources([*prioritized_sources, *context.sources, *evidence_sources])
@@ -256,3 +269,45 @@ def _render_gotcha_evidence_line(entry: GotchaEvidenceEntry) -> str:
         f"- [{entry.category}] {entry.title} "
         f"(source={entry.source_label}; score={entry.relevance_score}; url={entry.url})"
     )
+
+
+def _render_context_code_signals(source_metadata: dict[str, Any]) -> list[str]:
+    raw = source_metadata.get("context_code_signals")
+    if not isinstance(raw, list):
+        return []
+    output: list[str] = []
+    for item in raw[:25]:
+        if not isinstance(item, dict):
+            continue
+        kind = str(item.get("kind", "")).strip()
+        path = str(item.get("path", "")).strip()
+        value = str(item.get("value", "")).strip()
+        if not kind:
+            continue
+        descriptor = f"- {kind}"
+        if value:
+            descriptor += f"={value}"
+        if path:
+            descriptor += f" ({path})"
+        output.append(descriptor)
+    return output
+
+
+def _render_context_doc_claims(source_metadata: dict[str, Any]) -> list[str]:
+    raw = source_metadata.get("context_doc_claims")
+    if not isinstance(raw, list):
+        return []
+    output: list[str] = []
+    for item in raw[:20]:
+        if not isinstance(item, dict):
+            continue
+        text = str(item.get("text", "")).strip()
+        source_path = str(item.get("source_path", "")).strip()
+        source_section = str(item.get("source_section", "")).strip()
+        if not text:
+            continue
+        source_label = source_path or "context-doc"
+        if source_section:
+            source_label = f"{source_label}#{source_section}"
+        output.append(f"- [{source_label}] {text}")
+    return output
