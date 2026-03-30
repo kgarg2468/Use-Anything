@@ -147,6 +147,9 @@ use-anything run https://github.com/pallets/flask
 # Full pipeline from local directory
 use-anything run ./my-project
 
+# Full pipeline with explicit context docs
+use-anything run ./my-project --context-doc /absolute/path/to/supabase.md
+
 # Binary target
 use-anything run --binary ffmpeg
 
@@ -179,6 +182,7 @@ bash ./scripts/install_use_anything.sh --platform all --check
 ## Integration details
 
 - [Platform integrations](docs/platform-integrations.md)
+- [Context-doc guardrails](docs/context-doc-guardrails.md)
 
 ## Development
 
