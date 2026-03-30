@@ -99,6 +99,7 @@ def _run_impl(
     analysis_workflow_count = len(result.analysis.workflows) if result.analysis else 0
     emitted_workflow_count = _count_emitted_workflows(result.artifacts.skill_path if result.artifacts else None)
     workflow_count = emitted_workflow_count or analysis_workflow_count
+    context_report = result.context_doc_report
     summary = {
         "interface_used": result.rank_result.primary.type,
         "skill_path": str(result.artifacts.skill_path) if result.artifacts else "",
@@ -111,6 +112,11 @@ def _run_impl(
         "validation_errors": result.validation_report.errors if result.validation_report else [],
         "functional_checks_enabled": functional_checks,
         "functional_validation": result.functional_validation.to_dict() if result.functional_validation else None,
+        "context_docs": context_report.docs if context_report else [],
+        "context_warnings": context_report.warnings if context_report else [],
+        "context_claims_used": context_report.claims_used if context_report else 0,
+        "context_claims_dropped": context_report.claims_dropped if context_report else 0,
+        "context_conflicts": context_report.conflicts if context_report else [],
     }
     click.echo(json.dumps(summary, indent=2))
 
