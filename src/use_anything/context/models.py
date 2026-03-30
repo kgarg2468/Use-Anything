@@ -51,3 +51,9 @@ class ContextDecision:
     claim: ContextClaim
     accepted: bool
     reason: str
+
+
+@dataclass(frozen=True)
+class ContextDocParseResult:
+    doc: ContextDoc
+    warnings: list[str]
