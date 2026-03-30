@@ -64,3 +64,10 @@ class ContextDocFreshness:
     stale: bool
     age_days: int | None
     warning: str | None = None
+
+
+@dataclass(frozen=True)
+class ContextSection:
+    heading: str
+    body: str
+    generic: bool
