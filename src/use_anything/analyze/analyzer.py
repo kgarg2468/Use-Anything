@@ -42,6 +42,11 @@ class Analyzer:
             rank_result=rank_result,
             interface_context=interface_context.summary,
             analysis_sources=interface_context.sources,
+            context_claims=[
+                str(item.get("text", "")).strip()
+                for item in probe_result.source_metadata.get("context_doc_claims", [])
+                if isinstance(item, dict) and str(item.get("text", "")).strip()
+            ],
         )
         payload = self.llm_client.analyze(
             system_prompt=SYSTEM_PROMPT,

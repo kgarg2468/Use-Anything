@@ -17,6 +17,7 @@ MAX_SUMMARY_CHARS = 800
 MAX_SUMMARY_CHARS_GITHUB = 400
 MAX_PROJECT_URLS_CHARS = 1200
 MAX_PROJECT_URLS_CHARS_GITHUB = 500
+MAX_CONTEXT_CLAIMS_CHARS = 1400
 
 
 def build_analysis_prompt(
@@ -25,6 +26,7 @@ def build_analysis_prompt(
     rank_result: RankResult,
     interface_context: str,
     analysis_sources: list[str],
+    context_claims: list[str] | None = None,
 ) -> str:
     """Build the user prompt for deep interface analysis."""
 
@@ -49,6 +51,7 @@ def build_analysis_prompt(
         json.dumps(metadata.get("project_urls", {}), sort_keys=True),
         project_urls_limit,
     )
+    claims_text = _format_context_claims(context_claims or [])
 
     return (
         f"Target package: {probe_result.target}\n"
@@ -61,6 +64,8 @@ def build_analysis_prompt(
         f"{interfaces_text}\n\n"
         "Interface-specific context:\n"
         f"{_truncate(interface_context, context_limit)}\n\n"
+        "Curated context-doc claims:\n"
+        f"{claims_text}\n\n"
         f"Analysis sources (must be included in output as analysis_sources): {analysis_sources}\n\n"
         "Generate a strict JSON object with setup, capability groups, workflows, and gotchas. "
         "Workflows must be procedural and include concrete steps and common errors. "
@@ -75,3 +80,10 @@ def _truncate(value: str, limit: int) -> str:
     if len(value) <= limit:
         return value
     return f"{value[:limit]} [truncated]"
+
+
+def _format_context_claims(claims: list[str]) -> str:
+    if not claims:
+        return "- none"
+    rendered = "\n".join(f"- {claim}" for claim in claims[:25])
+    return _truncate(rendered, MAX_CONTEXT_CLAIMS_CHARS)
