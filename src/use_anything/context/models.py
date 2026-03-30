@@ -71,3 +71,11 @@ class ContextSection:
     heading: str
     body: str
     generic: bool
+
+
+@dataclass(frozen=True)
+class ContextBudgetResult:
+    claims: list[ContextClaim]
+    used_tokens: int
+    dropped_claims: int
+    truncated_claims: int
