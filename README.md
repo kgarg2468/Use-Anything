@@ -2,30 +2,28 @@
 
 > Point it at any software. Get a skill your agent can use immediately.
 
-#### ⚡ Codex · ⚡ Claude Code · ⚡ OpenCode · ⚡ OpenClaw · ⚡ Qoder · ⚡ Copilot CLI
+#### Codex · Claude Code · OpenCode · OpenClaw · Qoder · Copilot CLI
 
 ---
 
-## 🤔 The Problem
+## The Problem
 
 AI agents are increasingly powerful — but they're blind to most software. They can reason about code, but they don't know the right order to call Stripe's API, the gotcha that breaks ffmpeg on Windows, or which of boto3's 500 methods are actually worth using.
 
-The two existing solutions both fall short:
-- **Hand-written skill files** — great quality, zero scale. Most software has no skill coverage.
-- **Generated CLI wrappers** (like CLI-Anything) — powerful, but heavy. Installs new binaries, requires maintenance, needs the software locally.
+The existing solution — hand-written skill files — doesn't scale. Most software has zero skill coverage.
 
-**Use-Anything takes a third path**: analyze any software's *existing* interfaces (APIs, SDKs, CLIs, docs) and generate an agent-optimized `SKILL.md` that teaches agents to use what's already there.
+**Use-Anything takes a different path**: analyze any software's *existing* interfaces (APIs, SDKs, CLIs, docs) and generate an agent-optimized `SKILL.md` that teaches agents to use what's already there.
 
 Zero wrapper code. Zero new binaries. Just knowledge.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.10+
 - `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` set in your environment
-- A supported agent: [Codex](#-codex) · [Claude Code](#-claude-code) · [OpenCode](#-opencode) · [OpenClaw](#-openclaw) · [Qoder](#-qoder) · [Copilot CLI](#-copilot-cli)
+- A supported agent: [Codex](#codex) · [Claude Code](#claude-code) · [OpenCode](#opencode) · [OpenClaw](#openclaw) · [Qoder](#qoder) · [Copilot CLI](#copilot-cli)
 
 ### Install
 
@@ -62,12 +60,11 @@ Output: a ready-to-use `use-anything-<name>/` skill directory with `SKILL.md` an
 
 ---
 
-## 🎯 Pick Your Platform
+## Pick Your Platform
 
-### ⚡ Codex
+### Codex
 
 ```bash
-# From repo root
 bash ./scripts/install_use_anything.sh --platform codex --source repo
 ```
 
@@ -78,7 +75,7 @@ $use-anything stripe
 
 ---
 
-### ⚡ Claude Code
+### Claude Code
 
 ```bash
 # Installs a slash command into your Claude project
@@ -92,7 +89,7 @@ Then in Claude Code:
 
 ---
 
-### ⚡ OpenCode
+### OpenCode
 
 ```bash
 bash ./scripts/install_use_anything.sh --platform opencode --source repo
@@ -105,7 +102,7 @@ Then in OpenCode:
 
 ---
 
-### ⚡ OpenClaw
+### OpenClaw
 
 ```bash
 bash ./scripts/install_use_anything.sh --platform openclaw --source repo
@@ -118,7 +115,7 @@ Then in OpenClaw:
 
 ---
 
-### ⚡ Qoder
+### Qoder
 
 ```bash
 bash ./scripts/install_use_anything.sh --platform qoder --source repo
@@ -131,7 +128,7 @@ Then in Qoder:
 
 ---
 
-### ⚡ Copilot CLI
+### Copilot CLI
 
 ```bash
 bash ./scripts/install_use_anything.sh --platform copilot --source repo
@@ -154,7 +151,7 @@ The installer supports: `--platform codex|claude|opencode|openclaw|qoder|copilot
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 Use-Anything runs a fully automated 5-phase pipeline:
 
@@ -196,7 +193,7 @@ OpenAPI specs · REST APIs · Python SDKs · Node.js SDKs · CLI tools · GraphQ
 
 ---
 
-## 📦 What Gets Generated
+## What Gets Generated
 
 ```
 use-anything-stripe/
@@ -215,7 +212,7 @@ The `SKILL.md` is self-contained — no runtime dependency on Use-Anything. Drop
 
 ---
 
-## 📋 Full Command Reference
+## Full Command Reference
 
 ```bash
 # Generate (implicit run)
@@ -240,22 +237,7 @@ use-anything validate ./use-anything-stripe        # Validate an existing skill 
 
 ---
 
-## 🆚 Use-Anything vs CLI-Anything
-
-| | Use-Anything | CLI-Anything |
-|---|---|---|
-| **Output** | `SKILL.md` knowledge file | Full Python CLI binary |
-| **Approach** | Teaches agent to use *existing* interfaces | Generates a *new* CLI wrapper |
-| **Weight** | Zero — one text file | Heavy — installs new package |
-| **Best for** | APIs, SDKs, documented CLIs | GUI apps with no API |
-| **Requires software locally** | No | Yes |
-| **Maintenance** | Regenerate with `--force` | Tests + versioning |
-
-They're designed to complement each other. Use-Anything is the first choice; CLI-Anything is for GUI-only software with no programmable interface.
-
----
-
-## 📂 Project Structure
+## Project Structure
 
 ```
 use-anything/
@@ -284,7 +266,7 @@ use-anything/
 
 ---
 
-## 🔍 Verify Your Install
+## Verify Your Install
 
 ```bash
 use-anything --help
@@ -294,7 +276,7 @@ bash ./scripts/install_use_anything.sh --platform all --check
 
 ---
 
-## 🛠 Troubleshooting
+## Troubleshooting
 
 | Problem | Fix |
 |---|---|
@@ -306,18 +288,7 @@ bash ./scripts/install_use_anything.sh --platform all --check
 
 ---
 
-## 🗺 Roadmap
-
-- [ ] Community skill registry — share and reuse generated skills
-- [ ] Web interface for non-CLI users
-- [ ] `use-anything update` — refresh a skill when the software updates
-- [ ] Auto-router: detect when to use Use-Anything vs CLI-Anything vs raw MCP
-- [ ] Support for closed-source software and web services
-- [ ] Functional validation (actually run the first workflow step)
-
----
-
-## 🤝 Contributing
+## Contributing
 
 Contributions welcome. See [spec.md](spec.md) for the full design specification — it covers the architecture, every pipeline phase, design decisions, and roadmap in detail.
 
@@ -330,6 +301,6 @@ uv run ruff check .
 
 ---
 
-## 📄 License
+## License
 
 MIT
