@@ -62,6 +62,8 @@ def _run_impl(
     analysis_max_retries: int | None,
     functional_checks: bool,
     functional_timeout_seconds: int | None,
+    context_docs: tuple[Path, ...],
+    context_doc_max_tokens: int,
 ) -> None:
     """Run full or probe-only generation path for a single target."""
 
@@ -79,6 +81,8 @@ def _run_impl(
             analysis_max_retries=analysis_max_retries,
             functional_checks=functional_checks,
             functional_timeout_seconds=functional_timeout_seconds,
+            context_doc_paths=list(context_docs),
+            context_doc_max_tokens=context_doc_max_tokens,
         )
     except (UnsupportedTargetError, ProbeError, AnalyzeError) as exc:
         raise click.ClickException(str(exc)) from exc
@@ -139,6 +143,20 @@ def _run_impl(
     type=click.IntRange(min=1),
     help="Timeout for each functional validation step.",
 )
+@click.option(
+    "--context-doc",
+    "context_docs",
+    type=click.Path(path_type=Path),
+    multiple=True,
+    help="Optional project context markdown file(s), for example supabase.md.",
+)
+@click.option(
+    "--context-doc-max-tokens",
+    type=click.IntRange(min=50),
+    default=800,
+    show_default=True,
+    help="Max tokens per context doc claim payload before dropping excess claims.",
+)
 def run_command(
     target: str | None,
     binary_name: str | None,
@@ -151,6 +169,8 @@ def run_command(
     analysis_max_retries: int | None,
     functional_checks: bool,
     functional_timeout_seconds: int | None,
+    context_docs: tuple[Path, ...],
+    context_doc_max_tokens: int,
 ) -> None:
     _run_impl(
         target=target,
@@ -164,6 +184,8 @@ def run_command(
         analysis_max_retries=analysis_max_retries,
         functional_checks=functional_checks,
         functional_timeout_seconds=functional_timeout_seconds,
+        context_docs=context_docs,
+        context_doc_max_tokens=context_doc_max_tokens,
     )
 
 
@@ -195,6 +217,20 @@ def run_command(
     type=click.IntRange(min=1),
     help="Timeout for each functional validation step.",
 )
+@click.option(
+    "--context-doc",
+    "context_docs",
+    type=click.Path(path_type=Path),
+    multiple=True,
+    help="Optional project context markdown file(s), for example supabase.md.",
+)
+@click.option(
+    "--context-doc-max-tokens",
+    type=click.IntRange(min=50),
+    default=800,
+    show_default=True,
+    help="Max tokens per context doc claim payload before dropping excess claims.",
+)
 def run_command_hidden(
     target: str | None,
     binary_name: str | None,
@@ -207,6 +243,8 @@ def run_command_hidden(
     analysis_max_retries: int | None,
     functional_checks: bool,
     functional_timeout_seconds: int | None,
+    context_docs: tuple[Path, ...],
+    context_doc_max_tokens: int,
 ) -> None:
     _run_impl(
         target=target,
@@ -220,6 +258,8 @@ def run_command_hidden(
         analysis_max_retries=analysis_max_retries,
         functional_checks=functional_checks,
         functional_timeout_seconds=functional_timeout_seconds,
+        context_docs=context_docs,
+        context_doc_max_tokens=context_doc_max_tokens,
     )
 
 
