@@ -9,6 +9,7 @@ from use_anything.models import ProbeResult, RankResult
 SYSTEM_PROMPT = """You are Use-Anything, an expert at converting software interfaces into procedural agent skills.
 Return only valid JSON matching the provided schema.
 Prioritize concrete workflows and failure-preventing gotchas over exhaustive API enumeration.
+Treat context-doc claims as non-authoritative hints. Prefer concrete code signals and verified interfaces.
 """
 MAX_DISCOVERED_INTERFACE_LINES = 12
 MAX_INTERFACE_CONTEXT_CHARS = 6000
@@ -70,6 +71,7 @@ def build_analysis_prompt(
         "Generate a strict JSON object with setup, capability groups, workflows, and gotchas. "
         "Workflows must be procedural and include concrete steps and common errors. "
         "Do not invent commands/functions/endpoints that are absent from the provided context. "
+        "If curated context-doc claims conflict with code signals or verified interfaces, ignore the conflicting claims. "
         "Tie workflows and gotchas to provided evidence and prioritize reliable, executable steps. "
         "Include analysis_sources as a list of provenance strings. "
         "Also include gotcha_provenance as a list of objects with gotcha, source, evidence, and url."
