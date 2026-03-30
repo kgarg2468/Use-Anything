@@ -79,3 +79,11 @@ class ContextBudgetResult:
     used_tokens: int
     dropped_claims: int
     truncated_claims: int
+
+
+@dataclass(frozen=True)
+class ContextDecisionResult:
+    accepted_claims: list[ContextClaim]
+    dropped_claims: list[ContextClaim]
+    warnings: list[str]
+    conflicts: list[ContextClaimConflict]
